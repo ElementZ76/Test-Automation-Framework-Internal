@@ -13,6 +13,39 @@ A clean, maintainable **Selenium-based Test Automation Framework** designed for 
 * **Browser Flexibility:** Easy switching between Chrome, Firefox, Edge via configuration
 * **Scalable Design:** Ready for expansion with new pages, tests, and features
 
+## Project Structure
+```text
+TestAutomationFramework/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── (production code if needed)
+│   │   └── resources/
+│   │       └── (production resources if needed)
+│   └── test/
+│       ├── java/
+│       │   ├── com.automation.base/
+│       │   │   └── BaseTest.java           # Browser setup/teardown, common methods
+│       │   ├── com.automation.models/
+│       │   │   └── (data models/POJOs)
+│       │   ├── com.automation.pages/
+│       │   │   └── LoginPage.java          # Page Object classes
+│       │   ├── com.automation.runners/
+│       │   │   └── TestRunner.java         # TestNG runner classes
+│       │   ├── com.automation.stepdef/
+│       │   │   └── (step definitions if using BDD)
+│       │   └── com.automation.utils/
+│       │       └── (utility classes)
+│       └── resources/
+│           ├── features/
+│           │   └── (Gherkin feature files)
+│           ├── config.properties           # Configuration file
+│           └── log4j2.xml                  # Logging configuration
+├── target/                                  # Build output directory
+├── pom.xml                                  # Maven dependencies
+└── README.md
+```
+
 ## Tech Stack
 | Component | Tool / Library |
 | :--- | :--- |
@@ -81,39 +114,6 @@ mvn test -Dtest=LoginTest
 1. Navigate to test class in `src/test/java/com.automation.runners`
 2. Right-click the test class or test method
 3. Select **Run As** > **TestNG Test**
-
-## Project Structure
-```text
-TestAutomationFramework/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── (production code if needed)
-│   │   └── resources/
-│   │       └── (production resources if needed)
-│   └── test/
-│       ├── java/
-│       │   ├── com.automation.base/
-│       │   │   └── BaseTest.java           # Browser setup/teardown, common methods
-│       │   ├── com.automation.models/
-│       │   │   └── (data models/POJOs)
-│       │   ├── com.automation.pages/
-│       │   │   └── LoginPage.java          # Page Object classes
-│       │   ├── com.automation.runners/
-│       │   │   └── TestRunner.java         # TestNG runner classes
-│       │   ├── com.automation.stepdef/
-│       │   │   └── (step definitions if using BDD)
-│       │   └── com.automation.utils/
-│       │       └── (utility classes)
-│       └── resources/
-│           ├── features/
-│           │   └── (Gherkin feature files)
-│           ├── config.properties           # Configuration file
-│           └── log4j2.xml                  # Logging configuration
-├── target/                                  # Build output directory
-├── pom.xml                                  # Maven dependencies
-└── README.md
-```
 
 ## Configuration
 
