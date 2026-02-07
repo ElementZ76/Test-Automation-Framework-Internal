@@ -140,13 +140,5 @@ mvn clean install -U
 4. Restart Eclipse
 5. Right-click project > **Maven** > **Update Project**
 
-## Key Features
-* **Page Object Model (POM):** Strict separation of page interactions and test logic for better maintainability
-* **Configuration-Driven:** All environment settings externalized in `config.properties` - no hard-coded values
-* **Centralized Base Class:** Common setup/teardown and reusable utilities managed in one place
-* **Modular Architecture:** Clear separation between base classes, page objects, test runners, step definitions, and utilities
-* **Browser Flexibility:** Easy switching between Chrome, Firefox, Edge via configuration
-* **Scalable Design:** Ready for expansion with new pages, tests, and features
-
 ## License
 This project is intended for internal use and learning purposes.
