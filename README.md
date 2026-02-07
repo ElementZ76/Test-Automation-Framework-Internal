@@ -5,14 +5,6 @@
 ## Overview
 A clean, maintainable **Selenium-based Test Automation Framework** designed for web application testing. Built with industry best practices, this framework leverages the **Page Object Model (POM)** design pattern to ensure code reusability, maintainability, and scalability.
 
-## Key Features
-* **Page Object Model (POM):** Strict separation of page interactions and test logic for better maintainability
-* **Configuration-Driven:** All environment settings externalized in `config.properties` - no hard-coded values
-* **Centralized Base Class:** Common setup/teardown and reusable utilities managed in one place
-* **Modular Architecture:** Clear separation between base classes, page objects, test runners, step definitions, and utilities
-* **Browser Flexibility:** Easy switching between Chrome, Firefox, Edge via configuration
-* **Scalable Design:** Ready for expansion with new pages, tests, and features
-
 ## Project Structure
 ```text
 TestAutomationFramework/
