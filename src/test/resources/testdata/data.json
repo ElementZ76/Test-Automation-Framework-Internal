@@ -1,0 +1,31 @@
+{
+  "user": {
+    "username": "standard_user",
+    "password": "secret_sauce"
+  },
+  "checkoutInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "postalCode": "12345"
+  },
+  "productsToAdd": [
+    {
+      "name": "Sauce Labs Backpack",
+      "price": 29.99
+    },
+    {
+      "name": "Sauce Labs Bike Light",
+      "price": 9.99
+    }
+  ],
+  "expectedMessages": {
+    "orderConfirmation": "Thank you for your order!",
+    "checkoutComplete": "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+  },
+  "urls": {
+    "baseUrl": "https://www.saucedemo.com/",
+    "inventoryUrl": "https://www.saucedemo.com/inventory.html",
+    "cartUrl": "https://www.saucedemo.com/cart.html",
+    "checkoutCompleteUrl": "https://www.saucedemo.com/checkout-complete.html"
+  }
+}
