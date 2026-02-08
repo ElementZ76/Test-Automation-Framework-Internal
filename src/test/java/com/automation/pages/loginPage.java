@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 import com.automation.base.TestBase;
 
 public class loginPage extends TestBase {
+	
+	productListPage productPage;
+	
 	@FindBy(id = "user-name")
 	WebElement userNameInput;
 	
@@ -21,6 +24,8 @@ public class loginPage extends TestBase {
 		log.info("LoginPage initialized");
 	}
 	
+	
+	// login method
 	public void loginFunction(String username, String password) {
 		sendText(userNameInput, username);
 		log.info("Input Username successful");
@@ -29,11 +34,15 @@ public class loginPage extends TestBase {
 		loginBtn.click();
 	}
 	
-	public void clickLoginBtn() {
+	// login button click method
+	public productListPage clickLoginBtn() {
 		waitForClickability(loginBtn);
+		loginBtn.click();
+		log.info("Loggin button clicked");
+		return new productListPage();
 	}
 	
-    // Verifications
+    // verifications
     public boolean isOnLoginPage() {
         boolean isDisplayed = loginBtn.isDisplayed();
         log.debug("Is on login page: {}", isDisplayed);
