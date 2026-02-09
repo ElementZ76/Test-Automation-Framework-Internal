@@ -7,35 +7,30 @@ A clean, maintainable **Selenium-based Test Automation Framework** designed for 
 
 ## Project Structure
 ```text
-TestAutomationFramework/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── (production code if needed)
-│   │   └── resources/
-│   │       └── (production resources if needed)
-│   └── test/
-│       ├── java/
-│       │   ├── com.automation.base/
-│       │   │   └── BaseTest.java           # Browser setup/teardown, common methods
-│       │   ├── com.automation.models/
-│       │   │   └── (data models/POJOs)
-│       │   ├── com.automation.pages/
-│       │   │   └── LoginPage.java          # Page Object classes
-│       │   ├── com.automation.runners/
-│       │   │   └── TestRunner.java         # TestNG runner classes
-│       │   ├── com.automation.stepdef/
-│       │   │   └── (step definitions if using BDD)
-│       │   └── com.automation.utils/
-│       │       └── (utility classes)
-│       └── resources/
-│           ├── features/
-│           │   └── (Gherkin feature files)
-│           ├── config.properties           # Configuration file
-│           └── log4j2.xml                  # Logging configuration
-├── target/                                  # Build output directory
-├── pom.xml                                  # Maven dependencies
-└── README.md
+src/
+├── main/java/com/automation/
+│   ├── base/
+│   │   └── TestBase.java
+│   ├── models/
+│   │   └── SauceData.java
+│   ├── pages/
+│   │   ├── LoginPage.java
+│   │   ├── ProductListPage.java
+│   │   ├── CartPage.java
+│   │   ├── CheckoutInfoPage.java
+│   │   ├── CheckoutOverviewPage.java
+│   │   └── CheckoutCompletePage.java
+│   └── utils/
+│       └── JsonUtils.java
+├── test/java/com/automation/
+│   └── stepdefinitions/
+│       └── StepDefinitions.java
+└── test/resources/
+    ├── features/
+    │   └── Saucedemo.feature
+    ├── testdata/
+    │   └── testdata.json
+    └── config.properties
 ```
 
 ## Tech Stack
