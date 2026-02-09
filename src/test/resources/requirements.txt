@@ -1,0 +1,48 @@
+Phase 1 – 1 Week
+
+Project: Web Automation Framework (Internal)
+
+1. Project Setup
+
+   ●Java project using a standard build tool       (Maven)
+
+   ●Clean, well-organized folder structure
+
+   ●Version controlled (GitHub)
+
+
+2. Framework Base
+
+   ●Browser setup and teardown
+
+   ●Base test class
+
+   ●Centralized configuration for:
+        ○application URL
+        ○browser selection
+        ○timeouts
+
+   ●Configuration values should be changeable without modifying test code.
+
+3. Sample Automation
+
+   ●One simple end-to-end flow
+     (any public demo web application is fine)
+
+   ●Test should run reliably on at least one browser
+
+4. Quality Expectations
+
+   ●Avoid hard-coded values inside tests
+   ●Clear separation between:
+       ○test logic
+       ○page interactions
+       ○configuration
+
+   ●Code should be easy to explain to another developer
+
+5. Documentation
+   ●Short README covering:
+      ○project structure
+      ○ how to run the tests
+      ○where configuration values are defined

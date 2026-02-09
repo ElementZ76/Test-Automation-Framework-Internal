@@ -6,9 +6,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.automation.base.TestBase;
 
-public class loginPage extends TestBase {
+public class LoginPage extends TestBase {
 	
-	productListPage productPage;
+	ProductListPage productPage;
 	
 	@FindBy(id = "user-name")
 	WebElement userNameInput;
@@ -19,11 +19,10 @@ public class loginPage extends TestBase {
 	@FindBy(name = "login-button")
 	WebElement loginBtn;
 	
-	public loginPage() {
+	public LoginPage() {
 		PageFactory.initElements(driver, this);
 		log.info("LoginPage initialized");
 	}
-	
 	
 	// login method
 	public void loginFunction(String username, String password) {
@@ -31,15 +30,15 @@ public class loginPage extends TestBase {
 		log.info("Input Username successful");
 		sendText(passwordInput, password);
 		log.info("Input Password successful");
-		loginBtn.click();
+		clickOn(loginBtn);
 	}
 	
 	// login button click method
-	public productListPage clickLoginBtn() {
+	public ProductListPage clickLoginBtn() {
 		waitForClickability(loginBtn);
-		loginBtn.click();
+		clickOn(loginBtn);
 		log.info("Loggin button clicked");
-		return new productListPage();
+		return new ProductListPage();
 	}
 	
     // verifications

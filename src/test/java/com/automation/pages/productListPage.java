@@ -2,15 +2,16 @@ package com.automation.pages;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.automation.base.TestBase;
 
-public class productListPage extends TestBase {
+public class ProductListPage extends TestBase {
 	
-	cartPage cart;
+	CartPage cartPage;
 	@FindBy(className = "title")
 	private WebElement pageTitle;
 	    
@@ -21,41 +22,62 @@ public class productListPage extends TestBase {
 	private WebElement cartBadge;
 	
 	
-	public productListPage() {
+	public ProductListPage() {
 		PageFactory.initElements(driver, this);
 	}
 	
-	// add 1  product to card
-	private String addProductToCart(String productName) {
-		return "add-to-cart-" + productName.toLowerCase()
-		.replace(" ", "-")
-        .replace(".", "")
-        .replace("(", "")
-        .replace(")", "");
+	/**
+	 * Add 1 product to cart using dynamic xpath
+	 * @param productName
+	 * @return ProductListPage
+	 */
+	
+	private ProductListPage addProductToCart(String productName) {
+		String xpath = String.format(
+		        "//div[@class='inventory_item'][.//div[@class='inventory_item_name' and text()='%s']]" +
+		        "//button[contains(@id, 'add-to-cart')]", 
+		        productName);
+		WebElement addButton = driver.findElement(By.xpath(xpath));
+		clickOn(addButton);  
+		return this;
 	}
 	
-	// add multiple products to cart
-	public cartPage addMultipleProductsToCart(List<String> productNames) {	
+	/**
+	 * Adding multiple products to cart
+	 * @param productNames list of product names
+	 * @return CartPage after adding all products
+	 */
+	public CartPage addMultipleProductsToCart(List<String> productNames) {	
 		productNames.forEach(this::addProductToCart);
 		log.info("Adding {} products to cart", productNames.size());
-		return new cartPage();
+		return new CartPage();
 	}
 	
-	// click shopping cart btn
-	public void clickShoppingCart() {
+	/**
+	 * Navigate to cart
+	 * @return CartPage
+	 */
+	public CartPage clickShoppingCart() {
 		waitForClickability(shoppingCartIcon);
-		shoppingCartIcon.click();
+		clickOn(shoppingCartIcon);
 		log.info("Clicked shopping cart icon");
+		return new CartPage();
 	}
 	
-	// verify if we are on PLP
+	/**
+	 * Verify if we are on PLP
+	 * @return if we are on PLP or not
+	 */
 	public boolean isOnPLP() {
 		boolean isDisplayed = pageTitle.isDisplayed() && pageTitle.getText().equals("Products");
 		log.debug("On PLP {}", isDisplayed);
 		return isDisplayed;
 	}
 	
-	// verify if all products have been added to the cart
+	/**
+	 * @return get cart item count. return 0 if empty.
+	 */
+	
 	public int getItemCount() {
 		try {
 			int count = Integer.parseInt(cartBadge.getText());
