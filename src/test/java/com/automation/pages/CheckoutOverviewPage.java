@@ -134,4 +134,11 @@ public class CheckoutOverviewPage extends TestBase {
 			return 0.0;
 		}
 	}
+	
+	/** @return CheckoutCompletePage */
+	public CheckoutCompletePage finishPurchase() {
+		clickOn(finishButton);
+		log.info("Completed purchase");
+		return new CheckoutCompletePage();
+	}
 }

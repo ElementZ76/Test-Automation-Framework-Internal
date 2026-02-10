@@ -28,17 +28,22 @@ public class LoginPage extends TestBase {
 	 * Login with credentials
 	 * @param username
 	 * @param password
+	 * @return 
 	 */
 	
-	public void loginFunction(String username, String password) {
+	public ProductListPage loginFunction(String username, String password) {
 		sendText(userNameInput, username);
 		log.info("Input Username successful");
 		sendText(passwordInput, password);
 		log.info("Input Password successful");
-		clickOn(loginBtn);
+		clickLoginBtn();
+		return new ProductListPage();
 	}
 	
-	// login button click method
+	/**
+	 * Click login button
+	 * @return ProductListPage
+	 */
 	public ProductListPage clickLoginBtn() {
 		waitForClickability(loginBtn);
 		clickOn(loginBtn);
@@ -46,7 +51,10 @@ public class LoginPage extends TestBase {
 		return new ProductListPage();
 	}
 	
-    // verifications
+    /**
+     * verify if we are on login page
+     * @return true if we are on login page, if not then false
+     */
     public boolean isOnLoginPage() {
         boolean isDisplayed = loginBtn.isDisplayed();
         log.debug("Is on login page: {}", isDisplayed);

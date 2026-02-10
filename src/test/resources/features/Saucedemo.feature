@@ -6,7 +6,7 @@ Feature: SauceDemo E2E Purchase Flow
 
   @smoke @regression
   Scenario: Complete E2E purchase flow with valid user
-    When user logs in with valid test data from "testdata.json" using index 0
+    When user logs in with valid test data from "data.json" using index 0
     Then user should be on the products page
     When user adds all products from test data to cart
     And user navigates to cart

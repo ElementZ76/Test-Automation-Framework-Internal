@@ -7,7 +7,7 @@ import io.cucumber.java.Before;
 
 public class ApplicationHooks extends TestBase {
 	@Before
-	public void initialization() {
+	public void launchBrowser() {
 		initialization();
 	}
 	
