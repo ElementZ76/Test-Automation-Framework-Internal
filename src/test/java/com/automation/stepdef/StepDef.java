@@ -54,92 +54,85 @@ public class StepDef extends TestBase {
 	}
 
 	@When("user adds all products from test data to cart")
-	public void user_adds_all_products_from_test_data_to_cart() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void user_adds_all_products_from_test_data_to_cart() throws IOException {
+		addedProducts = currentTestData.getProducts();
+		for (String product : addedProducts) {
+			productListPage.addProductToCart(product);
+		}
 	}
 
 	@When("user navigates to cart")
 	public void user_navigates_to_cart() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    cartPage = productListPage.clickShoppingCart();
 	}
 
 	@Then("cart should contain all added products")
 	public void cart_should_contain_all_added_products() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Assert.assertTrue(cartPage.verifyCartHasProducts(addedProducts), "Cart products mismatch");
 	}
 
 	@When("user proceeds to checkout")
 	public void user_proceeds_to_checkout() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		checkoutInfoPage = cartPage.proceedToCheckout();
 	}
 
 	@When("user fills checkout information from test data")
 	public void user_fills_checkout_information_from_test_data() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    checkoutInfoPage.fillCheckoutInfo(currentTestData.getFirstName(), 
+	    		currentTestData.getLastName(), currentTestData.getPostalCode());
 	}
 
 	@When("user continues to overview page")
 	public void user_continues_to_overview_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    checkoutOverviewPage = checkoutInfoPage.continueToOverview();
 	}
 
 	@Then("order summary should show correct items")
 	public void order_summary_should_show_correct_items() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Assert.assertTrue(checkoutOverviewPage.verifyOrderItemSummary(addedProducts), "Order summary mismatch");
 	}
 
 	@Then("price calculation should be valid")
 	public void price_calculation_should_be_valid() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Assert.assertTrue(checkoutOverviewPage.validatePriceCalculation(), "Price mismatch.");
 	}
 
 	@When("user completes the purchase")
 	public void user_completes_the_purchase() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    checkoutCompletePage = checkoutOverviewPage.finishPurchase();
 	}
 
 	@Then("order confirmation should display {string}")
-	public void order_confirmation_should_display(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void order_confirmation_should_display(String expectedMessage) {
+	    Assert.assertTrue(checkoutCompletePage.verifyConfirmationmessage(expectedMessage), "Not correct message!");
 	}
 
 	@When("user attempts login with test data from {string} using index {int}")
-	public void user_attempts_login_with_test_data_from_using_index(String string, Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void user_attempts_login_with_test_data_from_using_index(String jsonFile, Integer index) throws IOException {
+		List<SauceData> testDataList = JsonUtils.getSauceData(jsonFile);
+		currentTestData = testDataList.get(index);
+		loginPage.loginFunction(currentTestData.getUsername(), currentTestData.getPassword());
 	}
 
 	@Then("user should see error message from test data")
 	public void user_should_see_error_message_from_test_data() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    String expectedError = currentTestData.getErrorMessage();
+	    String actualError = loginPage.getErrorMessage();
+	    Assert.assertEquals(actualError, expectedError, "Error message mismatch" );
 	}
 
 	@Then("user should remain on login page")
 	public void user_should_remain_on_login_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Assert.assertTrue(loginPage.isOnLoginPage(), "Not on login page");
 	}
 
 	@When("user adds product {string} to cart")
-	public void user_adds_product_to_cart(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void user_adds_product_to_cart(String productName) {
+	    productListPage.addProductToCart(productName);
 	}
 
 	@Then("cart badge should show {int} item")
-	public void cart_badge_should_show_item(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void cart_badge_should_show_item(Integer productCount) {
+	    Assert.assertEquals(productListPage.getItemCount(), productCount);
 	}
 }

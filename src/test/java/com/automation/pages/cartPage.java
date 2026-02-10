@@ -14,14 +14,24 @@ public class CartPage extends TestBase {
 	@FindBy(className = "title")
 	WebElement pageTitle;
 	
-	@FindBy(className = "checkout")
+	@FindBy(id = "checkout")
 	WebElement checkoutButtotn;
 	
-	@FindBy (className = "cart_item")
+	@FindBy (className = "inventory_item_name")
 	private List<WebElement> cartItem;
 
 	public CartPage() {
 		PageFactory.initElements(driver, this);
+	}
+	
+	public boolean isOnCartPage() {
+		try {
+			waitForVisibility(pageTitle);
+			return pageTitle.isDisplayed() && 
+			       pageTitle.getText().equalsIgnoreCase("Your Cart");
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	/** @return CheckoutInfoPage**/

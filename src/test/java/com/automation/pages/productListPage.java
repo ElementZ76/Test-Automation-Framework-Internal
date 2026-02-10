@@ -3,6 +3,7 @@ package com.automation.pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,13 +33,21 @@ public class ProductListPage extends TestBase {
 	 * @return ProductListPage
 	 */
 	
-	private ProductListPage addProductToCart(String productName) {
-		String xpath = String.format(
-		        "//div[@class='inventory_item'][.//div[@class='inventory_item_name' and text()='%s']]" +
-		        "//button[contains(@id, 'add-to-cart')]", 
-		        productName);
-		WebElement addButton = driver.findElement(By.xpath(xpath));
-		clickOn(addButton);  
+	public ProductListPage addProductToCart(String productName) {
+		try {
+			String dynamicLocator = "add-to-cart-" + productName.toLowerCase()
+			.replace(" ", "-")
+			.replace(".", "")
+			.replace("(", "")
+			.replace(")", "");
+			WebElement addButton = driver.findElement(By.id(dynamicLocator));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", addButton); 
+			log.info("Added '{}' to cart", productName);
+		} catch (Exception e) {
+			log.error("Failed to add '{}': {}", productName, e.getMessage());
+			throw new RuntimeException("Product '" + productName + "' not found", e);
+		}
 		return this;
 	}
 	
@@ -58,7 +67,6 @@ public class ProductListPage extends TestBase {
 	 * @return CartPage
 	 */
 	public CartPage clickShoppingCart() {
-		waitForClickability(shoppingCartIcon);
 		clickOn(shoppingCartIcon);
 		log.info("Clicked shopping cart icon");
 		return new CartPage();

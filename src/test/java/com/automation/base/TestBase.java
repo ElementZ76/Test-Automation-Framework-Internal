@@ -2,6 +2,7 @@ package com.automation.base;
 
 import java.io.FileInputStream;
 import java.time.Duration;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,7 +42,7 @@ public class TestBase {
 	public void initialization() {
 		String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
-			driver = new ChromeDriver();
+            driver = new ChromeDriver();
 		}
 		else if (browserName.equals("edge")) {
 			driver = new EdgeDriver();

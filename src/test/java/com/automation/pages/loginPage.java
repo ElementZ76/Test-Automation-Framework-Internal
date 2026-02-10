@@ -19,6 +19,9 @@ public class LoginPage extends TestBase {
 	@FindBy(name = "login-button")
 	WebElement loginBtn;
 	
+	@FindBy(xpath = "//h3[@data-test='error']")
+	private WebElement errorMessage;
+	
 	public LoginPage() {
 		PageFactory.initElements(driver, this);
 		log.info("LoginPage initialized");
@@ -60,5 +63,17 @@ public class LoginPage extends TestBase {
         log.debug("Is on login page: {}", isDisplayed);
         return isDisplayed;
     }
+    
+    public boolean isErrorDisplayed() {
+		try {
+			waitForVisibility(errorMessage);
+			return errorMessage.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+    public String getErrorMessage() {
+		return isErrorDisplayed() ? errorMessage.getText() : "";
+	}
 
 }
