@@ -22,6 +22,15 @@ public class CheckoutOverviewPage extends TestBase {
 	@FindBy(id = "finish")
 	WebElement finishButton;
 	
+	@FindBy(className = "summary_subtotal_label")
+	WebElement subTotal;
+	
+	@FindBy(className = "summary_tax_label")
+	WebElement taxLabel;
+	
+	@FindBy(className = "summary_total_label")
+	WebElement totalLabel;
+	
 	public CheckoutOverviewPage() {
 		PageFactory.initElements(driver, this);
 	}
@@ -69,5 +78,60 @@ public class CheckoutOverviewPage extends TestBase {
 			log.error("Mismatch - Expected = {} and Actual = {}", expectedProducts.size(), actualProducts.size());
 		}
 		return matches;
+	}
+	
+	/**
+	 * @return sub total
+	 */
+	public double getSubTotal() {
+		String subTotalText = subTotal.getText();
+		return extractPrice(subTotalText);
+	}
+	
+	/**
+	 * @return tax
+	 */
+	public double getTax() {
+		String taxText = taxLabel.getText();
+		return extractPrice(taxText);
+	}
+	
+	/**
+	 * @return total 
+	 */
+	public double getTotal() {
+		String totalText = totalLabel.getText();
+		return extractPrice(totalText);
+	}
+	
+	/** @return true if subtotal+tax = total */
+	public boolean validatePriceCalculation() {
+		double subtotal = getSubTotal();
+		double tax = getTax();
+		double total = getTotal();
+		
+		double calculated = Math.round((subtotal + tax) * 100.0) / 100.0;
+		double actual = Math.round(total * 100.0) / 100.0;
+		
+		boolean valid = Math.abs(calculated - actual) < 0.01;
+		
+		if (valid) {
+			log.info("Price calculation valid: ${} + ${} = ${}", subtotal, tax, total);
+		} else {
+			log.error("Price error - Expected: ${}, Actual: ${}", calculated, actual);
+		}
+		return valid;
+	}
+	
+	/** @param text Price text
+	 *  @return Numeric price value 
+	 */
+	private double extractPrice(String text) {
+		try {
+			return Double.parseDouble(text.replaceAll("[^0-9.]", ""));
+		} catch (NumberFormatException e) {
+			log.error("Failed to extract price from: {}", text);
+			return 0.0;
+		}
 	}
 }
