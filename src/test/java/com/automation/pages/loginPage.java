@@ -24,7 +24,12 @@ public class LoginPage extends TestBase {
 		log.info("LoginPage initialized");
 	}
 	
-	// login method
+	/** 
+	 * Login with credentials
+	 * @param username
+	 * @param password
+	 */
+	
 	public void loginFunction(String username, String password) {
 		sendText(userNameInput, username);
 		log.info("Input Username successful");

@@ -75,7 +75,7 @@ public class ProductListPage extends TestBase {
 	}
 	
 	/**
-	 * @return get cart item count. return 0 if empty.
+	 * @return get cart item count. return 0n if empty.
 	 */
 	
 	public int getItemCount() {
