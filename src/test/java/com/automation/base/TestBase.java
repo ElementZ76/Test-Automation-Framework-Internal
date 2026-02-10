@@ -42,7 +42,17 @@ public class TestBase {
 	public void initialization() {
 		String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
-            driver = new ChromeDriver();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-save-password-bubble");
+			options.setExperimentalOption(
+			    "prefs",
+			    Map.of(
+			        "credentials_enable_service", false,
+			        "profile.password_manager_enabled", false,
+			        "profile.password_manager_leak_detection", false // <--- This line fixes the breach popup
+			    )
+			);
+			driver = new ChromeDriver(options);
 		}
 		else if (browserName.equals("edge")) {
 			driver = new EdgeDriver();
@@ -89,7 +99,12 @@ public class TestBase {
 				attempts++;
 				System.out.println("Element was stale. Retrying...");
 			} catch (Exception e) {
-				System.out.println("Max attempts reached.");
+				attempts++;
+			    log.error("SendText failed on attempt {}/3: {}", attempts, e.getMessage());
+			    if (attempts >= 3) {
+			        log.error("Max attempts reached. Throwing exception.");
+			        throw new RuntimeException("Failed to send text after 3 attempts", e);
+			    }
 			}
 		}
 	}

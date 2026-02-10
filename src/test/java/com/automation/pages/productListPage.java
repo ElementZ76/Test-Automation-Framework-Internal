@@ -14,13 +14,13 @@ public class ProductListPage extends TestBase {
 	
 	CartPage cartPage;
 	@FindBy(className = "title")
-	private WebElement pageTitle;
+	WebElement pageTitle;
 	    
 	@FindBy(className = "shopping_cart_link")
-	private WebElement shoppingCartIcon;
+	WebElement shoppingCartIcon;
 	    
 	@FindBy(className = "shopping_cart_badge")
-	private WebElement cartBadge;
+	WebElement cartBadge;
 	
 	
 	public ProductListPage() {
@@ -88,6 +88,7 @@ public class ProductListPage extends TestBase {
 	
 	public int getItemCount() {
 		try {
+			waitForVisibility(cartBadge);
 			int count = Integer.parseInt(cartBadge.getText());
 			log.info("Added {} products to cart", count);
 			return count;

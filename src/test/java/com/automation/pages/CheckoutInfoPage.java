@@ -44,15 +44,13 @@ public class CheckoutInfoPage extends TestBase {
 	 * @return CheckoutInfoPage 
 	 */
 	public CheckoutInfoPage fillCheckoutInfo(String firstName, String lastName, String postalCode) {
-		try {
-			sendText(firstNameInput, firstName);
-			sendText(lastNameInput, lastName);
-			sendText(postalCodeInput, postalCode);
-			log.info("Checkout info entered.");
-		} catch (Exception e) {
-			log.error("Checkout info was not entered. Error: {}", e);
-		}
-		return this;
+		sendText(firstNameInput, firstName);
+	    log.info("Entered first name: {}", firstName);
+	    sendText(lastNameInput, lastName);
+	    log.info("Entered last name: {}", lastName);
+	    sendText(postalCodeInput, postalCode);
+	    log.info("Entered postal code: {}", postalCode);
+	    return this;
 	}
 	
 	/**

@@ -133,6 +133,7 @@ public class StepDef extends TestBase {
 
 	@Then("cart badge should show {int} item")
 	public void cart_badge_should_show_item(Integer productCount) {
-	    Assert.assertEquals(productListPage.getItemCount(), productCount);
+		int actualCount = productListPage.getItemCount();
+	    Assert.assertEquals(actualCount, productCount, "Mismatch in cart badge");
 	}
 }

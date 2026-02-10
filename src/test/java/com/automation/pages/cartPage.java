@@ -15,7 +15,7 @@ public class CartPage extends TestBase {
 	WebElement pageTitle;
 	
 	@FindBy(id = "checkout")
-	WebElement checkoutButtotn;
+	WebElement checkoutButton;
 	
 	@FindBy (className = "inventory_item_name")
 	private List<WebElement> cartItem;
@@ -36,7 +36,8 @@ public class CartPage extends TestBase {
 	
 	/** @return CheckoutInfoPage**/
 	public CheckoutInfoPage proceedToCheckout() {
-		clickOn(checkoutButtotn);
+		clickOn(checkoutButton);
+		log.info("Proceeding to checkout");
 		return new CheckoutInfoPage();
 	}
 	
