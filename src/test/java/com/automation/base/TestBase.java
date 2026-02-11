@@ -8,7 +8,9 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +19,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.cucumber.java.Scenario;
+import io.qameta.allure.Allure;
 
 public class TestBase {
 	public static WebDriver driver;
@@ -49,7 +54,7 @@ public class TestBase {
 			    Map.of(
 			        "credentials_enable_service", false,
 			        "profile.password_manager_enabled", false,
-			        "profile.password_manager_leak_detection", false // <--- This line fixes the breach popup
+			        "profile.password_manager_leak_detection", false 
 			    )
 			);
 			driver = new ChromeDriver(options);
@@ -61,7 +66,7 @@ public class TestBase {
 			driver = new FirefoxDriver();
 		}
 		else {
-			System.out.println("write the browsername properly!");
+			log.error("Browser name mismatch. Given browser name '{}' is wrong.", browserName);
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -97,10 +102,10 @@ public class TestBase {
 				break;
 			} catch (StaleElementReferenceException e) {
 				attempts++;
-				System.out.println("Element was stale. Retrying...");
+				log.debug("Element was stale. Retrying...");
 			} catch (Exception e) {
 				attempts++;
-			    log.error("SendText failed on attempt {}/3: {}", attempts, e.getMessage());
+			    log.error("ClickOn failed on attempt {}/3: {}", attempts, e.getMessage());
 			    if (attempts >= 3) {
 			        log.error("Max attempts reached. Throwing exception.");
 			        throw new RuntimeException("Failed to send text after 3 attempts", e);
@@ -121,9 +126,15 @@ public class TestBase {
 				element.sendKeys(text);
 				break;
 			} catch (StaleElementReferenceException e) {
-				System.out.println("Element was stale. Retrying...");
+				attempts++;
+				log.debug("Element was stale. Retrying...");
 			} catch(Exception e) {
-				System.out.println("Max attempts reached.");
+				attempts++;
+			    log.error("SendText failed on attempt {}/3: {}", attempts, e.getMessage());
+			    if (attempts >= 3) {
+			        log.error("Max attempts reached. Throwing exception.");
+			        throw new RuntimeException("Failed to send text after 3 attempts", e);
+			    }
 			}
 		}
 	}
@@ -132,12 +143,5 @@ public class TestBase {
 	public void invisibilityOfElement(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(element));
-	}
-	
-	//t5eardown 
-	public void tearDown() {
-		if(driver!=null) {
-			driver.quit();
-		}
 	}
 }

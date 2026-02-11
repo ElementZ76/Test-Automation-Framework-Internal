@@ -2,6 +2,7 @@ package com.automation.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import com.automation.base.TestBase;
 
@@ -18,6 +19,10 @@ public class CheckoutCompletePage extends TestBase {
 	@FindBy(id = "back-to-products")
 	WebElement backToProductsButton;
 	
+	
+	public CheckoutCompletePage() {
+		PageFactory.initElements(driver, this);
+	}
 	/**
 	 * check if we are on checkout complete page
 	 * @return true if we are on checkout complete page and false if we arent
@@ -36,8 +41,8 @@ public class CheckoutCompletePage extends TestBase {
 	 * @return confirmation header
 	 */
 	public String getConfirmationMessage() {
-		waitForVisibility(completeText);
-		return completeText.getText();
+		waitForVisibility(completeHeader);
+		return completeHeader.getText();
 	}
 	
 	/**
@@ -50,8 +55,7 @@ public class CheckoutCompletePage extends TestBase {
 		boolean matches = actualMessage.equalsIgnoreCase(expectedMessage);
 		
 		if(!matches) {
-			log.error("Message mismatcn. Expected = {}. Actual = {}", expectedMessage, actualMessage);
-			
+			log.error("Message mismatcH. Expected = {}. Actual = {}", expectedMessage, actualMessage);
 		}
 		return matches;
 	}
