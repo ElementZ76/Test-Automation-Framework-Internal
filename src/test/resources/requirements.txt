@@ -46,3 +46,17 @@ Project: Web Automation Framework (Internal)
       ○project structure
       ○ how to run the tests
       ○where configuration values are defined
+      
+      
+      
+WEEK 2:
+Scope:
+• Screenshot-on-failure integrated with Allure
+• Logging cleanup (no print statements)
+• Wait discipline and stable reruns
+• Minor cleanup only (naming / dead code)
+
+Acceptance:
+• Smoke test stable
+• Screenshot visible in Allure on failure
+• No manual steps needed to run tests
