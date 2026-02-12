@@ -1,36 +1,54 @@
-# Web Automation Framework
+# Web Automation Framework - SauceDemo Test
 
 ![Java](https://img.shields.io/badge/Java-11+-orange) ![Selenium](https://img.shields.io/badge/Selenium-4.x-green) ![TestNG](https://img.shields.io/badge/TestNG-7.x-red) ![Maven](https://img.shields.io/badge/Build-Maven-yellow)
 
 ## Overview
-A clean, maintainable **Selenium-based Test Automation Framework** designed for web application testing. Built with industry best practices, this framework leverages the **Page Object Model (POM)** design pattern to ensure code reusability, maintainability, and scalability.
+A comprehensive BDD test automation framework for SauceDemo e-commerce application using Selenium WebDriver, Cucumber, and TestNG with Allure reporting.
 
 ## Project Structure
 ```text
-src/
-├── main/java/com/automation/
-│   ├── base/
-│   │   └── TestBase.java
-│   ├── models/
-│   │   └── SauceData.java
-│   ├── pages/
-│   │   ├── LoginPage.java
-│   │   ├── ProductListPage.java
-│   │   ├── CartPage.java
-│   │   ├── CheckoutInfoPage.java
-│   │   ├── CheckoutOverviewPage.java
-│   │   └── CheckoutCompletePage.java
-│   └── utils/
-│       └── JsonUtils.java
-├── test/java/com/automation/
-│   └── stepdefinitions/
-│       └── StepDefinitions.java
-└── test/resources/
-    ├── features/
-    │   └── Saucedemo.feature
-    ├── testdata/
-    │   └── testdata.json
-    └── config.properties
+Test-Automation-Framework-Internal/
+│
+├── src/
+│   ├── main/java/com/automation/
+│   │   ├── base/
+│   │   │   └── TestBase.java           # Base class with browser setup and reusable methods
+│   │   ├── models/
+│   │   │   └── SauceData.java          # POJO for JSON test data deserialization
+│   │   ├── pages/                      # Page Object Model (POM)
+│   │   │   ├── LoginPage.java
+│   │   │   ├── ProductListPage.java
+│   │   │   ├── CartPage.java
+│   │   │   ├── CheckoutInfoPage.java
+│   │   │   ├── CheckoutOverviewPage.java
+│   │   │   └── CheckoutCompletePage.java
+│   │   └── utils/
+│   │       └── JsonUtils.java          # Utility for reading JSON test data
+│   │
+│   └── test/
+│       ├── java/com/automation/
+│       │   ├── hooks/
+│       │   │   └── Hooks.java          # Cucumber hooks (setup/teardown, screenshots)
+│       │   ├── runners/
+│       │   │   └── TestRunner.java     # TestNG runner with Cucumber integration
+│       │   └── stepdef/
+│       │       └── StepDef.java        # Cucumber step definitions
+│       │
+│       └── resources/
+│           ├── features/
+│           │   └── Saucedemo.feature   # BDD feature file (Gherkin syntax)
+│           ├── testdata/
+│           │   └── data.json           # Test data in JSON format
+│           ├── config.properties       # Application configuration
+│           ├── testng.xml              # TestNG suite configuration
+│           └── log4j2.xml              # Logging configuration
+│
+├── target/
+│   ├── allure-results/                 # Allure test results
+│   └── cucumber-reports/               # Cucumber HTML reports
+│
+├── pom.xml                             # Maven dependencies and plugins
+└── README.md                           # This file
 ```
 
 ## Tech Stack
@@ -49,7 +67,48 @@ src/
 * **IDE:** Eclipse, IntelliJ IDEA, or VS Code
 * **Git:** For version control
 
-## How to Run Locally
+## How to Run
+### 1. Clone the repo
+```bash
+git clone https://github.com/ElementZ76/Test-Automation-Framework-Internal.git
+cd Test-Automation-Framework-Internal
+```
+
+### 2. Install dependencies
+```bash
+mvn clean install -DskipTests
+```
+
+### 3. Run All Tests
+```bash
+mvn clean test
+```
+
+### 4. Run Specific Tags
+#### Run just smoke test
+```bash
+mvn test -Dcucumber.filter.tags="@smoke"
+```
+#### Run regression tests
+```bash
+mvn test -Dcucumber.filter.tags="@regression"
+```
+
+#### Run negative tests
+```bash
+mvn test -Dcucumber.filter.tags="@negative"
+```
+
+### 5. Generate Allure Report
+```bash
+# Generate and view report in browser
+mvn allure:serve
+# OR generate report only
+mvn allure:report
+# Report location: target/site/allure-maven-plugin/index.html
+```
+
+## How to Run via Eclipse/IntelliJ IDE
 
 ### 1. Clone the Repository
 ```bash
