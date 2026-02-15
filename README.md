@@ -1,6 +1,6 @@
 # Web Automation Framework - SauceDemo Test
 
-![Java](https://img.shields.io/badge/Java-11+-orange) ![Selenium](https://img.shields.io/badge/Selenium-4.x-green) ![TestNG](https://img.shields.io/badge/TestNG-7.x-red) ![Maven](https://img.shields.io/badge/Build-Maven-yellow)
+![Java](https://img.shields.io/badge/Java-11+-orange) ![Selenium](https://img.shields.io/badge/Selenium-4.x-green) ![TestNG](https://img.shields.io/badge/TestNG-7.x-red) ![Maven](https://img.shields.io/badge/Build-Maven-yellow) ![CI](https://github.com/ElementZ76/Test-Automation-Framework-Internal/actions/workflows/ci.yml/badge.svg)
 
 ## Overview
 A comprehensive BDD test automation framework for SauceDemo e-commerce application using Selenium WebDriver, Cucumber, and TestNG with Allure reporting.
