@@ -18,7 +18,7 @@ public class ApplicationHooks extends TestBase {
 	
 	@After
 	public void tearDown(Scenario scenario) {
-		if (scenario.isFailed()) {
+		if (scenario.isFailed() && driver != null) {
             // Take screenshot
             byte[] screenshot = ((TakesScreenshot) driver)
                 .getScreenshotAs(OutputType.BYTES);
