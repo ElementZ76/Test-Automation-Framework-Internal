@@ -29,10 +29,9 @@ public class TestBase {
 	public static Properties prop;
 	public static Logger log = LogManager.getLogger(TestBase.class);
 	
-//	implict wait for 10
-//	WebDriverWait waitFor10 = new WebDriverWait(driver, Duration.ofSeconds(10));
-	
-	//method to initialize the config file
+	/**
+	 * Method to initialize config file
+	 */
 	public TestBase() {
 		try {
 			prop = new Properties();
@@ -43,12 +42,19 @@ public class TestBase {
 		}
 	}
 	
-	//method to launch browser
+	/**
+	 * Method to launch browser with pop up's disabled
+	 */
 	public void initialization() {
 		String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--disable-save-password-bubble");
+			options.addArguments("--disable-save-password-bubble");
+		    options.addArguments("--headless");          
+		    options.addArguments("--no-sandbox");        
+		    options.addArguments("--disable-dev-shm-usage"); 
+		    options.addArguments("--window-size=1920,1080"); 
 			options.setExperimentalOption(
 			    "prefs",
 			    Map.of(
@@ -71,28 +77,34 @@ public class TestBase {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().deleteAllCookies();
-//		driver.get(prop.getProperty("url"));
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		log.info("Launching Browser: " + prop.getProperty("browser"));
-//        log.info("Navigating to URL: " + prop.getProperty("url"));
 	}
 	
-	//wait for element to be visible
+	/**
+	 * Method to wait for element to be visible
+	 * @param element
+	 */
 	public void waitForVisibility(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
-	//wait for element to be clickable
+	/**
+	 * Method to wait for element to be clickable
+	 * @param element
+	 */
 	public void waitForClickability(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.elementToBeClickable(element));
-		wait.ignoring(StaleElementReferenceException.class);
-		waitForVisibility(element);
+		new WebDriverWait(driver, Duration.ofSeconds(10))
+		.ignoring(StaleElementReferenceException.class)
+		.until(ExpectedConditions.elementToBeClickable(element));
 	}
 	
-	//method to retry clicking the element incase the element does not load. use attempts
-	//prevention of stale element
+	/**
+	 * Method to click element with retry attempts
+	 * Logic added for StaleElementReferenceException
+	 * @param element
+	 */
 	public void clickOn(WebElement element) {
 		int attempts = 0;
 		while(attempts<3) {
@@ -114,15 +126,19 @@ public class TestBase {
 		}
 	}
 	
-	//method to enter text in input field with attempts to prevent stale element exception
+	/**
+	 * Method to enter text in an input field
+	 * @param textbox
+	 * @param text
+	 */
 	public void sendText(WebElement element, String text) {
 		int attempts = 0;
 		while(attempts<3) {
 			try {
 				waitForVisibility(element);
 				element.click();
-				element.sendKeys(Keys.CONTROL + "a");
-				element.sendKeys(Keys.BACK_SPACE);
+				element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+				element.sendKeys(Keys.DELETE);
 				element.sendKeys(text);
 				break;
 			} catch (StaleElementReferenceException e) {
@@ -139,7 +155,10 @@ public class TestBase {
 		}
 	}
 	
-	//method to wait for element to disappear
+	/**
+	 * Method to wait for element to disappear
+	 * @param element
+	 */
 	public void invisibilityOfElement(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(element));
