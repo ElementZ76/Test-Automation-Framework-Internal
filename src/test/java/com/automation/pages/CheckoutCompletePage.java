@@ -41,7 +41,7 @@ public class CheckoutCompletePage extends TestBase {
 	 * @return confirmation header
 	 */
 	public String getConfirmationMessage() {
-		waitForVisibility(completeText);
+		waitForVisibility(completeHeader);
 		return completeHeader.getText();
 	}
 	

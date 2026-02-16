@@ -48,21 +48,30 @@ public class TestBase {
 	public void initialization() {
 		String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--disable-save-password-bubble");
-			options.addArguments("--disable-save-password-bubble");
-		    options.addArguments("--headless");          
-		    options.addArguments("--no-sandbox");        
-		    options.addArguments("--disable-dev-shm-usage"); 
-		    options.addArguments("--window-size=1920,1080"); 
-			options.setExperimentalOption(
-			    "prefs",
-			    Map.of(
-			        "credentials_enable_service", false,
-			        "profile.password_manager_enabled", false,
-			        "profile.password_manager_leak_detection", false 
-			    )
-			);
+		    ChromeOptions options = new ChromeOptions();
+		    options.addArguments("--disable-save-password-bubble");
+		    options.setExperimentalOption(
+		        "prefs",
+		        Map.of(
+		            "credentials_enable_service", false,
+		            "profile.password_manager_enabled", false,
+		            "profile.password_manager_leak_detection", false
+		        )
+		    );
+
+		    //Only run headless in CI environment
+		    boolean isCI = System.getenv("CI") != null;
+		    if (isCI) {
+		        options.addArguments("--headless");
+		        options.addArguments("--no-sandbox");
+		        options.addArguments("--disable-dev-shm-usage");
+		        options.addArguments("--window-size=1920,1080");
+		        log.info("Running in CI mode - headless enabled");
+		    } else {
+		        log.info("Running locally - headed mode, browser will be visible");
+		    }
+
+		    driver = new ChromeDriver(options);
 			driver = new ChromeDriver(options);
 		}
 		else if (browserName.equals("edge")) {
