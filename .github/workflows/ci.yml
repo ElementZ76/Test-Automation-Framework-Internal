@@ -32,7 +32,17 @@ jobs:
       - name: Run Tests
         run: mvn clean test --no-transfer-progress
         continue-on-error: true
-
+      - name: Debug - Show test output
+        if: always()
+        run: |
+            echo "=== Does target exist? ==="
+            ls -la target/ || echo "NO TARGET FOLDER"
+            echo "=== Allure results ==="
+            ls -la target/allure-results/ || echo "ALLURE RESULTS EMPTY"
+            echo "=== Surefire reports ==="
+            ls -la target/surefire-reports/ || echo "NO SUREFIRE REPORTS"
+            echo "=== Maven test log ==="
+            find . -name "*.txt" -path "*/surefire-reports/*" | head -5
       # DEBUG: Show what was actually generated after tests run
       - name: Debug - List target directory
         if: always()
