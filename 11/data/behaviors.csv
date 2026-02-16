@@ -1,0 +1,4 @@
+"BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
+"0","","0","SauceDemo E2E Purchase Flow","1","0","Login fails with locked out user","0"
+"0","","0","SauceDemo E2E Purchase Flow","1","0","Quick smoke test - Add single product to cart","0"
+"0","","1","SauceDemo E2E Purchase Flow","0","0","Complete E2E purchase flow with valid user","0"
