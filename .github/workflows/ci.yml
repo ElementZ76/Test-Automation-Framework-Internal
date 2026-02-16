@@ -12,7 +12,6 @@ jobs:
     name: Run Tests & Publish Report
     runs-on: ubuntu-latest
     
-    # Give Actions permission to push to gh-pages
     permissions:
       contents: write
 
@@ -34,7 +33,17 @@ jobs:
         run: mvn clean test --no-transfer-progress
         continue-on-error: true
 
-      # Upload raw results AND logs regardless of test outcome
+      # DEBUG: Show what was actually generated after tests run
+      - name: Debug - List target directory
+        if: always()
+        run: |
+          echo "=== target/ contents ==="
+          ls -la target/ || echo "target/ does not exist"
+          echo "=== allure-results contents ==="
+          ls -la target/allure-results/ || echo "target/allure-results is empty or missing"
+          echo "=== cucumber-reports ==="
+          ls -la target/cucumber-reports/ || echo "No cucumber reports"
+
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
         if: always()
@@ -59,7 +68,6 @@ jobs:
           path: logs/
           retention-days: 7
 
-      # Generate and push Allure HTML report to gh-pages
       - name: Publish Allure Report to GitHub Pages
         uses: simple-elf/allure-report-action@master
         if: always()
