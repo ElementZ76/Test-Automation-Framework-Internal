@@ -1,18 +1,48 @@
-# Web Automation Framework - SauceDemo Test
+# Web Automation Framework — SauceDemo
 
-![Java](https://img.shields.io/badge/Java-11+-orange) ![Selenium](https://img.shields.io/badge/Selenium-4.x-green) ![TestNG](https://img.shields.io/badge/TestNG-7.x-red) ![Maven](https://img.shields.io/badge/Build-Maven-yellow) ![CI](https://github.com/ElementZ76/Test-Automation-Framework-Internal/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/ElementZ76/Test-Automation-Framework-Internal/actions/workflows/ci.yml/badge.svg)
+![Java](https://img.shields.io/badge/Java-11+-orange)
+![Selenium](https://img.shields.io/badge/Selenium-4.27-green)
+![Cucumber](https://img.shields.io/badge/Cucumber-7.14-brightgreen)
+![TestNG](https://img.shields.io/badge/TestNG-7.8-red)
+![Maven](https://img.shields.io/badge/Build-Maven-yellow)
+![Allure](https://img.shields.io/badge/Reports-Allure-orange)
 
-## Overview
-A comprehensive BDD test automation framework for SauceDemo e-commerce application using Selenium WebDriver, Cucumber, and TestNG with Allure reporting.
+A BDD test automation framework for the [SauceDemo](https://www.saucedemo.com/) e-commerce application. Built with Selenium WebDriver, Cucumber, and TestNG. Includes a full CI/CD pipeline via GitHub Actions with live Allure reporting published to GitHub Pages.
+
+📊 **[View Live Allure Report](https://elementz76.github.io/Test-Automation-Framework-Internal/)**
+
+---
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Framework Design](#framework-design)
+- [Test Scenarios](#test-scenarios)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Running Tests](#running-tests)
+- [Reports](#reports)
+- [CI/CD Pipeline](#cicd-pipeline)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+
+---
 
 ## Project Structure
+
 ```text
 Test-Automation-Framework-Internal/
 │
-├── src/
-│   ├── main/java/com/automation/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                      # GitHub Actions CI/CD pipeline
+│
+├── src/test/
+│   ├── java/com/automation/
 │   │   ├── base/
-│   │   │   └── TestBase.java           # Base class with browser setup and reusable methods
+│   │   │   └── TestBase.java           # Browser setup, teardown, and reusable wrappers
 │   │   ├── models/
 │   │   │   └── SauceData.java          # POJO for JSON test data deserialization
 │   │   ├── pages/                      # Page Object Model (POM)
@@ -22,177 +52,271 @@ Test-Automation-Framework-Internal/
 │   │   │   ├── CheckoutInfoPage.java
 │   │   │   ├── CheckoutOverviewPage.java
 │   │   │   └── CheckoutCompletePage.java
+│   │   ├── runners/
+│   │   │   └── TestRunner.java         # TestNG + Cucumber entry point
+│   │   ├── stepdef/
+│   │   │   ├── StepDef.java            # Cucumber step definitions
+│   │   │   └── ApplicationHooks.java   # Before/After hooks, screenshot on failure
 │   │   └── utils/
-│   │       └── JsonUtils.java          # Utility for reading JSON test data
+│   │       └── JsonUtils.java          # JSON test data reader (Jackson)
 │   │
-│   └── test/
-│       ├── java/com/automation/
-│       │   ├── hooks/
-│       │   │   └── Hooks.java          # Cucumber hooks (setup/teardown, screenshots)
-│       │   ├── runners/
-│       │   │   └── TestRunner.java     # TestNG runner with Cucumber integration
-│       │   └── stepdef/
-│       │       └── StepDef.java        # Cucumber step definitions
-│       │
-│       └── resources/
-│           ├── features/
-│           │   └── Saucedemo.feature   # BDD feature file (Gherkin syntax)
-│           ├── testdata/
-│           │   └── data.json           # Test data in JSON format
-│           ├── config.properties       # Application configuration
-│           ├── testng.xml              # TestNG suite configuration
-│           └── log4j2.xml              # Logging configuration
+│   └── resources/
+│       ├── features/
+│       │   └── Saucedemo.feature       # Gherkin BDD scenarios
+│       ├── testdata/
+│       │   └── data.json               # Externalized test data
+│       ├── config.properties           # Browser, URL, timeout config
+│       ├── testng.xml                  # TestNG suite definition
+│       └── log4j2.xml                  # Log4j2 logging configuration
 │
-├── target/
-│   ├── allure-results/                 # Allure test results
-│   └── cucumber-reports/               # Cucumber HTML reports
-│
-├── pom.xml                             # Maven dependencies and plugins
-└── README.md                           # This file
+├── pom.xml                             # Maven dependencies and plugin config
+└── README.md
 ```
 
+---
+
 ## Tech Stack
-| Component | Tool / Library |
+
+| Component | Technology |
 | :--- | :--- |
-| **Language** | Java (JDK 11+) |
-| **Web Automation** | Selenium WebDriver |
-| **Test Framework** | TestNG |
-| **Build Tool** | Maven |
-| **Design Pattern** | Page Object Model (POM) |
-| **Version Control** | Git/GitHub |
+| Language | Java 11 |
+| Browser Automation | Selenium WebDriver 4.27 |
+| Test Framework | TestNG 7.8 |
+| BDD Layer | Cucumber 7.14 |
+| Build Tool | Maven |
+| Reporting | Allure 2.24 + Cucumber HTML |
+| Logging | Log4j2 |
+| Test Data | JSON via Jackson |
+| Design Pattern | Page Object Model (POM) |
+| CI/CD | GitHub Actions |
+
+---
+
+## Framework Design
+
+### TestBase — Centralized Browser Control
+
+All page classes extend `TestBase`, which provides:
+
+- `initialization()` — launches the configured browser with popups disabled. Automatically runs headless when executed in CI (detected via the `CI` environment variable set by GitHub Actions)
+- `clickOn(WebElement)` — click with retry logic and `StaleElementReferenceException` handling
+- `sendText(WebElement, String)` — clears and types into inputs with retry logic
+- `waitForVisibility(WebElement)` — explicit wait until element is visible
+- `waitForClickability(WebElement)` — explicit wait until element is interactable
+- `invisibilityOfElement(WebElement)` — waits for element to disappear
+
+### Page Object Model
+
+Each page of the application has a dedicated class. Page classes use `@FindBy` annotations and `PageFactory` for element location, and return the next relevant page object from action methods to support fluent chaining.
+
+### ApplicationHooks — Lifecycle and Screenshot Capture
+
+`@Before` launches the browser before each scenario. `@After` is split into two ordered hooks:
+
+- `order = 1` runs first — captures a screenshot on failure and attaches it to both the Allure report and the Cucumber HTML report
+- `order = 0` runs last — safely closes the browser after the screenshot is already taken
+
+### Test Data
+
+All credentials, personal info, product lists, and expected error messages are stored externally in `data.json`. Tests reference data by index, keeping step definitions free of hard-coded values. `JsonUtils` deserializes the JSON into `SauceData` POJOs using Jackson.
+
+---
+
+## Test Scenarios
+
+Defined in `src/test/resources/features/Saucedemo.feature`:
+
+| Tag | Scenario | Description |
+| :--- | :--- | :--- |
+| `@smoke @regression` | Complete E2E purchase flow | Login → add products → cart → checkout → confirm order |
+| `@regression @negative` | Login fails with locked out user | Verifies correct error message for locked accounts |
+| `@smoke` | Quick smoke — add single product | Login → add product → verify cart badge count |
+
+---
 
 ## Prerequisites
-* **Java (JDK):** JDK 11 or higher installed and configured in system path
-* **Maven:** Version 3.6+ 
-* **IDE:** Eclipse, IntelliJ IDEA, or VS Code
-* **Git:** For version control
 
-## How to Run
-### 1. Clone the repo
+- **Java JDK 11+** — configured in system `PATH`
+- **Maven 3.6+** — configured in system `PATH`
+- **Google Chrome** — latest stable version
+- **Git**
+- **IDE** — IntelliJ IDEA or Eclipse (optional for local runs)
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/ElementZ76/Test-Automation-Framework-Internal.git
 cd Test-Automation-Framework-Internal
 ```
 
 ### 2. Install dependencies
+
 ```bash
 mvn clean install -DskipTests
 ```
 
-### 3. Run All Tests
+### 3. Verify setup
+
+```bash
+mvn clean test -Dcucumber.filter.tags="@smoke"
+```
+
+Chrome should open, run the smoke test, and close. Results appear in `target/allure-results/`.
+
+---
+
+## Running Tests
+
+### Run all tests
+
 ```bash
 mvn clean test
 ```
 
-### 4. Run Specific Tags
-#### Run just smoke test
-```bash
-mvn test -Dcucumber.filter.tags="@smoke"
-```
-#### Run regression tests
-```bash
-mvn test -Dcucumber.filter.tags="@regression"
-```
+### Run by tag
 
-#### Run negative tests
 ```bash
+# Smoke tests only
+mvn test -Dcucumber.filter.tags="@smoke"
+
+# Full regression suite
+mvn test -Dcucumber.filter.tags="@regression"
+
+# Negative test cases
 mvn test -Dcucumber.filter.tags="@negative"
 ```
 
-### 5. Generate Allure Report
+### Via IDE
+
+1. Open the project as a Maven project
+2. Navigate to `src/test/java/com/automation/runners/TestRunner.java`
+3. Right-click → **Run As** → **TestNG Test**
+
+---
+
+## Reports
+
+### Allure (recommended)
+
 ```bash
-# Generate and view report in browser
+# Run tests first, then:
 mvn allure:serve
-# OR generate report only
+```
+
+Opens a live Allure report in your browser with step-by-step execution details, timing, tags, and screenshots embedded directly inside any failed scenario.
+
+```bash
+# Generate static HTML only (no auto-open)
 mvn allure:report
-# Report location: target/site/allure-maven-plugin/index.html
+# Output: target/site/allure-maven-plugin/index.html
 ```
 
-## How to Run via Eclipse/IntelliJ IDE
+### Cucumber HTML
 
-### 1. Clone the Repository
-```bash
-git clone <repository-url>
-cd TestAutomationFramework
+Available at `target/cucumber-reports/cucumber.html` after any test run. Open directly in a browser.
+
+### Live report (CI)
+
+Every push to `main` triggers the pipeline and publishes results automatically:
+
+📊 **https://elementz76.github.io/Test-Automation-Framework-Internal/**
+
+---
+
+## CI/CD Pipeline
+
+The GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and pull request to `main`.
+
+### Pipeline stages
+
+```
+Push to main
+     ↓
+Checkout code
+     ↓
+Set up JDK 11 (with Maven cache)
+     ↓
+Run tests (headless Chrome, all scenarios)
+     ↓
+Upload artifacts: allure-results, cucumber-report, logs
+     ↓
+Generate Allure HTML report
+     ↓
+Deploy to GitHub Pages (gh-pages branch)
 ```
 
-### 2. Import into IDE
+### Key behaviours
 
-**For Eclipse:**
-1. Open Eclipse
-2. Go to **File** > **Import...**
-3. Expand **Maven** folder and select **Existing Maven Projects**
-4. Click **Next**
-5. Browse and select the project root folder (containing `pom.xml`)
-6. Ensure `pom.xml` checkbox is selected
-7. Click **Finish**
+- Tests run in **headless Chrome** automatically on CI — no configuration needed
+- Tests run in **headed Chrome** locally — browser opens visibly as expected
+- The pipeline continues even if tests fail (`continue-on-error: true`) so reports are always generated and uploaded
+- Artifacts (results, reports, logs) are retained for 7 days per run
+- The Allure report keeps a history of the last 20 runs for trend analysis
 
-*Note: Wait for Maven to download dependencies (check progress bar at bottom right)*
+### Manual trigger
 
-**For IntelliJ IDEA:**
-1. Open IntelliJ IDEA
-2. Select **File** > **Open**
-3. Navigate to project folder and select it
-4. Click **OK**
-5. IntelliJ will automatically detect and import the Maven project
+The pipeline can also be triggered manually from the **Actions** tab in GitHub using the `workflow_dispatch` event — no push required.
 
-### 3. Update Configuration
-Edit `src/test/resources/config.properties` to set your test environment:
-```properties
-app.url=https://your-application-url.com
-browser=chrome
-implicit.wait=10
-explicit.wait=20
-```
-
-### 4. Run Tests
-
-**Via Maven (Command Line):**
-```bash
-# Run all tests
-mvn clean test
-
-# Run specific test class
-mvn test -Dtest=LoginTest
-```
-
-**Via IDE:**
-1. Navigate to test class in `src/test/java/com.automation.runners`
-2. Right-click the test class or test method
-3. Select **Run As** > **TestNG Test**
+---
 
 ## Configuration
 
-All test settings are centralized in `src/test/resources/config.properties`:
+All environment settings are in `src/test/resources/config.properties`:
 
-| Property | Description | Example Values |
-|----------|-------------|----------------|
-| `app.url` | Base URL of application under test | `https://demo.app.com` |
-| `browser` | Browser type | `chrome`, `firefox`, `edge` |
-| `implicit.wait` | Default implicit wait (seconds) | `10` |
-| `explicit.wait` | Explicit wait timeout (seconds) | `20` |
+```properties
+url = https://www.saucedemo.com/
+browser = chrome
+implicitwait = 10
+```
 
-**To change settings:** Simply edit `config.properties` - no code modifications needed.
+| Property | Description | Accepted Values |
+| :--- | :--- | :--- |
+| `url` | Base URL of the application | Any valid URL |
+| `browser` | Browser to launch | `chrome`, `firefox`, `edge` |
+| `implicitwait` | Implicit wait timeout in seconds | Integer |
+
+No code changes are needed to switch browsers or environments — edit this file only.
+
+---
 
 ## Troubleshooting
 
-### Maven Dependencies Not Downloading
+### Chrome does not open locally
+
+Confirm `--headless` is not hardcoded in `TestBase.java`. The framework detects CI automatically via `System.getenv("CI")`. Locally this is `null`, so headed mode is used. On GitHub Actions it is `"true"`, so headless mode activates.
+
+### Maven dependencies not downloading
+
 ```bash
-# Force update Maven project
 mvn clean install -U
 ```
 
-**In Eclipse:**
-- Right-click project > **Maven** > **Update Project**
-- Check **Force Update of Snapshots/Releases**
-- Click **OK**
+In Eclipse: right-click project → **Maven** → **Update Project** → check **Force Update** → OK.
 
-### TestNG Not Found in Eclipse
-1. Go to **Help** > **Eclipse Marketplace**
-2. Search for "TestNG for Eclipse"
-3. Install the plugin
-4. Restart Eclipse
-5. Right-click project > **Maven** > **Update Project**
+### TestNG plugin missing in Eclipse
 
-## License
-This project is intended for internal use and learning purposes.
+Go to **Help** → **Eclipse Marketplace** → search **TestNG for Eclipse** → install → restart Eclipse.
+
+### Allure report is blank after CI run
+
+Check the **Actions** run log for compilation errors. The most common cause is a filename case mismatch — Java class names must exactly match their filenames (case-sensitive on Linux). For example, `CartPage.java` not `cartPage.java`.
+
+### Tests compile locally but fail on CI
+
+Ensure all source files are committed and tracked by Git:
+
+```bash
+git ls-files src/
+```
+
+Every `.java` file should appear. If any are missing, stage and commit them explicitly:
+
+```bash
+git add src/
+git commit -m "fix: ensure all source files are tracked"
+git push origin main
+```
