@@ -17,7 +17,7 @@ public class ApplicationHooks extends TestBase {
 	}
 	
 	@Attachment(value = "Screenshot on Failure", type = "image/png")
-    private byte[] attachScreenshot(byte[] screenshot) {
+    public byte[] attachScreenshot(byte[] screenshot) {
         return screenshot;
     }
 	
