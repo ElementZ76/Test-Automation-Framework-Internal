@@ -49,7 +49,7 @@ public class TestBase {
 		String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
 		    ChromeOptions options = new ChromeOptions();
-		    options.addArguments("--disable-save-password-bubble");
+		    options.addArguments(prop.getProperty("passwordBubble"));
 		    options.setExperimentalOption(
 		        "prefs",
 		        Map.of(
@@ -62,10 +62,10 @@ public class TestBase {
 		    //Only run headless in CI environment
 		    boolean isCI = System.getenv("CI") != null;
 		    if (isCI) {
-		        options.addArguments("--headless");
-		        options.addArguments("--no-sandbox");
-		        options.addArguments("--disable-dev-shm-usage");
-		        options.addArguments("--window-size=1920,1080");
+		        options.addArguments(prop.getProperty("headless"));
+		        options.addArguments(prop.getProperty("nosandbox"));
+		        options.addArguments(prop.getProperty("shmUsage"));
+		        options.addArguments(prop.getProperty("windowSize"));
 		        log.info("Running in CI mode - headless enabled");
 		    } else {
 		        log.info("Running locally - headed mode, browser will be visible");

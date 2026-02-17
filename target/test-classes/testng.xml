@@ -1,0 +1,11 @@
+<suite name="SauceDemo Test Suite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+    
+    <test name="SauceDemo E2E Tests">
+        <classes>
+            <class name="com.automation.runners.TestRunner"/>
+        </classes>
+    </test>
+</suite>
