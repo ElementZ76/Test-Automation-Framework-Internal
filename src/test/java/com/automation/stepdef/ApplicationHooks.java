@@ -35,7 +35,7 @@ public class ApplicationHooks extends TestBase {
 
                 log.info("Screenshot attached for: {}", scenario.getName());
             } catch (Exception e) {
-                log.error("Screenshot capture failed: {}", e.getMessage());
+                log.error("Screenshot capture failed: {}");
             }
         }
     }

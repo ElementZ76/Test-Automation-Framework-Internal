@@ -70,8 +70,6 @@ public class TestBase {
 		    } else {
 		        log.info("Running locally - headed mode, browser will be visible");
 		    }
-
-		    driver = new ChromeDriver(options);
 			driver = new ChromeDriver(options);
 		}
 		else if (browserName.equals("edge")) {
