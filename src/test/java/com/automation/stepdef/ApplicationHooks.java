@@ -9,13 +9,25 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
 
 public class ApplicationHooks extends TestBase {
 	@Before
 	public void launchBrowser() {
 		initialization();
 	}
+	
+	@After(order = 0)
+    public void closeBrowser(Scenario scenario) {
+        if (scenario.isFailed()) {
+            log.error("Test completed with FAILURE status");
+        } else {
+            log.info("Scenario PASSED: {}", scenario.getName());
+        }
+        if (driver != null) {
+            driver.quit();
+            log.info("Browser closed.");
+        }
+    }
 	
     @After(order = 1)
     public void captureScreenshotOnFailure(Scenario scenario) {
@@ -35,21 +47,10 @@ public class ApplicationHooks extends TestBase {
 
                 log.info("Screenshot attached for: {}", scenario.getName());
             } catch (Exception e) {
-                log.error("Screenshot capture failed: {}");
+                log.error("Screenshot capture failed: {}", e.getMessage());
             }
         }
     }
 
-    @After(order = 0)
-    public void closeBrowser(Scenario scenario) {
-        if (scenario.isFailed()) {
-            log.error("Test completed with FAILURE status");
-        } else {
-            log.info("Scenario PASSED: {}", scenario.getName());
-        }
-        if (driver != null) {
-            driver.quit();
-            log.info("Browser closed.");
-        }
-    }
+    
 }

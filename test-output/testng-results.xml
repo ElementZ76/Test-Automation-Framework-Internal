@@ -2,26 +2,26 @@
 <testng-results ignored="0" total="3" passed="2" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-02-17T13:41:28 IST" name="Default suite" finished-at="2026-02-17T13:41:59 IST" duration-ms="31736">
+  <suite started-at="2026-02-17T13:55:34 IST" name="Default suite" finished-at="2026-02-17T13:56:08 IST" duration-ms="33487">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@7e5b621b]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@61e86192]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-02-17T13:41:28 IST" name="Default test" finished-at="2026-02-17T13:41:59 IST" duration-ms="31736">
+    <test started-at="2026-02-17T13:55:34 IST" name="Default test" finished-at="2026-02-17T13:56:08 IST" duration-ms="33487">
       <class name="com.automation.runners.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.automation.runners.TestRunner@7e5b621b]" started-at="2026-02-17T13:41:28 IST" name="setUpClass" finished-at="2026-02-17T13:41:29 IST" duration-ms="1547" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.automation.runners.TestRunner@61e86192]" started-at="2026-02-17T13:55:34 IST" name="setUpClass" finished-at="2026-02-17T13:55:35 IST" duration-ms="1008" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@3503e68e]]>
+                <![CDATA[org.testng.TestRunner@79cfc008]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@7e5b621b]" started-at="2026-02-17T13:41:29 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-17T13:41:55 IST" duration-ms="25877" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@61e86192]" started-at="2026-02-17T13:55:35 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-17T13:55:42 IST" duration-ms="6535" status="FAIL">
           <params>
             <param index="0">
               <value>
@@ -51,7 +51,7 @@ at ✽.order confirmation should display "WRONG VERIFICATION"(file:///C:/Users/U
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@7e5b621b]" started-at="2026-02-17T13:41:55 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-17T13:41:57 IST" duration-ms="2171" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@61e86192]" started-at="2026-02-17T13:55:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-17T13:56:05 IST" duration-ms="23561" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -67,7 +67,7 @@ at ✽.order confirmation should display "WRONG VERIFICATION"(file:///C:/Users/U
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@7e5b621b]" started-at="2026-02-17T13:41:57 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-17T13:41:59 IST" duration-ms="2026" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@61e86192]" started-at="2026-02-17T13:56:05 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-17T13:56:08 IST" duration-ms="2290" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -83,7 +83,7 @@ at ✽.order confirmation should display "WRONG VERIFICATION"(file:///C:/Users/U
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.automation.runners.TestRunner@7e5b621b]" started-at="2026-02-17T13:41:59 IST" name="tearDownClass" finished-at="2026-02-17T13:41:59 IST" duration-ms="48" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.automation.runners.TestRunner@61e86192]" started-at="2026-02-17T13:56:08 IST" name="tearDownClass" finished-at="2026-02-17T13:56:08 IST" duration-ms="35" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
