@@ -9,8 +9,8 @@
       <class name="com.automation.runners.TestRunner">
         <methods>
           <include name="setUpClass"/>
-          <include name="tearDownClass"/>
           <include name="runScenario" invocation-numbers="0"/>
+          <include name="tearDownClass"/>
         </methods>
       </class> <!-- com.automation.runners.TestRunner -->
     </classes>

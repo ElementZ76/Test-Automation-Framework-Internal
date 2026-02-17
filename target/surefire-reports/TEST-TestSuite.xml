@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="24.444" tests="3" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="23.061" tests="3" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
-    <property name="sun.java.command" value="C:\Users\USER\AppData\Local\Temp\surefire4883534073058179656\surefirebooter-20260217140144612_3.jar C:\Users\USER\AppData\Local\Temp\surefire4883534073058179656 2026-02-17T14-01-44_491-jvmRun1 surefire-20260217140144612_1tmp surefire_0-20260217140144612_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\USER\AppData\Local\Temp\surefire8493127643188440503\surefirebooter-20260217153737648_3.jar C:\Users\USER\AppData\Local\Temp\surefire8493127643188440503 2026-02-17T15-37-37_294-jvmRun1 surefire-20260217153737648_1tmp surefire_0-20260217153737648_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\USER\Desktop\Web automation\TestAutomationFramework\target\test-classes;C:\Users\USER\Desktop\Web automation\TestAutomationFramework\target\classes;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-java\4.27.0\selenium-java-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-api\4.27.0\selenium-api-4.27.0.jar;C:\Users\USER\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.27.0\selenium-chrome-driver-4.27.0.jar;C:\Users\USER\.m2\repository\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.27.0\selenium-chromium-driver-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-json\4.27.0\selenium-json-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.27.0\selenium-manager-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v129\4.27.0\selenium-devtools-v129-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v130\4.27.0\selenium-devtools-v130-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v131\4.27.0\selenium-devtools-v131-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.27.0\selenium-devtools-v85-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.27.0\selenium-edge-driver-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.27.0\selenium-firefox-driver-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-http\4.27.0\selenium-http-4.27.0.jar;C:\Users\USER\.m2\repository\dev\failsafe\failsafe\3.3.2\failsafe-3.3.2.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.27.0\selenium-ie-driver-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.27.0\selenium-remote-driver-4.27.0.jar;C:\Users\USER\.m2\repository\com\google\guava\guava\33.3.1-jre\guava-33.3.1-jre.jar;C:\Users\USER\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\USER\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\USER\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\USER\.m2\repository\org\checkerframework\checker-qual\3.43.0\checker-qual-3.43.0.jar;C:\Users\USER\.m2\repository\com\google\errorprone\error_prone_annotations\2.28.0\error_prone_annotations-2.28.0.jar;C:\Users\USER\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\USER\.m2\repository\io\opentelemetry\semconv\opentelemetry-semconv\1.25.0-alpha\opentelemetry-semconv-1.25.0-alpha.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-api\1.44.1\opentelemetry-api-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-context\1.44.1\opentelemetry-context-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.44.1\opentelemetry-exporter-logging-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.44.1\opentelemetry-sdk-common-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.44.1\opentelemetry-sdk-extension-autoconfigure-spi-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.44.1\opentelemetry-sdk-extension-autoconfigure-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-api-incubator\1.44.1-alpha\opentelemetry-api-incubator-1.44.1-alpha.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.44.1\opentelemetry-sdk-trace-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.44.1\opentelemetry-sdk-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.44.1\opentelemetry-sdk-metrics-1.44.1.jar;C:\Users\USER\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.44.1\opentelemetry-sdk-logs-1.44.1.jar;C:\Users\USER\.m2\repository\net\bytebuddy\byte-buddy\1.15.10\byte-buddy-1.15.10.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-os\4.27.0\selenium-os-4.27.0.jar;C:\Users\USER\.m2\repository\org\apache\commons\commons-exec\1.4.0\commons-exec-1.4.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.27.0\selenium-safari-driver-4.27.0.jar;C:\Users\USER\.m2\repository\org\seleniumhq\selenium\selenium-support\4.27.0\selenium-support-4.27.0.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-java\7.14.0\cucumber-java-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-core\7.14.0\cucumber-core-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-gherkin\7.14.0\cucumber-gherkin-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-gherkin-messages\7.14.0\cucumber-gherkin-messages-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\messages\22.0.0\messages-22.0.0.jar;C:\Users\USER\.m2\repository\io\cucumber\tag-expressions\5.0.6\tag-expressions-5.0.6.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-expressions\16.1.2\cucumber-expressions-16.1.2.jar;C:\Users\USER\.m2\repository\io\cucumber\datatable\7.14.0\datatable-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-plugin\7.14.0\cucumber-plugin-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\docstring\7.14.0\docstring-7.14.0.jar;C:\Users\USER\.m2\repository\io\cucumber\html-formatter\20.4.0\html-formatter-20.4.0.jar;C:\Users\USER\.m2\repository\io\cucumber\junit-xml-formatter\0.2.0\junit-xml-formatter-0.2.0.jar;C:\Users\USER\.m2\repository\io\cucumber\ci-environment\9.2.0\ci-environment-9.2.0.jar;C:\Users\USER\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\USER\.m2\repository\io\cucumber\cucumber-testng\7.14.0\cucumber-testng-7.14.0.jar;C:\Users\USER\.m2\repository\org\testng\testng\7.8.0\testng-7.8.0.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\USER\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\USER\.m2\repository\org\webjars\jquery\3.6.1\jquery-3.6.1.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-cucumber7-jvm\2.24.0\allure-cucumber7-jvm-2.24.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-java-commons\2.24.0\allure-java-commons-2.24.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-model\2.24.0\allure-model-2.24.0.jar;C:\Users\USER\.m2\repository\io\cucumber\gherkin\26.2.0\gherkin-26.2.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-testng\2.24.0\allure-testng-2.24.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-test-filter\2.24.0\allure-test-filter-2.24.0.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.3\jackson-databind-2.15.3.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.3\jackson-annotations-2.15.3.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.3\jackson-core-2.15.3.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-core\2.20.0\log4j-core-2.20.0.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-api\2.20.0\log4j-api-2.20.0.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-slf4j-impl\2.20.0\log4j-slf4j-impl-2.20.0.jar;"/>
     <property name="allure.results.directory" value="C:\Users\USER\Desktop\Web automation\TestAutomationFramework\target/allure-results"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\USER\AppData\Local\Temp\surefire4883534073058179656\surefirebooter-20260217140144612_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\USER\AppData\Local\Temp\surefire8493127643188440503\surefirebooter-20260217153737648_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22.0.1+8-16"/>
@@ -59,7 +59,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="runScenario[&quot;Complete E2E purchase flow with valid user&quot;, &quot;SauceDemo E2E Purchase Flow&quot;](1)" classname="com.automation.runners.TestRunner" time="5.427">
+  <testcase name="runScenario[&quot;Complete E2E purchase flow with valid user&quot;, &quot;SauceDemo E2E Purchase Flow&quot;](1)" classname="com.automation.runners.TestRunner" time="9.41">
     <failure message="Not correct message! expected [true] but found [false]" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Not correct message! expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:111)
 	at org.testng.Assert.failNotEquals(Assert.java:1578)
@@ -67,47 +67,47 @@
 	at com.automation.stepdef.StepDef.order_confirmation_should_display(StepDef.java:122)
 	at ✽.order confirmation should display "WRONG VERIFICATION"(file:///C:/Users/USER/Desktop/Web%20automation/TestAutomationFramework/src/test/resources/features/Saucedemo.feature:20)
 ]]></failure>
-    <system-out><![CDATA[14:01:46 [main] WARN  org.testng.xml.TestNGContentHandler - It is strongly recommended to add "<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >" at the top of the suite file [C:\Users\USER\Desktop\Web automation\TestAutomationFramework\src\test\resources\testng.xml] otherwise TestNG may fail or not work as expected.
-14:01:46 [main] WARN  org.testng.TestNG - Ignoring duplicate listener : io.qameta.allure.testng.AllureTestNg
-14:01:46 [main] WARN  org.testng.TestNG - Ignoring duplicate listener : io.qameta.allure.testng.AllureTestNg
-14:01:46 [main] WARN  org.testng.TestNG - Ignoring duplicate listener : io.qameta.allure.testng.AllureTestNg
+    <system-out><![CDATA[15:37:41 [main] WARN  org.testng.xml.TestNGContentHandler - It is strongly recommended to add "<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >" at the top of the suite file [C:\Users\USER\Desktop\Web automation\TestAutomationFramework\src\test\resources\testng.xml] otherwise TestNG may fail or not work as expected.
+15:37:42 [main] WARN  org.testng.TestNG - Ignoring duplicate listener : io.qameta.allure.testng.AllureTestNg
+15:37:42 [main] WARN  org.testng.TestNG - Ignoring duplicate listener : io.qameta.allure.testng.AllureTestNg
+15:37:42 [main] WARN  org.testng.TestNG - Ignoring duplicate listener : io.qameta.allure.testng.AllureTestNg
 
 @smoke @regression
 Scenario: Complete E2E purchase flow with valid user                    # src/test/resources/features/Saucedemo.feature:8
-14:01:48 [main] INFO  com.automation.base.TestBase - Running locally - headed mode, browser will be visible
-14:01:50 [main] INFO  com.automation.base.TestBase - Launching Browser: chrome
-14:01:50 [main] INFO  com.automation.base.TestBase - Navigated to: https://www.saucedemo.com/
+15:37:45 [main] INFO  com.automation.base.TestBase - Running locally - headed mode, browser will be visible
+15:37:48 [main] INFO  com.automation.base.TestBase - Launching Browser: chrome
+15:37:49 [main] INFO  com.automation.base.TestBase - Navigated to: https://www.saucedemo.com/
   Given user navigates to SauceDemo application                         # com.automation.stepdef.StepDef.user_navigates_to_sauce_demo_application()
-14:01:50 [main] INFO  com.automation.base.TestBase - LoginPage initialized
+15:37:49 [main] INFO  com.automation.base.TestBase - LoginPage initialized
   And user is on the login page                                         # com.automation.stepdef.StepDef.user_is_on_the_login_page()
-14:01:51 [main] INFO  com.automation.base.TestBase - Input Username successful
-14:01:51 [main] INFO  com.automation.base.TestBase - Input Password successful
-14:01:51 [main] INFO  com.automation.base.TestBase - Loggin button clicked
+15:37:50 [main] INFO  com.automation.base.TestBase - Input Username successful
+15:37:51 [main] INFO  com.automation.base.TestBase - Input Password successful
+15:37:51 [main] INFO  com.automation.base.TestBase - Loggin button clicked
   When user logs in with valid test data from "data.json" using index 0 # com.automation.stepdef.StepDef.user_logs_in_with_valid_test_data_from_using_index(java.lang.String,java.lang.Integer)
   Then user should be on the products page                              # com.automation.stepdef.StepDef.user_should_be_on_the_products_page()
-14:01:51 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Backpack' to cart
-14:01:51 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Bike Light' to cart
-14:01:51 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Bolt T-Shirt' to cart
+15:37:51 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Backpack' to cart
+15:37:51 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Bike Light' to cart
+15:37:51 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Bolt T-Shirt' to cart
   When user adds all products from test data to cart                    # com.automation.stepdef.StepDef.user_adds_all_products_from_test_data_to_cart()
-14:01:52 [main] INFO  com.automation.base.TestBase - Clicked shopping cart icon
+15:37:51 [main] INFO  com.automation.base.TestBase - Clicked shopping cart icon
   And user navigates to cart                                            # com.automation.stepdef.StepDef.user_navigates_to_cart()
-14:01:52 [main] INFO  com.automation.base.TestBase - All products present in cart. Passed
+15:37:51 [main] INFO  com.automation.base.TestBase - All products present in cart. Passed
   Then cart should contain all added products                           # com.automation.stepdef.StepDef.cart_should_contain_all_added_products()
-14:01:52 [main] INFO  com.automation.base.TestBase - Proceeding to checkout
+15:37:52 [main] INFO  com.automation.base.TestBase - Proceeding to checkout
   When user proceeds to checkout                                        # com.automation.stepdef.StepDef.user_proceeds_to_checkout()
-14:01:52 [main] INFO  com.automation.base.TestBase - Entered first name: Praveen
-14:01:52 [main] INFO  com.automation.base.TestBase - Entered last name: PR
-14:01:52 [main] INFO  com.automation.base.TestBase - Entered postal code: 603204
+15:37:52 [main] INFO  com.automation.base.TestBase - Entered first name: Praveen
+15:37:52 [main] INFO  com.automation.base.TestBase - Entered last name: PR
+15:37:53 [main] INFO  com.automation.base.TestBase - Entered postal code: 603204
   And user fills checkout information from test data                    # com.automation.stepdef.StepDef.user_fills_checkout_information_from_test_data()
-14:01:52 [main] INFO  com.automation.base.TestBase - Continuing to overview page
+15:37:53 [main] INFO  com.automation.base.TestBase - Continuing to overview page
   And user continues to overview page                                   # com.automation.stepdef.StepDef.user_continues_to_overview_page()
-14:01:52 [main] INFO  com.automation.base.TestBase - Order summary verified
+15:37:53 [main] INFO  com.automation.base.TestBase - Order summary verified
   Then order summary should show correct items                          # com.automation.stepdef.StepDef.order_summary_should_show_correct_items()
-14:01:52 [main] INFO  com.automation.base.TestBase - Price calculation valid: $55.97 + $4.48 = $60.45
+15:37:53 [main] INFO  com.automation.base.TestBase - Price calculation valid: $55.97 + $4.48 = $60.45
   And price calculation should be valid                                 # com.automation.stepdef.StepDef.price_calculation_should_be_valid()
-14:01:52 [main] INFO  com.automation.base.TestBase - Completed purchase
+15:37:53 [main] INFO  com.automation.base.TestBase - Completed purchase
   When user completes the purchase                                      # com.automation.stepdef.StepDef.user_completes_the_purchase()
-14:01:52 [main] ERROR com.automation.base.TestBase - Message mismatcH. Expected = WRONG VERIFICATION. Actual = Thank you for your order!
+15:37:53 [main] ERROR com.automation.base.TestBase - Message mismatcH. Expected = WRONG VERIFICATION. Actual = Thank you for your order!
   Then order confirmation should display "WRONG VERIFICATION"           # com.automation.stepdef.StepDef.order_confirmation_should_display(java.lang.String)
       java.lang.AssertionError: Not correct message! expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:111)
@@ -116,69 +116,69 @@ Scenario: Complete E2E purchase flow with valid user                    # src/te
 	at com.automation.stepdef.StepDef.order_confirmation_should_display(StepDef.java:122)
 	at ✽.order confirmation should display "WRONG VERIFICATION"(file:///C:/Users/USER/Desktop/Web%20automation/TestAutomationFramework/src/test/resources/features/Saucedemo.feature:20)
 
-14:01:52 [main] ERROR com.automation.base.TestBase - Scenario FAILED: Complete E2E purchase flow with valid user
+15:37:53 [main] ERROR com.automation.base.TestBase - Scenario FAILED: Complete E2E purchase flow with valid user
 
-    Embedding Screenshot - Complete E2E purchase flow with valid user [image/png 47344 bytes]
+    Embedding Failed Screenshot [image/png 47344 bytes]
 
-14:01:53 [main] INFO  com.automation.base.TestBase - Screenshot attached for: Complete E2E purchase flow with valid user
-14:01:53 [main] ERROR com.automation.base.TestBase - Test completed with FAILURE status
-14:01:53 [main] INFO  com.automation.base.TestBase - Browser closed.
+15:37:54 [main] INFO  com.automation.base.TestBase - Screenshot attached for: Complete E2E purchase flow with valid user
+15:37:54 [main] ERROR com.automation.base.TestBase - Test completed with FAILURE status
+15:37:54 [main] INFO  com.automation.base.TestBase - Browser closed.
 ]]></system-out>
-    <system-err><![CDATA[Feb 17, 2026 2:01:49 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    <system-err><![CDATA[Feb 17, 2026 3:37:48 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 144
-Feb 17, 2026 2:01:49 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Feb 17, 2026 3:37:48 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 144.0.7559.133. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.27.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="runScenario[&quot;Login fails with locked out user&quot;, &quot;SauceDemo E2E Purchase Flow&quot;](2)" classname="com.automation.runners.TestRunner" time="7.052">
+  <testcase name="runScenario[&quot;Login fails with locked out user&quot;, &quot;SauceDemo E2E Purchase Flow&quot;](2)" classname="com.automation.runners.TestRunner" time="3.975">
     <system-out><![CDATA[
 @regression @negative
 Scenario: Login fails with locked out user                               # src/test/resources/features/Saucedemo.feature:23
-14:01:53 [main] INFO  com.automation.base.TestBase - Running locally - headed mode, browser will be visible
-14:01:54 [main] INFO  com.automation.base.TestBase - Launching Browser: chrome
-14:01:59 [main] INFO  com.automation.base.TestBase - Navigated to: https://www.saucedemo.com/
+15:37:54 [main] INFO  com.automation.base.TestBase - Running locally - headed mode, browser will be visible
+15:37:56 [main] INFO  com.automation.base.TestBase - Launching Browser: chrome
+15:37:56 [main] INFO  com.automation.base.TestBase - Navigated to: https://www.saucedemo.com/
   Given user navigates to SauceDemo application                          # com.automation.stepdef.StepDef.user_navigates_to_sauce_demo_application()
-14:01:59 [main] INFO  com.automation.base.TestBase - LoginPage initialized
+15:37:56 [main] INFO  com.automation.base.TestBase - LoginPage initialized
   And user is on the login page                                          # com.automation.stepdef.StepDef.user_is_on_the_login_page()
-14:01:59 [main] INFO  com.automation.base.TestBase - Input Username successful
-14:02:00 [main] INFO  com.automation.base.TestBase - Input Password successful
-14:02:00 [main] INFO  com.automation.base.TestBase - Loggin button clicked
+15:37:57 [main] INFO  com.automation.base.TestBase - Input Username successful
+15:37:57 [main] INFO  com.automation.base.TestBase - Input Password successful
+15:37:58 [main] INFO  com.automation.base.TestBase - Loggin button clicked
   When user attempts login with test data from "data.json" using index 1 # com.automation.stepdef.StepDef.user_attempts_login_with_test_data_from_using_index(java.lang.String,java.lang.Integer)
   Then user should see error message from test data                      # com.automation.stepdef.StepDef.user_should_see_error_message_from_test_data()
   And user should remain on login page                                   # com.automation.stepdef.StepDef.user_should_remain_on_login_page()
-14:02:00 [main] INFO  com.automation.base.TestBase - Scenario PASSED: Login fails with locked out user
-14:02:00 [main] INFO  com.automation.base.TestBase - Browser closed.
+15:37:58 [main] INFO  com.automation.base.TestBase - Scenario PASSED: Login fails with locked out user
+15:37:58 [main] INFO  com.automation.base.TestBase - Browser closed.
 ]]></system-out>
-    <system-err><![CDATA[Feb 17, 2026 2:01:54 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    <system-err><![CDATA[Feb 17, 2026 3:37:56 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 144
-Feb 17, 2026 2:01:54 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Feb 17, 2026 3:37:56 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 144.0.7559.133. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.27.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="runScenario[&quot;Quick smoke test - Add single product to cart&quot;, &quot;SauceDemo E2E Purchase Flow&quot;](3)" classname="com.automation.runners.TestRunner" time="9.264">
+  <testcase name="runScenario[&quot;Quick smoke test - Add single product to cart&quot;, &quot;SauceDemo E2E Purchase Flow&quot;](3)" classname="com.automation.runners.TestRunner" time="3.717">
     <system-out><![CDATA[
 @smoke
 Scenario: Quick smoke test - Add single product to cart                 # src/test/resources/features/Saucedemo.feature:29
-14:02:00 [main] INFO  com.automation.base.TestBase - Running locally - headed mode, browser will be visible
-14:02:01 [main] INFO  com.automation.base.TestBase - Launching Browser: chrome
-14:02:09 [main] INFO  com.automation.base.TestBase - Navigated to: https://www.saucedemo.com/
+15:37:58 [main] INFO  com.automation.base.TestBase - Running locally - headed mode, browser will be visible
+15:38:00 [main] INFO  com.automation.base.TestBase - Launching Browser: chrome
+15:38:00 [main] INFO  com.automation.base.TestBase - Navigated to: https://www.saucedemo.com/
   Given user navigates to SauceDemo application                         # com.automation.stepdef.StepDef.user_navigates_to_sauce_demo_application()
-14:02:09 [main] INFO  com.automation.base.TestBase - LoginPage initialized
+15:38:00 [main] INFO  com.automation.base.TestBase - LoginPage initialized
   And user is on the login page                                         # com.automation.stepdef.StepDef.user_is_on_the_login_page()
-14:02:09 [main] INFO  com.automation.base.TestBase - Input Username successful
-14:02:09 [main] INFO  com.automation.base.TestBase - Input Password successful
-14:02:09 [main] INFO  com.automation.base.TestBase - Loggin button clicked
+15:38:01 [main] INFO  com.automation.base.TestBase - Input Username successful
+15:38:01 [main] INFO  com.automation.base.TestBase - Input Password successful
+15:38:01 [main] INFO  com.automation.base.TestBase - Loggin button clicked
   When user logs in with valid test data from "data.json" using index 0 # com.automation.stepdef.StepDef.user_logs_in_with_valid_test_data_from_using_index(java.lang.String,java.lang.Integer)
-14:02:09 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Backpack' to cart
+15:38:01 [main] INFO  com.automation.base.TestBase - Added 'Sauce Labs Backpack' to cart
   And user adds product "Sauce Labs Backpack" to cart                   # com.automation.stepdef.StepDef.user_adds_product_to_cart(java.lang.String)
-14:02:09 [main] INFO  com.automation.base.TestBase - Added 1 products to cart
+15:38:01 [main] INFO  com.automation.base.TestBase - Added 1 products to cart
   Then cart badge should show 1 item                                    # com.automation.stepdef.StepDef.cart_badge_should_show_item(java.lang.Integer)
-14:02:09 [main] INFO  com.automation.base.TestBase - Scenario PASSED: Quick smoke test - Add single product to cart
-14:02:09 [main] INFO  com.automation.base.TestBase - Browser closed.
+15:38:01 [main] INFO  com.automation.base.TestBase - Scenario PASSED: Quick smoke test - Add single product to cart
+15:38:02 [main] INFO  com.automation.base.TestBase - Browser closed.
 ]]></system-out>
-    <system-err><![CDATA[Feb 17, 2026 2:02:01 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    <system-err><![CDATA[Feb 17, 2026 3:38:00 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 144
-Feb 17, 2026 2:02:01 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Feb 17, 2026 3:38:00 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 144.0.7559.133. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.27.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
