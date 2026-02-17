@@ -2,12 +2,13 @@ package com.automation.stepdef;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
+import java.io.ByteArrayInputStream;
 import com.automation.base.TestBase;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 
 public class ApplicationHooks extends TestBase {
@@ -15,11 +16,6 @@ public class ApplicationHooks extends TestBase {
 	public void launchBrowser() {
 		initialization();
 	}
-	
-	@Attachment(value = "Screenshot on Failure", type = "image/png")
-    public byte[] attachScreenshot(byte[] screenshot) {
-        return screenshot;
-    }
 	
     @After(order = 1)
     public void captureScreenshotOnFailure(Scenario scenario) {
@@ -30,7 +26,12 @@ public class ApplicationHooks extends TestBase {
                         .getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", 
                         "Screenshot - " + scenario.getName());
-                attachScreenshot(screenshot);
+                Allure.addAttachment(
+                        "Screenshot on Failure",
+                        "image/png",
+                        new ByteArrayInputStream(screenshot),
+                        "png"
+                );
 
                 log.info("Screenshot attached for: {}", scenario.getName());
             } catch (Exception e) {

@@ -3,8 +3,6 @@ package com.automation.stepdef;
 import java.io.IOException;
 import java.util.List;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 
 import com.automation.base.TestBase;
@@ -18,7 +16,6 @@ import com.automation.pages.ProductListPage;
 import com.automation.utils.JsonUtils;
 
 import io.cucumber.java.en.*;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
 public class StepDef extends TestBase {
