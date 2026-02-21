@@ -99,7 +99,7 @@ public class TestBase {
 		getDriver().manage().window().maximize();
 		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		getDriver().manage().deleteAllCookies();
-		log.info("[Thread {}] Browser launched: {}", Thread.currentThread().threadId(), browserName);
+		log.info("[Thread {}] Browser launched: {}", Thread.currentThread().getId(), browserName);
 		
 	}
 	
@@ -107,7 +107,7 @@ public class TestBase {
 		if (getDriver() != null) {
             getDriver().quit();
             driverThreadLocal.remove();
-            log.info("[Thread {}] Browser closed and ThreadLocal cleared.", Thread.currentThread().threadId());
+            log.info("[Thread {}] Browser closed and ThreadLocal cleared.", Thread.currentThread().getId());
         }
 	}
 	

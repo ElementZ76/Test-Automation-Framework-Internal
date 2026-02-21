@@ -19,7 +19,7 @@ public class ApplicationHooks extends TestBase {
     @After(order = 1)
     public void captureScreenshotOnFailure(Scenario scenario) {
         if (scenario.isFailed()) {
-            log.error("[Thread {}] Scenario FAILED: {}", Thread.currentThread().threadId(), scenario.getName());
+            log.error("[Thread {}] Scenario FAILED: {}", Thread.currentThread().getId(), scenario.getName());
             try {
                 byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", "Failed Screenshot");
