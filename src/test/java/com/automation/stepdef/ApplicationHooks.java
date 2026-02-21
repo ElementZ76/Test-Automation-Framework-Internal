@@ -19,9 +19,9 @@ public class ApplicationHooks extends TestBase {
     @After(order = 1)
     public void captureScreenshotOnFailure(Scenario scenario) {
         if (scenario.isFailed()) {
-            log.error("Scenario FAILED: {}", scenario.getName());
+            log.error("[Thread {}] Scenario FAILED: {}", Thread.currentThread().threadId(), scenario.getName());
             try {
-                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", "Failed Screenshot");
                 log.info("Screenshot attached for: {}", scenario.getName());
             } catch (Exception e) {
@@ -37,9 +37,6 @@ public class ApplicationHooks extends TestBase {
 
     @After(order = 0)
     public void closeBrowser(Scenario scenario) {
-        if (driver != null) {
-            driver.quit();
-            log.info("Browser closed.");
-        }
+        TestBase.quitDriver();
     }
 }

@@ -32,7 +32,7 @@ public class StepDef extends TestBase {
 	@Step("Navigate to SauceDemo application")
 	@Given("user navigates to SauceDemo application")
 	public void user_navigates_to_sauce_demo_application() {
-		driver.get(prop.getProperty("url"));
+		getDriver().get(prop.getProperty("url"));
 		log.info("Navigated to: {}", prop.getProperty("url"));
 	}
 	

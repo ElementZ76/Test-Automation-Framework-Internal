@@ -17,7 +17,7 @@ Feature: SauceDemo E2E Purchase Flow
     Then order summary should show correct items
     And price calculation should be valid
     When user completes the purchase
-    Then order confirmation should display "WRONG VERIFICATION"
+    Then order confirmation should display "Thank you for your order!"
 
   @regression @negative
   Scenario: Login fails with locked out user

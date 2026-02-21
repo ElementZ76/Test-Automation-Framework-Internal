@@ -24,7 +24,7 @@ public class ProductListPage extends TestBase {
 	
 	
 	public ProductListPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	/**
@@ -40,8 +40,8 @@ public class ProductListPage extends TestBase {
 			.replace(".", "")
 			.replace("(", "")
 			.replace(")", "");
-			WebElement addButton = driver.findElement(By.id(dynamicLocator));
-			JavascriptExecutor js = (JavascriptExecutor) driver;
+			WebElement addButton = getDriver().findElement(By.id(dynamicLocator));
+			JavascriptExecutor js = (JavascriptExecutor) getDriver();
 			js.executeScript("arguments[0].click();", addButton); 
 			log.info("Added '{}' to cart", productName);
 		} catch (Exception e) {

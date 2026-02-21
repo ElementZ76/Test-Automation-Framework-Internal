@@ -24,10 +24,19 @@ import io.cucumber.java.Scenario;
 import io.qameta.allure.Allure;
 
 public class TestBase {
-	public static WebDriver driver;
+	
+	public static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+	
 	public static WebDriverWait wait;
 	public static Properties prop;
 	public static Logger log = LogManager.getLogger(TestBase.class);
+	
+	public static WebDriver getDriver() {
+		return driverThreadLocal.get();
+	}
+	private static void setDriver(WebDriver driver) {
+		driverThreadLocal.set(driver);
+	}
 	
 	/**
 	 * Method to initialize config file
@@ -46,8 +55,10 @@ public class TestBase {
 	 * Method to launch browser with pop up's disabled
 	 */
 	public void initialization() {
-		String browserName = prop.getProperty("browser");
-		if(browserName.equals("chrome")) {
+		String browserName = System.getProperty("browser", prop.getProperty("browser"));
+		WebDriver driver;
+		
+		if(browserName.equalsIgnoreCase("chrome")) {
 		    ChromeOptions options = new ChromeOptions();
 		    options.addArguments(prop.getProperty("passwordBubble"));
 		    options.setExperimentalOption(
@@ -79,13 +90,25 @@ public class TestBase {
 			driver = new FirefoxDriver();
 		}
 		else {
-			log.error("Browser name mismatch. Given browser name '{}' is wrong.", browserName);
+			log.error("Browser name mismatch. Given browser name '{}' is wrong. Defaulting to Chrome", browserName);
+			driver = new ChromeDriver();
 		}
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().deleteAllCookies();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		log.info("Launching Browser: " + prop.getProperty("browser"));
+		
+		setDriver(driver);
+		
+		getDriver().manage().window().maximize();
+		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		getDriver().manage().deleteAllCookies();
+		log.info("[Thread {}] Browser launched: {}", Thread.currentThread().threadId(), browserName);
+		
+	}
+	
+	public static void quitDriver() {
+		if (getDriver() != null) {
+            getDriver().quit();
+            driverThreadLocal.remove();
+            log.info("[Thread {}] Browser closed and ThreadLocal cleared.", Thread.currentThread().threadId());
+        }
 	}
 	
 	/**
@@ -93,7 +116,7 @@ public class TestBase {
 	 * @param element
 	 */
 	public void waitForVisibility(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
@@ -102,7 +125,7 @@ public class TestBase {
 	 * @param element
 	 */
 	public void waitForClickability(WebElement element) {
-		new WebDriverWait(driver, Duration.ofSeconds(10))
+		new WebDriverWait(getDriver(), Duration.ofSeconds(10))
 		.ignoring(StaleElementReferenceException.class)
 		.until(ExpectedConditions.elementToBeClickable(element));
 	}
@@ -167,7 +190,7 @@ public class TestBase {
 	 * @param element
 	 */
 	public void invisibilityOfElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
 }

@@ -23,7 +23,7 @@ public class LoginPage extends TestBase {
 	private WebElement errorMessage;
 	
 	public LoginPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 		log.info("LoginPage initialized");
 	}
 	

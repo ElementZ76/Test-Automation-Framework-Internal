@@ -32,7 +32,7 @@ public class CheckoutOverviewPage extends TestBase {
 	WebElement totalLabel;
 	
 	public CheckoutOverviewPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	/**

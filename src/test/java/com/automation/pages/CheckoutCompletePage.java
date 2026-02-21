@@ -21,7 +21,7 @@ public class CheckoutCompletePage extends TestBase {
 	
 	
 	public CheckoutCompletePage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	/**
 	 * check if we are on checkout complete page

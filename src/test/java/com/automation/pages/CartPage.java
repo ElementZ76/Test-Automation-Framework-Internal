@@ -21,7 +21,7 @@ public class CartPage extends TestBase {
 	private List<WebElement> cartItem;
 
 	public CartPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	public boolean isOnCartPage() {

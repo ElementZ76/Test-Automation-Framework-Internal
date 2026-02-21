@@ -23,7 +23,7 @@ public class CheckoutInfoPage extends TestBase {
 	WebElement continueButton;
 	
 	public CheckoutInfoPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	public boolean isOnCheckoutInfoPage() {

@@ -60,3 +60,32 @@ Acceptance:
 • Smoke test stable
 • Screenshot visible in Allure on failure
 • No manual steps needed to run tests
+
+WEEK 3:
+For Iteration-3, the focus will be on making execution operational and CI-ready.
+
+Scope includes:
+
+• CI pipeline stabilization with automated smoke runs
+
+• Configurable execution (browser/env/headless via parameters)
+
+• Stable reruns and reliability improvements
+
+• Report artifact publishing in CI
+No new test scenarios or major refactors in this iteration.
+
+We’ll close the iteration once CI runs are stable and repeatable.
+
+WEEK 4:
+Scope for this week's iteration :
+
+Enable parallel test execution (configurable thread count)
+
+Ensure driver lifecycle is thread-safe for parallel runs
+
+Allow execution on multiple browsers via configuration
+
+Maintain stability when running tests in parallel
+
+Minor framework adjustments required to support parallel execution
