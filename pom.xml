@@ -17,6 +17,8 @@
         <cucumber.version>7.14.0</cucumber.version>
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.20</aspectj.version>
+        <threads>1</threads>
+    	<browser>chrome</browser>
     </properties>
 
     <dependencies>
@@ -89,33 +91,44 @@
         </dependency>
     </dependencies>
 
-    <build>
+     <build>
         <plugins>
             <!-- Maven Surefire Plugin for TestNG -->
             <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <version>3.0.0</version>
-    <configuration>
-        <testFailureIgnore>true</testFailureIgnore>
-        <suiteXmlFiles>
-            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-        </suiteXmlFiles>
-        <argLine>
-            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-        </argLine>
-        <systemPropertyVariables>
-            <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-        </systemPropertyVariables>
-    </configuration>
-    <dependencies>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-    </dependencies>
-</plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <browser>${browser}</browser>
+                    </systemPropertyVariables>
+                    <properties>
+                        <property>
+                            <name>threadcount</name>
+                            <value>${threads}</value>
+                        </property>
+                        <property>
+                            <name>parallel</name>
+                            <value>methods</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
             <!-- Allure Maven Plugin -->
             <plugin>
