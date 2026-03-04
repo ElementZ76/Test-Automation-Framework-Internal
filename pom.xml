@@ -106,21 +106,24 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                        <browser>${browser}</browser>
-                    </systemPropertyVariables>
-                    <properties>
-                        <property>
-                            <name>threadcount</name>
-                            <value>${threads}</value>
-                        </property>
-                        <property>
-                            <name>parallel</name>
-                            <value>methods</value>
-                        </property>
-                    </properties>
-                </configuration>
+<systemPropertyVariables>
+    <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+    <browser>${browser}</browser>
+</systemPropertyVariables>
+<properties>
+    <property>
+        <name>dataproviderthreadcount</name>
+        <value>${threads}</value>
+    </property>
+    <property>
+        <name>threadcount</name>
+        <value>${threads}</value>
+    </property>
+    <property>
+        <name>parallel</name>
+        <value>methods</value>
+    </property>
+</properties>                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
