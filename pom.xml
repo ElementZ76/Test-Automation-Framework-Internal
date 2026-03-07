@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.automation</groupId>
     <artifactId>saucedemo-automation</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!-- ================================================================
+         Project-wide properties — override any of these on the command
+         line with -D flags, e.g.  -Dbrowser=firefox -Dthreads=3
+         ================================================================ -->
     <properties>
+        <!-- Compiler -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Dependency versions -->
         <selenium.version>4.27.0</selenium.version>
         <cucumber.version>7.14.0</cucumber.version>
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.20</aspectj.version>
+
+        <!-- Execution defaults (overridable via -D on mvn command line) -->
+        <browser>chrome</browser>
         <threads>1</threads>
-    	<browser>chrome</browser>
+        <executionMode>local</executionMode>
+        <gridUrl>http://localhost:4444</gridUrl>
     </properties>
 
+    <!-- ================================================================
+         Dependencies
+         ================================================================ -->
     <dependencies>
-        <!-- Selenium -->
+
+        <!-- Selenium WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -49,21 +65,21 @@
             <version>7.8.0</version>
         </dependency>
 
-        <!-- Allure Cucumber Integration -->
+        <!-- Allure — Cucumber 7 integration -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber7-jvm</artifactId>
             <version>${allure.version}</version>
         </dependency>
 
-        <!-- Allure TestNG Integration -->
+        <!-- Allure — TestNG integration -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
 
-        <!-- Jackson for JSON -->
+        <!-- Jackson — JSON deserialisation -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -83,47 +99,72 @@
             <version>2.20.0</version>
         </dependency>
 
-        <!-- SLF4J Bridge for Log4j -->
+        <!-- SLF4J bridge for Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.20.0</version>
         </dependency>
+
     </dependencies>
 
-     <build>
+    <!-- ================================================================
+         Build
+         ================================================================ -->
+    <build>
         <plugins>
-            <!-- Maven Surefire Plugin for TestNG -->
+
+            <!--
+                 Maven Surefire — runs TestNG suite
+             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
+
+                    <!-- Continue build even if tests fail so reports are generated -->
                     <testFailureIgnore>true</testFailureIgnore>
+
+                    <!-- Point at the TestNG suite file -->
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+
+                    <!-- AspectJ weaver required for Allure's @Step / @Attachment annotations -->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-<systemPropertyVariables>
-    <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-    <browser>${browser}</browser>
-</systemPropertyVariables>
-<properties>
-    <property>
-        <name>dataproviderthreadcount</name>
-        <value>${threads}</value>
-    </property>
-    <property>
-        <name>threadcount</name>
-        <value>${threads}</value>
-    </property>
-    <property>
-        <name>parallel</name>
-        <value>methods</value>
-    </property>
-</properties>                </configuration>
+
+                    <!-- System properties forwarded into the JVM that runs tests.
+                         Values come from <properties> above and can be overridden
+                         on the command line, e.g. -DbrowserName=firefox           -->
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <browser>${browser}</browser>
+                       	<threads>${threads}</threads>
+                        <executionMode>${executionMode}</executionMode>
+                        <gridUrl>${gridUrl}</gridUrl>
+                        <tags>${tags}</tags>
+                    </systemPropertyVariables>
+
+                    <!-- TestNG-specific properties: thread counts and parallel mode -->
+                    <properties>
+                        <property>
+                            <name>dataproviderthreadcount</name>
+                            <value>${threads}</value>
+                        </property>
+                        <property>
+                            <name>threadcount</name>
+                            <value>${threads}</value>
+                        </property>
+                        <property>
+                            <name>parallel</name>
+                            <value>methods</value>
+                        </property>
+                    </properties>
+
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
@@ -133,7 +174,9 @@
                 </dependencies>
             </plugin>
 
-            <!-- Allure Maven Plugin -->
+            <!--
+                 Allure Maven Plugin — generates HTML report from results
+               -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -146,6 +189,8 @@
                     </allureDownloadUrl>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
 </project>

@@ -1,6 +1,7 @@
 package com.automation.base;
 
 import java.io.FileInputStream;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
 import java.util.Properties;
@@ -16,7 +17,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -56,6 +60,8 @@ public class TestBase {
 	 */
 	public void initialization() {
 		String browserName = System.getProperty("browser", prop.getProperty("browser"));
+		String executionMode = System.getProperty("executionMode", prop.getProperty("gridUrl"));
+		String gridUrl = System.getProperty("gridUrl", prop.getProperty("gridUrl"));
 		WebDriver driver;
 		
 		if(browserName.equalsIgnoreCase("chrome")) {
@@ -70,7 +76,6 @@ public class TestBase {
 		        )
 		    );
 
-		    //Only run headless in CI environment
 		    boolean isCI = System.getenv("CI") != null;
 		    if (isCI) {
 		        options.addArguments(prop.getProperty("headless"));
@@ -81,16 +86,46 @@ public class TestBase {
 		    } else {
 		        log.info("Running locally - headed mode, browser will be visible");
 		    }
-			driver = new ChromeDriver(options);
+		    
+		    if("grid".equalsIgnoreCase(executionMode)) {
+		    	try {
+		    		driver = new RemoteWebDriver(new URL(gridUrl), options);
+		    		log.info("[Thread {}] RemoteWebDriver launched on grid: {}", Thread.currentThread().getId(), gridUrl);
+		    	} catch(Exception e) {
+		    		throw new RuntimeException("Failed to connect to Selenium Grid at:"+gridUrl, e);
+		    	}
+		    } else {
+		    	driver = new ChromeDriver(options);
+		    }
 		}
+		
 		else if (browserName.equals("edge")) {
+			EdgeOptions edgeOptions = new EdgeOptions();
+			if("grid".equalsIgnoreCase(executionMode)) {
+				try {
+					driver = new RemoteWebDriver(new URL(gridUrl), edgeOptions);
+					log.info("[Thread {}] RemoteWebDriver(Edge) launched on Grid:{}", Thread.currentThread().getId(), gridUrl);
+				} catch (Exception e) {
+					log.info("Failed to connect Selenium Grid at:"+gridUrl, e);
+				}
+			}
 			driver = new EdgeDriver();
 		}
+		
 		else if(browserName.equals("firefox")) {
+			FirefoxOptions ffoptions = new FirefoxOptions();
+			if("grid".equalsIgnoreCase(executionMode)) {
+				try {
+					driver = new RemoteWebDriver(new URL(gridUrl), ffoptions);
+					log.info("[Thread {}] RemoteWebDriver Firefox launched on Grid: {}", Thread.currentThread().getId(), gridUrl);
+				} catch (Exception e) {
+					log.info("Failed to connect Selenium grid at:"+gridUrl, e);
+				}
+			}
 			driver = new FirefoxDriver();
 		}
 		else {
-			log.error("Browser name mismatch. Given browser name '{}' is wrong. Defaulting to Chrome", browserName);
+			log.error("Browser name mismatch. Given browser name '{}' is wrong. Defaulting to Chrome (local)", browserName);
 			driver = new ChromeDriver();
 		}
 		
