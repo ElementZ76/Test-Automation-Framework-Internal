@@ -177,6 +177,17 @@ Chrome should open, run the smoke test, and close. Results appear in `target/all
 mvn clean test
 ```
 
+## Running on Selenium Grid
+
+1. Download `selenium-server-4.27.0.jar` from:  
+   https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.27.0
+
+2. Start the grid:
+   java -jar selenium-server-4.27.0.jar standalone
+
+3. Run tests:
+   mvn clean test -Dtags="@smoke" -DexecutionMode=grid -DgridUrl=http://localhost:4444
+
 ### Run by tag
 
 ```bash
