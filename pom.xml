@@ -145,7 +145,7 @@
                        	<threads>${threads}</threads>
                         <executionMode>${executionMode}</executionMode>
                         <gridUrl>${gridUrl}</gridUrl>
-                        <tags>${tags}</tags>
+                        <cucumber.filter.tags>${tags}</cucumber.filter.tags>
                     </systemPropertyVariables>
 
                     <!-- TestNG-specific properties: thread counts and parallel mode -->

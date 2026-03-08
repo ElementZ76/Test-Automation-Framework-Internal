@@ -8,7 +8,6 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
     features = "src/test/resources/features/", //points to features
     glue = "com.automation.stepdef", //points to step definitions
-    tags="${tags:-}",
     plugin = {
     		"pretty",
             "html:target/cucumber-reports/cucumber.html",
