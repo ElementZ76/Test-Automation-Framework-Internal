@@ -1,4 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","1205","Quick smoke test - Add single product to cart","","Sun Mar 08 06:20:36 UTC 2026","passed","Sun Mar 08 06:20:37 UTC 2026","","SauceDemo E2E Purchase Flow","Quick smoke test - Add single product to cart",""
-"","1193","Login fails with locked out user","","Sun Mar 08 06:20:35 UTC 2026","passed","Sun Mar 08 06:20:36 UTC 2026","","SauceDemo E2E Purchase Flow","Login fails with locked out user",""
-"","10753","Complete E2E purchase flow with valid user","","Sun Mar 08 06:20:24 UTC 2026","passed","Sun Mar 08 06:20:35 UTC 2026","","SauceDemo E2E Purchase Flow","Complete E2E purchase flow with valid user",""
