@@ -60,9 +60,9 @@ public class TestBase {
 	 */
 	public void initialization() {
 		String browserName = System.getProperty("browser", prop.getProperty("browser"));
-		String executionMode = System.getProperty("executionMode", prop.getProperty("gridUrl"));
+		String executionMode = System.getProperty("executionMode", prop.getProperty("executionMode"));
 		String gridUrl = System.getProperty("gridUrl", prop.getProperty("gridUrl"));
-		WebDriver driver;
+		WebDriver driver = null;
 		
 		if(browserName.equalsIgnoreCase("chrome")) {
 		    ChromeOptions options = new ChromeOptions();
@@ -108,8 +108,9 @@ public class TestBase {
 				} catch (Exception e) {
 					log.info("Failed to connect Selenium Grid at:"+gridUrl, e);
 				}
+			} else {
+				driver = new EdgeDriver();
 			}
-			driver = new EdgeDriver();
 		}
 		
 		else if(browserName.equals("firefox")) {
