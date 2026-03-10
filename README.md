@@ -1,7 +1,5 @@
-# Web Automation Framework — SauceDemo
+# SauceDemo Test Automation Framework
 
-![CI](https://github.com/ElementZ76/Test-Automation-Framework-Internal/actions/workflows/ci.yml/badge.svg)
-![Java](https://img.shields.io/badge/Java-11+-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.27-green)
 ![Cucumber](https://img.shields.io/badge/Cucumber-7.14-brightgreen)
 ![TestNG](https://img.shields.io/badge/TestNG-7.8-red)
@@ -65,7 +63,7 @@ Test-Automation-Framework-Internal/
 │       │   └── Saucedemo.feature       # Gherkin BDD scenarios
 │       ├── testdata/
 │       │   └── data.json               # Externalized test data
-│       ├── config.properties           # Browser, URL, timeout config
+│       ├── config.properties           # Browser, URL, timeout, and execution config
 │       ├── testng.xml                  # TestNG suite definition
 │       └── log4j2.xml                  # Log4j2 logging configuration
 │
@@ -98,7 +96,7 @@ Test-Automation-Framework-Internal/
 
 All page classes extend `TestBase`, which provides:
 
-- `initialization()` — launches the configured browser with popups disabled. Automatically runs headless when executed in CI (detected via the `CI` environment variable set by GitHub Actions)
+- `initialization()` — launches the configured browser with popups disabled. Automatically runs headless when executed in CI (detected via the `CI` environment variable set by GitHub Actions). Supports local and Selenium Grid execution via `executionMode`.
 - `clickOn(WebElement)` — click with retry logic and `StaleElementReferenceException` handling
 - `sendText(WebElement, String)` — clears and types into inputs with retry logic
 - `waitForVisibility(WebElement)` — explicit wait until element is visible
@@ -162,7 +160,7 @@ mvn clean install -DskipTests
 ### 3. Verify setup
 
 ```bash
-mvn clean test -Dcucumber.filter.tags="@smoke"
+mvn clean test -Dtags="@smoke"
 ```
 
 Chrome should open, run the smoke test, and close. Results appear in `target/allure-results/`.
@@ -171,34 +169,71 @@ Chrome should open, run the smoke test, and close. Results appear in `target/all
 
 ## Running Tests
 
+All parameters are passed with the `-D` flag and override their corresponding default in `config.properties`.
+
+### Supported Parameters
+
+| Parameter | Default | Accepted Values | Description |
+| :--- | :--- | :--- | :--- |
+| `browser` | `chrome` | `chrome`, `firefox`, `edge` | Browser to launch |
+| `threads` | `1` | Any positive integer | Number of parallel test threads |
+| `tags` | *(all scenarios)* | Any Cucumber tag expression | Filter which scenarios to run |
+| `executionMode` | `local` | `local`, `grid` | Run locally or against a Selenium Grid hub |
+| `gridUrl` | `http://localhost:4444` | Any valid hub URL | Selenium Grid hub address (used when `executionMode=grid`) |
+
 ### Run all tests
 
 ```bash
 mvn clean test
 ```
 
-## Running on Selenium Grid
-
-1. Download `selenium-server-4.27.0.jar` from:  
-   https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.27.0
-
-2. Start the grid:
-   java -jar selenium-server-4.27.0.jar standalone
-
-3. Run tests:
-   mvn clean test -Dtags="@smoke" -DexecutionMode=grid -DgridUrl=http://localhost:4444
-
-### Run by tag
+### Filter by tag
 
 ```bash
 # Smoke tests only
-mvn test -Dcucumber.filter.tags="@smoke"
+mvn clean test -Dtags="@smoke"
 
 # Full regression suite
-mvn test -Dcucumber.filter.tags="@regression"
+mvn clean test -Dtags="@regression"
 
 # Negative test cases
-mvn test -Dcucumber.filter.tags="@negative"
+mvn clean test -Dtags="@negative"
+
+# Multiple tags (AND)
+mvn clean test -Dtags="@smoke and @regression"
+
+# Exclude a tag
+mvn clean test -Dtags="not @wip"
+```
+
+### Select a browser
+
+```bash
+mvn clean test -Dbrowser=firefox
+mvn clean test -Dbrowser=edge
+```
+
+### Parallel execution
+
+```bash
+# Run with 3 parallel threads
+mvn clean test -Dthreads=3
+
+# Parallel smoke suite on Firefox
+mvn clean test -Dbrowser=firefox -Dthreads=4 -Dtags="@smoke"
+```
+
+### Selenium Grid execution
+
+```bash
+# Run on a local Grid hub (default port)
+mvn clean test -DexecutionMode=grid
+
+# Run on a specific Grid URL
+mvn clean test -DexecutionMode=grid -DgridUrl=http://selenium-hub:4444
+
+# Grid + browser + tag filter
+mvn clean test -DexecutionMode=grid -DgridUrl=http://selenium-hub:4444 -Dbrowser=chrome -Dtags="@regression"
 ```
 
 ### Via IDE
@@ -214,21 +249,27 @@ mvn test -Dcucumber.filter.tags="@negative"
 ### Allure (recommended)
 
 ```bash
-# Run tests first, then:
+# Run tests first, then open the live report:
 mvn allure:serve
+
+# Generate static HTML only (no auto-open):
+mvn allure:report
 ```
 
 Opens a live Allure report in your browser with step-by-step execution details, timing, tags, and screenshots embedded directly inside any failed scenario.
 
-```bash
-# Generate static HTML only (no auto-open)
-mvn allure:report
-# Output: target/site/allure-maven-plugin/index.html
-```
-
 ### Cucumber HTML
 
 Available at `target/cucumber-reports/cucumber.html` after any test run. Open directly in a browser.
+
+### Report output locations
+
+| Path | Contents |
+| :--- | :--- |
+| `target/allure-results/` | Raw Allure JSON results |
+| `target/site/allure-maven-plugin/` | Generated static Allure HTML report |
+| `target/cucumber-reports/cucumber.html` | Cucumber HTML report |
+| `logs/automation.log` | Full Log4j2 execution log |
 
 ### Live report (CI)
 
@@ -276,21 +317,25 @@ The pipeline can also be triggered manually from the **Actions** tab in GitHub u
 
 ## Configuration
 
-All environment settings are in `src/test/resources/config.properties`:
+All default settings are in `src/test/resources/config.properties`. Any value can be overridden at runtime using `-D` flags without modifying any code.
 
 ```properties
-url = https://www.saucedemo.com/
-browser = chrome
-implicitwait = 10
+url           = https://www.saucedemo.com/
+browser       = chrome
+implicitwait  = 10
+threads       = 1
+executionMode = local
+gridUrl       = http://localhost:4444
 ```
 
 | Property | Description | Accepted Values |
 | :--- | :--- | :--- |
-| `url` | Base URL of the application | Any valid URL |
+| `url` | Base URL of the application under test | Any valid URL |
 | `browser` | Browser to launch | `chrome`, `firefox`, `edge` |
 | `implicitwait` | Implicit wait timeout in seconds | Integer |
-
-No code changes are needed to switch browsers or environments — edit this file only.
+| `threads` | Number of parallel execution threads | Positive integer |
+| `executionMode` | Where to run — locally or on a Selenium Grid | `local`, `grid` |
+| `gridUrl` | Selenium Grid hub URL (used when `executionMode=grid`) | Any valid hub URL |
 
 ---
 
