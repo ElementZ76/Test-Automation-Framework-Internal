@@ -300,14 +300,6 @@ mvn clean test -DexecutionMode=grid -Dthreads=3
 
 When `executionMode=grid`, `TestBase.initialization()` creates a `RemoteWebDriver` pointed at the hub URL instead of launching a local `ChromeDriver`. The hub receives the request and delegates it to an available node, which opens the browser on its own machine. From the framework's perspective everything else — hooks, steps, waits, screenshots, reports — is identical to a local run.
 
-| | Local | Grid |
-| :--- | :--- | :--- |
-| Who opens the browser | Your machine | The Grid node |
-| Hub needs to be running | No | Yes — keep both terminals open |
-| TestNG still runs | ✅ | ✅ |
-| Allure / Cucumber reports | ✅ Same | ✅ Same |
-| Maven command | `mvn clean test` | `mvn clean test -DexecutionMode=grid` |
-
 ---
 
 ## Reports
