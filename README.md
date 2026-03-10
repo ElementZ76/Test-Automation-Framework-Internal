@@ -21,6 +21,7 @@ A BDD test automation framework for the [SauceDemo](https://www.saucedemo.com/) 
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Running Tests](#running-tests)
+- [Selenium Grid](#selenium-grid)
 - [Reports](#reports)
 - [CI/CD Pipeline](#cicd-pipeline)
 - [Configuration](#configuration)
@@ -223,24 +224,89 @@ mvn clean test -Dthreads=3
 mvn clean test -Dbrowser=firefox -Dthreads=4 -Dtags="@smoke"
 ```
 
-### Selenium Grid execution
-
-```bash
-# Run on a local Grid hub (default port)
-mvn clean test -DexecutionMode=grid
-
-# Run on a specific Grid URL
-mvn clean test -DexecutionMode=grid -DgridUrl=http://selenium-hub:4444
-
-# Grid + browser + tag filter
-mvn clean test -DexecutionMode=grid -DgridUrl=http://selenium-hub:4444 -Dbrowser=chrome -Dtags="@regression"
-```
-
 ### Via IDE
 
 1. Open the project as a Maven project
 2. Navigate to `src/test/java/com/automation/runners/TestRunner.java`
 3. Right-click → **Run As** → **TestNG Test**
+
+---
+
+## Selenium Grid
+
+Selenium Grid lets the framework send browser sessions to a hub rather than opening a browser directly on your machine. TestNG, Cucumber, Allure, and all reports work exactly the same — only where the browser process runs changes.
+
+### Prerequisites
+
+- Java must be installed and available in `PATH` on the machine running the hub and node
+- The Selenium Server jar (`selenium-server-<version>.jar`) must be present
+- Chrome (or whichever browser you intend to use) must be installed on the **node** machine
+
+### Step 1 — Start the Hub
+
+Open a terminal in the folder containing the Selenium Server jar and run:
+
+```bash
+java -jar selenium-server-<version>.jar hub
+```
+
+The hub starts and listens on port `4444` by default. You will see a line like:
+
+```
+INFO [Standalone.execute] - Started Selenium standalone
+```
+
+Leave this terminal open for the duration of your test run.
+
+### Step 2 — Register a Node
+
+Open a **second terminal** in the same folder and run:
+
+```bash
+java -jar selenium-server-<version>.jar node --hub http://localhost:4444
+```
+
+The node registers itself with the hub and advertises whichever browsers are installed on the machine. You will see a confirmation like:
+
+```
+INFO [Node.register] - Node registered with hub
+```
+
+Leave this terminal open as well.
+
+### Step 3 — Verify the Grid is running
+
+Open `http://localhost:4444/ui` in a browser. The Grid console will show the registered node and its available browser slots. Both the hub and node must appear healthy before running tests.
+
+### Step 4 — Run tests against the Grid
+
+With both terminals still running, execute from your project directory:
+
+```bash
+# Default — Chrome on localhost:4444
+mvn clean test -DexecutionMode=grid
+
+# Specific Grid URL
+mvn clean test -DexecutionMode=grid -DgridUrl=http://localhost:4444
+
+# Grid + browser + tag filter
+mvn clean test -DexecutionMode=grid -DgridUrl=http://localhost:4444 -Dbrowser=chrome -Dtags="@regression"
+
+# Grid + parallel threads
+mvn clean test -DexecutionMode=grid -Dthreads=3
+```
+
+### How it works
+
+When `executionMode=grid`, `TestBase.initialization()` creates a `RemoteWebDriver` pointed at the hub URL instead of launching a local `ChromeDriver`. The hub receives the request and delegates it to an available node, which opens the browser on its own machine. From the framework's perspective everything else — hooks, steps, waits, screenshots, reports — is identical to a local run.
+
+| | Local | Grid |
+| :--- | :--- | :--- |
+| Who opens the browser | Your machine | The Grid node |
+| Hub needs to be running | No | Yes — keep both terminals open |
+| TestNG still runs | ✅ | ✅ |
+| Allure / Cucumber reports | ✅ Same | ✅ Same |
+| Maven command | `mvn clean test` | `mvn clean test -DexecutionMode=grid` |
 
 ---
 
