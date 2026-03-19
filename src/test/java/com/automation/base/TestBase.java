@@ -122,6 +122,8 @@ public class TestBase {
 				} catch (Exception e) {
 					log.info("Failed to connect Selenium grid at:"+gridUrl, e);
 				}
+			} else {
+				driver = new FirefoxDriver();
 			}
 			driver = new FirefoxDriver();
 		}
