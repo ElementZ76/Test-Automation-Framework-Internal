@@ -27,6 +27,7 @@ public class TestBase {
 	
 	public static WebDriverWait wait;
 	public static Properties prop;
+	private static int WAIT_TIMEOUT;
 	public static Logger log = LogManager.getLogger(TestBase.class);
 	
 	public static WebDriver getDriver() {
@@ -52,7 +53,9 @@ public class TestBase {
 	/**
 	 * Method to launch browser with pop up's disabled
 	 */
+
 	public void initialization() {
+		WAIT_TIMEOUT = Integer.parseInt(prop.getProperty("implicitwait", "10"));
 		String browserName = System.getProperty("browser", prop.getProperty("browser"));
 		String executionMode = System.getProperty("executionMode", prop.getProperty("executionMode"));
 		String gridUrl = System.getProperty("gridUrl", prop.getProperty("gridUrl"));
@@ -100,7 +103,7 @@ public class TestBase {
 					driver = new RemoteWebDriver(new URL(gridUrl), edgeOptions);
 					log.info("[Thread {}] RemoteWebDriver(Edge) launched on Grid:{}", Thread.currentThread().getId(), gridUrl);
 				} catch (Exception e) {
-                    log.info("Failed to connect Selenium Grid at:{}", gridUrl, e);
+					throw new RuntimeException("Failed to connect Selenium grid at:"+gridUrl, e);
 				}
 			} else {
 				driver = new EdgeDriver();
@@ -114,7 +117,7 @@ public class TestBase {
 					driver = new RemoteWebDriver(new URL(gridUrl), ffoptions);
 					log.info("[Thread {}] RemoteWebDriver Firefox launched on Grid: {}", Thread.currentThread().getId(), gridUrl);
 				} catch (Exception e) {
-					log.info("Failed to connect Selenium grid at:"+gridUrl, e);
+					throw new RuntimeException("Failed to connect Selenium grid at:"+gridUrl, e);
 				}
 			} else {
 				driver = new FirefoxDriver();
@@ -128,7 +131,7 @@ public class TestBase {
 		setDriver(driver);
 		
 		getDriver().manage().window().maximize();
-		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(WAIT_TIMEOUT));
 		getDriver().manage().deleteAllCookies();
 		log.info("[Thread {}] Browser launched: {}", Thread.currentThread().getId(), browserName);
 		
@@ -147,7 +150,7 @@ public class TestBase {
 	 * @param element
 	 */
 	public void waitForVisibility(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
@@ -156,7 +159,7 @@ public class TestBase {
 	 * @param element
 	 */
 	public void waitForClickability(WebElement element) {
-		new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+		new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT))
 		.ignoring(StaleElementReferenceException.class)
 		.until(ExpectedConditions.elementToBeClickable(element));
 	}
@@ -220,7 +223,7 @@ public class TestBase {
 	 * Method to wait for element to disappear
      */
 	public void invisibilityOfElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT));
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
 }
