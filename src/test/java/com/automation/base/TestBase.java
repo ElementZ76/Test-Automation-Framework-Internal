@@ -5,13 +5,10 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
 import java.util.Properties;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,9 +20,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.cucumber.java.Scenario;
-import io.qameta.allure.Allure;
 
 public class TestBase {
 	
@@ -106,7 +100,7 @@ public class TestBase {
 					driver = new RemoteWebDriver(new URL(gridUrl), edgeOptions);
 					log.info("[Thread {}] RemoteWebDriver(Edge) launched on Grid:{}", Thread.currentThread().getId(), gridUrl);
 				} catch (Exception e) {
-					log.info("Failed to connect Selenium Grid at:"+gridUrl, e);
+                    log.info("Failed to connect Selenium Grid at:{}", gridUrl, e);
 				}
 			} else {
 				driver = new EdgeDriver();
@@ -125,7 +119,6 @@ public class TestBase {
 			} else {
 				driver = new FirefoxDriver();
 			}
-			driver = new FirefoxDriver();
 		}
 		else {
 			log.error("Browser name mismatch. Given browser name '{}' is wrong. Defaulting to Chrome (local)", browserName);
@@ -196,7 +189,7 @@ public class TestBase {
 	
 	/**
 	 * Method to enter text in an input field
-	 * @param textbox
+	 * @param element
 	 * @param text
 	 */
 	public void sendText(WebElement element, String text) {
@@ -225,8 +218,7 @@ public class TestBase {
 	
 	/**
 	 * Method to wait for element to disappear
-	 * @param element
-	 */
+     */
 	public void invisibilityOfElement(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(element));
