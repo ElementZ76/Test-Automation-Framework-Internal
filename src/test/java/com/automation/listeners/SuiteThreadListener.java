@@ -48,8 +48,6 @@ public class SuiteThreadListener implements IAlterSuiteListener {
 
         for (XmlSuite suite : suites) {
             suite.setThreadCount(threadCount);
-            // Ensure parallel mode is set — testng.xml value is preserved if already
-            // set to something other than NONE; we only force it when it is NONE.
             if (suite.getParallel() == XmlSuite.ParallelMode.NONE) {
                 suite.setParallel(XmlSuite.ParallelMode.METHODS);
                 log.info("SuiteThreadListener: parallel mode was NONE, set to METHODS.");
