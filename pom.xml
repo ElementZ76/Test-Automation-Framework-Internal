@@ -25,12 +25,7 @@
         <cucumber.version>7.14.0</cucumber.version>
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.20</aspectj.version>
-
-        <!-- Execution defaults (overridable via -D on mvn command line) -->
-        <browser>chrome</browser>
-        <threads>1</threads>
-        <executionMode>local</executionMode>
-        <gridUrl>http://localhost:4444</gridUrl>
+        <cli.threads></cli.threads>
     </properties>
 
     <!-- ================================================================
@@ -123,43 +118,24 @@
                 <version>3.0.0</version>
                 <configuration>
 
-                    <!-- Continue build even if tests fail so reports are generated -->
                     <testFailureIgnore>true</testFailureIgnore>
 
-                    <!-- Point at the TestNG suite file -->
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
-                    <!-- AspectJ weaver required for Allure's @Step / @Attachment annotations -->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
 
-                    <!-- System properties forwarded into the JVM that runs tests.
-                         Values come from <properties> above and can be overridden
-                         on the command line, e.g. -DbrowserName=firefox           -->
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                         <!--suppress UnresolvedMavenProperty -->
                         <cucumber.filter.tags>${tags}</cucumber.filter.tags>
-                    </systemPropertyVariables>
 
-                    <!-- TestNG-specific properties: thread counts and parallel mode -->
-                    <properties>
-                        <property>
-                            <name>dataproviderthreadcount</name>
-                            <value>${threads}</value>
-                        </property>
-                        <property>
-                            <name>threadcount</name>
-                            <value>${threads}</value>
-                        </property>
-                        <property>
-                            <name>parallel</name>
-                            <value>methods</value>
-                        </property>
-                    </properties>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <threads>${cli.threads}</threads>
+                    </systemPropertyVariables>
 
                 </configuration>
                 <dependencies>

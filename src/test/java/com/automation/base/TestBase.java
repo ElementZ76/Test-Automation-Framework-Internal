@@ -108,11 +108,12 @@ public class TestBase {
 				"profile.password_manager_leak_detection", false
 		));
 		if(System.getenv("CI")!=null) {
+			options.addArguments("--start-maximized");
 			options.addArguments(
 					prop.getProperty("headless", "--headless"),
 					prop.getProperty("nosandbox", "--no-sandbox"),
 					prop.getProperty("shmUsage", "--disable-dev-shm-usage"),
-					prop.getProperty("windowSize", "--window-size=1920, 1080"));
+					prop.getProperty("windowSize", "--window-size=1920, 720"));
 			log.info("CI environment detected - Chrome running headless");
 		}
 		if("grid".equalsIgnoreCase(executionMode)) {
@@ -123,6 +124,7 @@ public class TestBase {
 
 	public WebDriver buildEdge(String executionMode, String gridUrl) {
 		EdgeOptions options = new EdgeOptions();
+		options.addArguments("--start-maximized");    
 		if("grid".equalsIgnoreCase(executionMode)) {
 			return connectToGrid(gridUrl, options);
 		}
@@ -131,6 +133,7 @@ public class TestBase {
 
 	public WebDriver buildFirefox(String executionMode, String gridUrl) {
 		FirefoxOptions options = new FirefoxOptions();
+		options.addArguments("--start-maximized");    
 		if("grid".equalsIgnoreCase(executionMode)){
 			return connectToGrid(gridUrl, options);
 		}

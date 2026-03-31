@@ -48,6 +48,7 @@ public class SuiteThreadListener implements IAlterSuiteListener {
 
         for (XmlSuite suite : suites) {
             suite.setThreadCount(threadCount);
+            suite.setDataProviderThreadCount(threadCount);
             if (suite.getParallel() == XmlSuite.ParallelMode.NONE) {
                 suite.setParallel(XmlSuite.ParallelMode.METHODS);
                 log.info("SuiteThreadListener: parallel mode was NONE, set to METHODS.");
