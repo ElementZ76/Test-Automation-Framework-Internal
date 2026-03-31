@@ -24,119 +24,133 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TestBase {
 	
 	public static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
-	
-	public static WebDriverWait wait;
-	public static Properties prop;
+
+	public static volatile Properties prop;
 	private static int WAIT_TIMEOUT;
 	public static Logger log = LogManager.getLogger(TestBase.class);
-	
-	public static WebDriver getDriver() {
-		return driverThreadLocal.get();
-	}
-	private static void setDriver(WebDriver driver) {
-		driverThreadLocal.set(driver);
-	}
 	
 	/**
 	 * Method to initialize config file
 	 */
 	public TestBase() {
-		try {
-			prop = new Properties();
-			FileInputStream ip = new FileInputStream("src/test/resources/config.properties");
-			prop.load(ip);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(prop == null) {
+			synchronized (TestBase.class) {
+				if(prop==null) {
+					Properties p = new Properties();
+					try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
+						p.load(fis);
+						prop=p;
+						log.info("config.properties loaded successfully");
+					} catch (Exception e) {
+						throw new RuntimeException("Cannot read config.properties. Aborting.",e);
+					}
+				}
+			}
 		}
 	}
-	
+
 	/**
-	 * Method to launch browser with pop up's disabled
+	 * Method to resolve to given key. If no key is found in config file, resort to default value.
+	 * @param key - value to take from config
+	 * @param hardDefault - value to use if key is missing from config
+	 * @return hardDefault if key is wrong
 	 */
+	private String resolve(String key, String hardDefault) {
+		String sysProp = System.getProperty(key);
+		if(sysProp!=null && !sysProp.trim().isEmpty()) {
+			log.debug("'{}'->-D system property: '{}'", key, sysProp.trim());
+			return sysProp.trim();
+		}
+		String configVal = prop.getProperty(key);
+		if(configVal!=null && !configVal.trim().isEmpty()) {
+			log.debug("'{}'->config.properties: '{}'", key, configVal.trim());
+			return configVal.trim();
+		}
+		log.warn("'{}' not set in -D args or config.properties. Using built in default: '{}'", key, hardDefault);
+		return hardDefault;
+	}
 
 	public void initialization() {
-		WAIT_TIMEOUT = Integer.parseInt(prop.getProperty("implicitwait", "10"));
-		String browserName = System.getProperty("browser", prop.getProperty("browser"));
-		String executionMode = System.getProperty("executionMode", prop.getProperty("executionMode"));
-		String gridUrl = System.getProperty("gridUrl", prop.getProperty("gridUrl"));
-		WebDriver driver = null;
-		
-		if(browserName.equalsIgnoreCase("chrome")) {
-		    ChromeOptions options = new ChromeOptions();
-		    options.addArguments(prop.getProperty("passwordBubble"));
-		    options.setExperimentalOption(
-		        "prefs",
-		        Map.of(
-		            "credentials_enable_service", false,
-		            "profile.password_manager_enabled", false,
-		            "profile.password_manager_leak_detection", false
-		        )
-		    );
+		WAIT_TIMEOUT = Integer.parseInt(resolve("implicitWait", "10"));
+		String browserName = resolve("browser", "chrome");
+		String executionMode = resolve("executionMode", "local");
+		String gridUrl = resolve("gridUrl", "http://localhost:4444");
 
-		    boolean isCI = System.getenv("CI") != null;
-		    if (isCI) {
-		        options.addArguments(prop.getProperty("headless"));
-		        options.addArguments(prop.getProperty("nosandbox"));
-		        options.addArguments(prop.getProperty("shmUsage"));
-		        options.addArguments(prop.getProperty("windowSize"));
-		        log.info("Running in CI mode - headless enabled");
-		    } else {
-		        log.info("Running locally - headed mode, browser will be visible");
-		    }
-		    
-		    if("grid".equalsIgnoreCase(executionMode)) {
-		    	try {
-		    		driver = new RemoteWebDriver(new URL(gridUrl), options);
-		    		log.info("[Thread {}] RemoteWebDriver launched on grid: {}", Thread.currentThread().getId(), gridUrl);
-		    	} catch(Exception e) {
-		    		throw new RuntimeException("Failed to connect to Selenium Grid at:"+gridUrl, e);
-		    	}
-		    } else {
-		    	driver = new ChromeDriver(options);
-		    }
+		log.info(" --- Driver Init | browser='{}' | executionMode='{}' | gridUrl='{}' ---", browserName, executionMode, gridUrl);
+		WebDriver driver;
+
+		if(browserName.equalsIgnoreCase("chrome")) {
+			driver=buildChrome(executionMode, gridUrl);
+		} else if (browserName.equalsIgnoreCase("firefox")) {
+			driver = buildFirefox(executionMode, gridUrl);
+		} else if (browserName.equalsIgnoreCase("edge")) {
+			driver = buildEdge(executionMode, gridUrl);
+		} else {
+			throw new RuntimeException( "Unsupported Browser: '" + browserName + "'" +
+					"Accepted values: chrome | firefox | edge" +
+					"Set browser=<value> in config.properties or pass -Dbrowser=<value>");
 		}
-		
-		else if (browserName.equals("edge")) {
-			EdgeOptions edgeOptions = new EdgeOptions();
-			if("grid".equalsIgnoreCase(executionMode)) {
-				try {
-					driver = new RemoteWebDriver(new URL(gridUrl), edgeOptions);
-					log.info("[Thread {}] RemoteWebDriver(Edge) launched on Grid:{}", Thread.currentThread().getId(), gridUrl);
-				} catch (Exception e) {
-					throw new RuntimeException("Failed to connect Selenium grid at:"+gridUrl, e);
-				}
-			} else {
-				driver = new EdgeDriver();
-			}
-		}
-		
-		else if(browserName.equals("firefox")) {
-			FirefoxOptions ffoptions = new FirefoxOptions();
-			if("grid".equalsIgnoreCase(executionMode)) {
-				try {
-					driver = new RemoteWebDriver(new URL(gridUrl), ffoptions);
-					log.info("[Thread {}] RemoteWebDriver Firefox launched on Grid: {}", Thread.currentThread().getId(), gridUrl);
-				} catch (Exception e) {
-					throw new RuntimeException("Failed to connect Selenium grid at:"+gridUrl, e);
-				}
-			} else {
-				driver = new FirefoxDriver();
-			}
-		}
-		else {
-			log.error("Browser name mismatch. Given browser name '{}' is wrong. Defaulting to Chrome (local)", browserName);
-			driver = new ChromeDriver();
-		}
-		
+
 		setDriver(driver);
-		
 		getDriver().manage().window().maximize();
 		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(WAIT_TIMEOUT));
 		getDriver().manage().deleteAllCookies();
 		log.info("[Thread {}] Browser launched: {}", Thread.currentThread().getId(), browserName);
 		
 	}
-	
+
+	public WebDriver buildChrome(String executionMode, String gridUrl) {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments(prop.getProperty("passwordBubble", "--disable-save-password-bubble"));
+		options.setExperimentalOption("prefs", Map.of(
+				"credentials_enable_service", false,
+				"profile.password_manager_enabled", false,
+				"profile.password_manager_leak_detection", false
+		));
+		if(System.getenv("CI")!=null) {
+			options.addArguments(
+					prop.getProperty("headless", "--headless"),
+					prop.getProperty("nosandbox", "--no-sandbox"),
+					prop.getProperty("shmUsage", "--disable-dev-shm-usage"),
+					prop.getProperty("windowSize", "--window-size=1920, 1080"));
+			log.info("CI environment detected - Chrome running headless");
+		}
+		if("grid".equalsIgnoreCase(executionMode)) {
+			return connectToGrid(gridUrl, options);
+		}
+		return new ChromeDriver(options);
+	}
+
+	public WebDriver buildEdge(String executionMode, String gridUrl) {
+		EdgeOptions options = new EdgeOptions();
+		if("grid".equalsIgnoreCase(executionMode)) {
+			return connectToGrid(gridUrl, options);
+		}
+		return new EdgeDriver();
+	}
+
+	public WebDriver buildFirefox(String executionMode, String gridUrl) {
+		FirefoxOptions options = new FirefoxOptions();
+		if("grid".equalsIgnoreCase(executionMode)){
+			return connectToGrid(gridUrl, options);
+		}
+		return new FirefoxDriver();
+	}
+
+	public static WebDriver getDriver() {
+	        return driverThreadLocal.get();
+	}                                                                    
+
+	private WebDriver connectToGrid(String gridUrl, org.openqa.selenium.MutableCapabilities options) {
+		try {
+			WebDriver driver = new RemoteWebDriver(new URL(gridUrl), options);
+			log.info("[thread{}] RemoteWebDriver connected to Grid: {}", Thread.currentThread().getId(), gridUrl);
+			return driver;
+		} catch (Exception e) {
+            throw new RuntimeException("Failed to connect to Selenium Grid at: "+gridUrl, e);
+        }
+    }
+
 	public static void quitDriver() {
 		if (getDriver() != null) {
             getDriver().quit();
@@ -144,11 +158,15 @@ public class TestBase {
             log.info("[Thread {}] Browser closed and ThreadLocal cleared.", Thread.currentThread().getId());
         }
 	}
-	
+
+
+	private static void setDriver(WebDriver driver) {
+	        driverThreadLocal.set(driver);
+	}
+
 	/**
 	 * Method to wait for element to be visible
-	 * @param element
-	 */
+     */
 	public void waitForVisibility(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT));
 		wait.until(ExpectedConditions.visibilityOf(element));
@@ -156,8 +174,7 @@ public class TestBase {
 	
 	/**
 	 * Method to wait for element to be clickable
-	 * @param element
-	 */
+     */
 	public void waitForClickability(WebElement element) {
 		new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT))
 		.ignoring(StaleElementReferenceException.class)
@@ -167,8 +184,7 @@ public class TestBase {
 	/**
 	 * Method to click element with retry attempts
 	 * Logic added for StaleElementReferenceException
-	 * @param element
-	 */
+     */
 	public void clickOn(WebElement element) {
 		int attempts = 0;
 		while(attempts<3) {
@@ -192,9 +208,7 @@ public class TestBase {
 	
 	/**
 	 * Method to enter text in an input field
-	 * @param element
-	 * @param text
-	 */
+     */
 	public void sendText(WebElement element, String text) {
 		int attempts = 0;
 		while(attempts<3) {
@@ -218,7 +232,7 @@ public class TestBase {
 			}
 		}
 	}
-	
+
 	/**
 	 * Method to wait for element to disappear
      */

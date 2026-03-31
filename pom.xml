@@ -141,10 +141,6 @@
                          on the command line, e.g. -DbrowserName=firefox           -->
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                        <browser>${browser}</browser>
-                       	<threads>${threads}</threads>
-                        <executionMode>${executionMode}</executionMode>
-                        <gridUrl>${gridUrl}</gridUrl>
                         <!--suppress UnresolvedMavenProperty -->
                         <cucumber.filter.tags>${tags}</cucumber.filter.tags>
                     </systemPropertyVariables>
