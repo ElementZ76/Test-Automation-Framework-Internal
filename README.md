@@ -30,32 +30,47 @@ BDD test automation framework for [SauceDemo](https://www.saucedemo.com/) built 
 ---
 
 ## Project Structure
-
-```text
-├── .github/workflows/ci.yml
-├── src/test/
-│   ├── java/com/automation/
-│   │   ├── base/TestBase.java
-│   │   ├── models/SauceData.java
-│   │   ├── pages/
-│   │   │   ├── LoginPage.java
-│   │   │   ├── ProductListPage.java
-│   │   │   ├── CartPage.java
-│   │   │   ├── CheckoutInfoPage.java
-│   │   │   ├── CheckoutOverviewPage.java
-│   │   │   └── CheckoutCompletePage.java
-│   │   ├── runners/TestRunner.java
-│   │   ├── stepdef/
-│   │   │   ├── StepDef.java
-│   │   │   └── ApplicationHooks.java
-│   │   └── utils/JsonUtils.java
-│   └── resources/
-│       ├── features/Saucedemo.feature
-│       ├── testdata/data.json
-│       ├── config.properties
-│       ├── testng.xml
-│       └── log4j2.xml
-└── pom.xml
+```
+TestAutomationFramework/
+├── src/
+│   └── test/
+│       ├── java/
+│       │   └── com/automation/
+│       │       ├── driver/
+│       │       │   ├── DriverFactory.java       # Browser instantiation (Chrome/Firefox/Edge, local/grid)
+│       │       │   └── DriverManager.java        # ThreadLocal WebDriver management
+│       │       ├── listeners/
+│       │       │   └── SuiteThreadListener.java  # IAlterSuiteListener for dynamic thread config
+│       │       ├── models/
+│       │       │   └── SauceData.java            # POJO for test data deserialization
+│       │       ├── pages/
+│       │       │   ├── BasePage.java             # Shared wait utilities and interaction methods
+│       │       │   ├── LoginPage.java
+│       │       │   ├── ProductListPage.java
+│       │       │   ├── CartPage.java
+│       │       │   ├── CheckoutInfoPage.java
+│       │       │   ├── CheckoutOverviewPage.java
+│       │       │   └── CheckoutCompletePage.java
+│       │       ├── runners/
+│       │       │   └── TestRunner.java           # Cucumber-TestNG entry point with parallel DataProvider
+│       │       ├── stepdef/
+│       │       │   ├── ApplicationHooks.java     # @Before/@After: driver init, screenshot on failure
+│       │       │   └── StepDef.java              # Cucumber step definitions
+│       │       └── utils/
+│       │           ├── ConfigManager.java        # Property resolution: -D flag → config.properties → default
+│       │           └── JsonUtils.java            # Jackson-based JSON test data loader
+│       └── resources/
+│           ├── features/
+│           │   └── Saucedemo.feature             # Cucumber feature file
+│           ├── testdata/
+│           │   └── data.json                     # Test data (credentials, products, expected messages)
+│           ├── config.properties                 # Default configuration (browser, URL, threads, timeouts)
+│           ├── log4j2.xml                        # Logging configuration
+│           └── testng.xml                        # TestNG suite definition with SuiteThreadListener
+├── logs/
+│   └── automation.log                            # Runtime log output
+├── pom.xml                                       # Maven build, dependencies, Surefire and Allure plugins
+└── README.md
 ```
 
 ---
