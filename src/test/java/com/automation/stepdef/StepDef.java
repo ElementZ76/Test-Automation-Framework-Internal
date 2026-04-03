@@ -3,22 +3,21 @@ package com.automation.stepdef;
 import java.io.IOException;
 import java.util.List;
 
+import com.automation.pages.*;
 import org.testng.Assert;
 
-import com.automation.base.TestBase;
+import com.automation.pages.BasePage.*;
+
 import com.automation.models.SauceData;
-import com.automation.pages.CartPage;
-import com.automation.pages.CheckoutCompletePage;
-import com.automation.pages.CheckoutInfoPage;
-import com.automation.pages.CheckoutOverviewPage;
-import com.automation.pages.LoginPage;
-import com.automation.pages.ProductListPage;
 import com.automation.utils.JsonUtils;
 
 import io.cucumber.java.en.*;
 import io.qameta.allure.Step;
 
-public class StepDef extends TestBase {
+import static com.automation.driver.DriverManager.*;
+import static com.automation.utils.ConfigManager.*;
+
+public class StepDef extends BasePage {
 	private LoginPage loginPage;
 	private ProductListPage productListPage;
 	private CartPage cartPage;

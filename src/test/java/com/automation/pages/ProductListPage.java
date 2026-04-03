@@ -8,9 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.automation.base.TestBase;
+import com.automation.pages.BasePage.*;
+import static com.automation.driver.DriverManager.*;
 
-public class ProductListPage extends TestBase {
+public class ProductListPage extends BasePage {
 	
 	CartPage cartPage;
 	@FindBy(className = "title")

@@ -4,9 +4,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.automation.base.TestBase;
+import com.automation.pages.BasePage.*;
+import static com.automation.driver.DriverManager.*;
 
-public class CheckoutCompletePage extends TestBase {
+public class CheckoutCompletePage extends BasePage {
 	@FindBy(className = "title")
 	WebElement pageTitle;
 	
