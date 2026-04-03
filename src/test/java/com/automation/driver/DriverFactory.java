@@ -14,6 +14,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 
 public class DriverFactory {
@@ -24,9 +25,10 @@ public class DriverFactory {
         String browserName = ConfigManager.get("browser", "chrome").toLowerCase().trim();
         String executionMode = ConfigManager.get("executionMode", "local").toLowerCase().trim();
         String gridUrl = ConfigManager.get("gridUrl", "http://localhost:4444");
+        String threadCount = ConfigManager.get("threads", String.valueOf(3));
         boolean fallbackToLocal = Boolean.parseBoolean(ConfigManager.get("fallbackToLocal", "false"));
 
-        log.info("--- Driver Init | browser='{}' | mode='{}' | fallback={} ---", browserName, executionMode, fallbackToLocal);
+        log.info("--- Driver Initialization | browser='{}' | mode='{}' | fallback={} | threads={} ---", browserName, executionMode, fallbackToLocal, threadCount);
 
         WebDriver driver;
         try {
@@ -64,9 +66,15 @@ public class DriverFactory {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(ConfigManager.get("passwordBubble", "--disable-save-password-bubble"));
         options.addArguments("--start-maximized");
+        options.addArguments("--disable-features=PasswordLeakDetection");
+        options.addArguments("--password-store=basic");
         options.setExperimentalOption("prefs", Map.of(
                 "credentials_enable_service", false,
-                "profile.password_manager_enabled", false
+                "profile.password_manager_enabled", false,
+                "profile.password_manager_leak_detection", false,
+                "safebrowsing_for_trusted_sources_enabled", false,
+                "safebrowsing.enabled", false,
+                "excludeSwitches", List.of("enable-automation", "enable-logging")
         ));
 
         if (System.getenv("CI") != null) {
