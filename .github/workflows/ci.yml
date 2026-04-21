@@ -30,7 +30,7 @@ jobs:
         run: google-chrome --version
 
       - name: Run Tests
-        run: mvn clean test --no-transfer-progress
+        run: mvn clean test -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress
         continue-on-error: true
       - name: Debug - Show test output
         if: always()

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.automation.pages.*;
+import com.automation.utils.ConfigManager;
 import org.testng.Assert;
 
 import com.automation.pages.BasePage.*;
@@ -31,7 +32,7 @@ public class StepDef extends BasePage {
 	@Step("Navigate to SauceDemo application")
 	@Given("user navigates to SauceDemo application")
 	public void user_navigates_to_sauce_demo_application() {
-		getDriver().get(prop.getProperty("url"));
+		getDriver().get(ConfigManager.get("url"));
 		log.info("Navigated to: {}", prop.getProperty("url"));
 	}
 	
