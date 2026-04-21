@@ -89,3 +89,43 @@ Allow execution on multiple browsers via configuration
 Maintain stability when running tests in parallel
 
 Minor framework adjustments required to support parallel execution
+
+WEEK 5 AND WEEK 6:
+The previously reported issues around IntelliJ TestRunner thread handling have now been fixed and revalidated successfully.
+
+Next iteration scope:  Execution Readiness
+
+1. Fix pending issues
+
+- Add null-check before screenshot capture when driver initialization fails
+- Upgrade Selenium version to remove Chrome CDP warning
+- Revalidate Edge browser execution
+- Revalidate Firefox parallel execution stability
+
+2. Strengthen reporting
+
+- Ensure screenshots are attached only when driver is available
+- Add environment details into Allure report
+- Include browser, execution mode, thread count, OS, Java version in report metadata
+- Standardize report folder structure and naming
+
+3. Standardize execution
+
+- Ensure IntelliJ TestRunner and mvn clean test behave identically
+- Document exact execution steps for both approaches
+- Document supported browsers and thread behavior
+- Ensure config.properties values are consistently respected
+
+4. Improve framework reusability
+
+- Keep utilities generic and reusable
+- Clean up config and test data structure
+- Improve README and run instructions
+- Make it easier to onboard a second application into the framework later
+
+5. Improve execution portability
+
+- Ensure framework can run fully from Maven without IDE dependency
+- Keep Allure and report paths stable
+- Ensure execution is fully config-driven
+- Standardize output structure and setup consistency

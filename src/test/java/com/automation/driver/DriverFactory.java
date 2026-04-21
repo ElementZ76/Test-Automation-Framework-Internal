@@ -68,6 +68,8 @@ public class DriverFactory {
         options.addArguments("--start-maximized");
         options.addArguments("--disable-features=PasswordLeakDetection");
         options.addArguments("--password-store=basic");
+        options.addArguments("--disable-save-password-bubble");
+        options.setExperimentalOption("excludeSwitches", List.of("enable-automation", "enable-logging"));
         options.setExperimentalOption("prefs", Map.of(
                 "credentials_enable_service", false,
                 "profile.password_manager_enabled", false,
