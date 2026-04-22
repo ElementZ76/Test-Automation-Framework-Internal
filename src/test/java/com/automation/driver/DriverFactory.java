@@ -87,11 +87,18 @@ public class DriverFactory {
 
     private static WebDriver buildFirefox(String mode, String gridUrl) {
         FirefoxOptions options = new FirefoxOptions();
+        if (System.getenv("CI") != null) {
+            options.addArguments("-headless");
+        }
         return "grid".equals(mode) ? connectToGrid(gridUrl, options) : new FirefoxDriver(options);
     }
 
     private static WebDriver buildEdge(String mode, String gridUrl) {
         EdgeOptions options = new EdgeOptions();
+        options.addArguments("--start-maximized");
+        if (System.getenv("CI") != null) {
+            options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
+        }
         options.addArguments("--start-maximized");
         return "grid".equals(mode) ? connectToGrid(gridUrl, options) : new EdgeDriver(options);
     }
