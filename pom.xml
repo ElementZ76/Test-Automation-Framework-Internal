@@ -25,7 +25,6 @@
         <cucumber.version>7.14.0</cucumber.version>
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.20</aspectj.version>
-        <cli.threads></cli.threads>
     </properties>
 
     <!-- ================================================================
