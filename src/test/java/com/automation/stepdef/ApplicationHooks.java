@@ -28,6 +28,10 @@ public class ApplicationHooks extends BasePage {
         if (scenario.isFailed()) {
             log.error("[Thread {}] Scenario FAILED: {}", Thread.currentThread().getId(), scenario.getName());
             try {
+                if (getDriver()==null) {
+                    log.warn("Driver is null; skipping screenshot for: {}", scenario.getName());
+                    return;
+                }
                 byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", "Failed Screenshot");
                 log.info("Screenshot attached for: {}", scenario.getName());
