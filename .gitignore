@@ -12,7 +12,6 @@ target/
 .JAR
 
 # Logs
-logs/
 *.log
 
 # OS files

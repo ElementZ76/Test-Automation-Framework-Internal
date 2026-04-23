@@ -75,7 +75,7 @@ jobs:
         if: always()
         with:
           name: automation-logs
-          path: logs/
+          path: target/reports/logs/
           retention-days: 7
 
       - name: Publish Allure Report to GitHub Pages

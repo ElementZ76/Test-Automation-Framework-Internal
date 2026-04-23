@@ -6,7 +6,13 @@ import org.apache.logging.log4j.Logger;
 import org.testng.IAlterSuiteListener;
 import org.testng.xml.XmlSuite;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Properties;
 
 public class SuiteThreadListener implements IAlterSuiteListener {
     private static final Logger log = LogManager.getLogger(SuiteThreadListener.class);
@@ -32,5 +38,26 @@ public class SuiteThreadListener implements IAlterSuiteListener {
             }
             log.info("SuiteThreadListener: suite '{}' thread-count set to {}", suite.getName(), threadCount);
         }
+        writeAllureEnvironment();
+    }
+
+    public void writeAllureEnvironment() {
+        Properties env = new Properties();
+        env.setProperty("Browser", ConfigManager.get("browser", "crhome"));
+        env.setProperty("Execution.Mode", ConfigManager.get("executionMode", "local"));
+        env.setProperty("Threads", ConfigManager.get("threads", "1"));
+        env.setProperty("OS", System.getProperty("os.name") + " " + System.getProperty("os.version"));
+        env.setProperty("Java.Version", System.getProperty("java.version"));
+        env.setProperty("URL", ConfigManager.get("url", " "));
+    try {
+        Path dir = Paths.get("target/allure-results");
+        Files.createDirectories(dir);
+        try (OutputStream out = Files.newOutputStream(dir.resolve("environment.properties"))) {
+            env.store(out,null);
+        }
+        log.info("Allure environment.properties written.");
+    } catch (IOException e) {
+            log.warn("Failed to write Allure environment.properties: {}", e.getMessage());
+    }
     }
 }
