@@ -1,6 +1,6 @@
 # SauceDemo Test Automation Framework
 
-![Selenium](https://img.shields.io/badge/Selenium-4.27-green)
+![Selenium](https://img.shields.io/badge/Selenium-4.43-green)
 ![Cucumber](https://img.shields.io/badge/Cucumber-7.14-brightgreen)
 ![TestNG](https://img.shields.io/badge/TestNG-7.8-red)
 ![Maven](https://img.shields.io/badge/Build-Maven-yellow)
@@ -26,11 +26,13 @@ BDD test automation framework for [SauceDemo](https://www.saucedemo.com/) built 
 - [Reports](#reports)
 - [CI/CD Pipeline](#cicd-pipeline)
 - [Configuration](#configuration)
+- [Onboarding a Second Application](#onboarding-a-second-application)
 - [Troubleshooting](#troubleshooting)
 
 ---
 
 ## Project Structure
+
 ```
 TestAutomationFramework/
 ├── src/
@@ -58,14 +60,15 @@ TestAutomationFramework/
 │       │       │   ├── ApplicationHooks.java     # @Before/@After: driver init, screenshot on failure
 │       │       │   └── StepDef.java              # Cucumber step definitions
 │       │       └── utils/
-│       │           ├── ConfigManager.java        # Property resolution: -D flag → config.properties → default
-│       │           └── JsonUtils.java            # Jackson-based JSON test data loader
+│       │           ├── ConfigManager.java        # Property resolution: -D flag → {appName}.properties → config.properties → default
+│       │           └── JsonUtils.java            # Generic Jackson-based JSON test data loader
 │       └── resources/
 │           ├── features/
 │           │   └── Saucedemo.feature             # Cucumber feature file
 │           ├── testdata/
 │           │   └── data.json                     # Test data (credentials, products, expected messages)
-│           ├── config.properties                 # Default configuration (browser, URL, threads, timeouts)
+│           ├── config.properties                 # Base configuration (browser, URL, threads, timeouts)
+│           ├── saucedemo.properties              # SauceDemo-specific overrides (loaded via -DappName=saucedemo)
 │           ├── log4j2.xml                        # Logging configuration
 │           └── testng.xml                        # TestNG suite definition with SuiteThreadListener
 ├── logs/
@@ -81,7 +84,7 @@ TestAutomationFramework/
 | Component | Technology |
 | :--- | :--- |
 | Language | Java 11 |
-| Browser Automation | Selenium WebDriver 4.27 |
+| Browser Automation | Selenium WebDriver 4.43 |
 | Test Framework | TestNG 7.8 |
 | BDD Layer | Cucumber 7.14 |
 | Build Tool | Maven |
@@ -95,30 +98,54 @@ TestAutomationFramework/
 
 ## Framework Design
 
-### TestBase
+### Driver Management
 
-All page classes extend `BasePage`, which provides shared utilities:
+`DriverFactory` instantiates the browser based on `browser` and `executionMode` config values. `DriverManager` holds the instance in a `ThreadLocal<WebDriver>`, making parallel execution thread-safe. Every scenario gets its own driver via `@Before` in `ApplicationHooks` and tears it down via `@After`.
+
+### BasePage
+
+All page classes extend `BasePage`, which provides shared interaction utilities:
 
 - `clickOn(WebElement)` — click with retry logic and `StaleElementReferenceException` handling.
 - `sendText(WebElement, String)` — clears and types into inputs with retry logic.
 - `waitForVisibility(WebElement)` — explicit wait until element is visible.
 - `waitForClickability(WebElement)` — explicit wait until element is interactable.
 
+No `Thread.sleep()` is used anywhere in the framework.
+
 ### Page Object Model
 
-Each page of the application has a dedicated class using `@FindBy` annotations and `PageFactory`. Action methods return the next page object to support fluent chaining.
+Each page has a dedicated class using `@FindBy` annotations and `PageFactory`. Action methods return the next page object to support fluent chaining.
 
 ### ApplicationHooks
 
-Manages the Cucumber lifecycle:
+Manages the Cucumber scenario lifecycle:
 
 - `@Before` — launches the browser before each scenario via `DriverFactory.initializeDriver()`.
 - `@After (order = 1)` — captures a screenshot on failure and attaches it to the Allure report.
 - `@After (order = 0)` — closes the browser after the screenshot has been taken.
 
+### ConfigManager
+
+Resolves configuration in this priority order:
+
+```
+-D flag (System property)           ← highest priority
+    ↓ not found
+{appName}.properties value          ← loaded when -DappName is set
+    ↓ not found
+config.properties value             ← base config, always loaded
+    ↓ not found
+hard-coded default                  ← lowest priority
+```
+
+### JsonUtils
+
+Generic test data loader. Accepts a `TypeReference` so any POJO type can be deserialized — not tied to any single application's data model.
+
 ### Test Data
 
-All credentials, personal info, product lists, and expected error messages live in `data.json`. Tests reference data by index. `JsonUtils` deserializes the JSON into `SauceData` POJOs using Jackson.
+All credentials, personal info, product lists, and expected error messages live in `data.json`. Tests reference entries by index. `JsonUtils` deserializes the JSON into typed POJOs using Jackson.
 
 ---
 
@@ -152,14 +179,21 @@ mvn clean install -DskipTests
 mvn clean test -Dtags="@smoke"
 ```
 
+To run as a named application:
+
+```bash
+mvn clean test -DappName=saucedemo -Dtags="@smoke"
+```
+
 ---
 
 ## Running Tests
 
 All parameters are passed with `-D` and override the defaults in `config.properties`.
 
-| Parameter | Default (config.properties) | Options | Description |
+| Parameter | Default | Options | Description |
 | :--- | :--- | :--- | :--- |
+| `appName` | *(not set)* | `saucedemo`, or any app name | Loads `{appName}.properties` on top of `config.properties` |
 | `browser` | `chrome` | `chrome`, `firefox`, `edge` | Browser to launch |
 | `threads` | `3` | Any integer ≥ 1 | Parallel scenario threads |
 | `tags` | *(all scenarios)* | Any Cucumber tag expression | Filter scenarios by tag |
@@ -170,6 +204,9 @@ All parameters are passed with `-D` and override the defaults in `config.propert
 # Run all tests
 mvn clean test
 
+# Run as named application
+mvn clean test -DappName=saucedemo
+
 # Filter by tag
 mvn clean test -Dtags="@smoke"
 mvn clean test -Dtags="@regression"
@@ -179,24 +216,18 @@ mvn clean test -Dtags="not @wip"
 mvn clean test -Dbrowser=firefox
 mvn clean test -Dbrowser=edge
 
-# Parallel execution (overrides config.properties)
+# Parallel execution
 mvn clean test -Dthreads=3
 
 # Combined
-mvn clean test -Dbrowser=firefox -Dthreads=3 -Dtags="@smoke"
+mvn clean test -DappName=saucedemo -Dbrowser=chrome -Dthreads=3 -Dtags="@smoke"
 ```
 
 ### Thread Behavior
 
-Thread count is resolved in this priority order:
+Thread count is resolved following the ConfigManager priority order above. `SuiteThreadListener` applies the count to both `threadCount` and `dataProviderThreadCount` on the suite. `TestRunner.setUpClass` applies it again on the test-level DataProvider. Both are required because Cucumber scenarios run via TestNG's DataProvider thread pool, not the suite method pool.
 
-1. `-Dthreads=N` CLI flag
-2. `threads` value in `config.properties`
-3. Hard-coded default: `1`
-
-`SuiteThreadListener` applies the count to both `threadCount` and `dataProviderThreadCount` on the suite. `TestRunner.setUpClass` applies it again on the test-level DataProvider. Both are required because Cucumber scenarios run via TestNG's DataProvider thread pool, not the suite method pool.
-
-Recommended parallel range: 1–5 threads for local runs. CI uses the value in `config.properties` unless overridden with `-Dthreads`.
+Recommended parallel range: 1–5 threads for local runs. CI uses the value in `config.properties` unless overridden.
 
 ### Supported Browsers
 
@@ -206,13 +237,13 @@ Recommended parallel range: 1–5 threads for local runs. CI uses the value in `
 | Firefox | ✅ | ✅ | ✅ auto |
 | Edge | ✅ | ✅ | ✅ auto |
 
-Headless mode is enabled automatically when the `CI` environment variable is set (GitHub Actions sets this by default). It is never enabled on local runs unless you add `--headless` manually to `config.properties`.
+Headless mode is enabled automatically when the `CI` environment variable is set (GitHub Actions sets this by default). It is never enabled on local runs.
 
 ---
 
 ## Running from IntelliJ IDEA
 
-IntelliJ runs TestNG directly without Surefire. Parameters are passed as JVM options in the run configuration instead of via `-D` CLI flags. `ConfigManager` reads from `System.getProperty()` in both cases, so behavior is identical.
+IntelliJ runs TestNG directly without Surefire. Parameters are passed as JVM options in the run configuration. `ConfigManager` reads from `System.getProperty()` in both cases, so behavior is identical to Maven.
 
 ### Method 1 — Run via `testng.xml` (recommended)
 
@@ -220,7 +251,7 @@ IntelliJ runs TestNG directly without Surefire. Parameters are passed as JVM opt
 2. Right-click → **Run 'testng.xml'**
 3. To override parameters: **Run → Edit Configurations → VM options**:
    ```
-   -Dbrowser=chrome -Dthreads=3 -Dtags=@smoke
+   -DappName=saucedemo -Dbrowser=chrome -Dthreads=3 -Dtags=@smoke
    ```
 
 ### Method 2 — Run via `TestRunner` class
@@ -232,22 +263,8 @@ IntelliJ runs TestNG directly without Surefire. Parameters are passed as JVM opt
 ### Method 3 — Run individual scenarios from the feature file
 
 1. Open `src/test/resources/features/Saucedemo.feature`
-2. Click the green gutter arrow next to any scenario or the `Feature:` line
+2. Click the green gutter arrow next to any scenario
 3. Parameters from `config.properties` apply; override via VM options in the generated run config
-
-### Maven vs IntelliJ parity
-
-Both entry points resolve properties through the same `ConfigManager.get()` chain:
-
-```
-System.getProperty(key)        ← -D flags (Maven CLI or IntelliJ VM options)
-    ↓ not found
-config.properties value        ← src/test/resources/config.properties
-    ↓ not found
-hard-coded default
-```
-
-The only historical difference was a misconfigured `<threads>` entry in `pom.xml`'s Surefire `<systemPropertyVariables>` block that mapped `threads` to an undefined `${cli.threads}` property, causing `-Dthreads` to be silently discarded during Maven runs. This has been removed. Both environments now behave identically.
 
 ---
 
@@ -263,15 +280,15 @@ Download the Selenium Server jar from the [Selenium releases page](https://githu
 java -jar selenium-server-<version>.jar standalone
 ```
 
-The grid starts on port `4444` by default. Verify it is healthy by visiting `http://localhost:4444/ui` before running tests.
+Verify the grid is healthy at `http://localhost:4444/ui` before running tests.
 
 ### Step 2 — Run Tests Against the Grid
 
 ```bash
-mvn clean test -Dbrowser=chrome -Dthreads=3 -DgridUrl=http://localhost:4444 -DexecutionMode=grid
+mvn clean test -DappName=saucedemo -Dbrowser=chrome -Dthreads=3 -DgridUrl=http://localhost:4444 -DexecutionMode=grid
 ```
 
-When `executionMode=grid`, `DriverFactory` creates a `RemoteWebDriver` pointed at the grid URL instead of launching a local browser. Everything else — hooks, steps, waits, screenshots, reports — behaves identically to a local run.
+When `executionMode=grid`, `DriverFactory` creates a `RemoteWebDriver` pointed at the grid URL. Everything else — hooks, steps, waits, screenshots, reports — behaves identically to a local run.
 
 ---
 
@@ -314,13 +331,23 @@ The pipeline continues even if tests fail (`continue-on-error: true`) so reports
 
 ## Configuration
 
-`src/test/resources/config.properties`
+### Base config — `src/test/resources/config.properties`
 
 ```properties
+# Application
 url           = https://www.saucedemo.com/
+# appName     =
+
+# Browser
 browser       = chrome
+
+# Timeouts
 implicitWait  = 10
+
+# Parallel execution
 threads       = 3
+
+# Execution
 executionMode = local
 gridUrl       = http://localhost:4444
 ```
@@ -331,6 +358,82 @@ All values can be overridden at runtime without modifying this file:
 mvn clean test -Dbrowser=edge -Dthreads=5 -DexecutionMode=grid
 ```
 
+### App-specific config — `src/test/resources/saucedemo.properties`
+
+When `-DappName=saucedemo` is passed, `ConfigManager` loads `saucedemo.properties` after `config.properties` and merges the values on top. Only include keys that are specific to or different for this application.
+
+```properties
+url     = https://www.saucedemo.com/
+browser = chrome
+threads = 3
+```
+
+---
+
+## Onboarding a Second Application
+
+The framework is designed so that onboarding a new application requires no changes to any existing file.
+
+### Step 1 — Create an app-specific properties file
+
+Create `src/test/resources/{appName}.properties` with only the values unique to the new application:
+
+```properties
+# src/test/resources/hrm.properties
+url     = https://your-hrm-app.com/
+browser = chrome
+threads = 2
+```
+
+### Step 2 — Create a data model
+
+Add a POJO under `src/test/java/com/automation/models/` for the new app's test data shape:
+
+```java
+// com/automation/models/HrmData.java
+public class HrmData {
+    private String username;
+    private String password;
+    // getters and setters
+}
+```
+
+### Step 3 — Create a test data file
+
+Add `src/test/resources/testdata/hrm-data.json` with the test data for the new application.
+
+### Step 4 — Create page objects
+
+Add page classes under a namespaced sub-package to avoid collision with existing pages:
+
+```
+com/automation/pages/hrm/LoginPage.java
+com/automation/pages/hrm/DashboardPage.java
+```
+
+### Step 5 — Create feature files and step definitions
+
+```
+src/test/resources/features/hrm/Login.feature
+com/automation/stepdef/hrm/HrmStepDef.java
+```
+
+Update the `glue` path in `TestRunner` to include the new step definition package:
+
+```java
+@CucumberOptions(
+    glue = {"com.automation.stepdef", "com.automation.stepdef.hrm"}
+)
+```
+
+### Step 6 — Run the new application
+
+```bash
+mvn clean test -DappName=hrm -Dtags="@smoke"
+```
+
+`ConfigManager` loads `config.properties` first, then merges `hrm.properties` on top. The URL, browser, and any other overrides in `hrm.properties` take effect automatically.
+
 ---
 
 ## Troubleshooting
@@ -338,6 +441,8 @@ mvn clean test -Dbrowser=edge -Dthreads=5 -DexecutionMode=grid
 **Chrome does not open locally** — confirm `--headless` is not hardcoded anywhere. Headless mode is only enabled when the `CI` environment variable is set, which GitHub Actions does automatically.
 
 **`-Dthreads` has no effect** — ensure `pom.xml` does not contain a `<threads>` entry in Surefire's `<systemPropertyVariables>` block. That mapping was previously misconfigured and has been removed.
+
+**`-DappName` config not loading** — confirm the file exists at `src/test/resources/{appName}.properties` and the filename matches the `appName` value exactly (case-sensitive on Linux).
 
 **Maven dependencies not downloading** — run `mvn clean install -U`. In Eclipse: right-click project → Maven → Update Project → Force Update → OK.
 
