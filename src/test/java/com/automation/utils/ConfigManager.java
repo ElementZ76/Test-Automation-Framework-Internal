@@ -20,7 +20,7 @@ public class ConfigManager {
             throw new RuntimeException("Failed to load config properties", e);
         }
 
-        String appName = System.getProperty("appName");
+        String appName = System.getProperty("appName", prop.getProperty("appName"));
         if (appName != null && !appName.trim().isEmpty()) {
             String appConfig = "src/test/resources/" + appName.trim() + ".properties";
             try (FileInputStream fis = new FileInputStream(appConfig)) {
