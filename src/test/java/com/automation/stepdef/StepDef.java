@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.automation.pages.*;
 import com.automation.utils.ConfigManager;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.testng.Assert;
 
 import com.automation.pages.BasePage.*;
@@ -46,7 +47,7 @@ public class StepDef extends BasePage {
 	@Step("User logs in with test data from {0} at index {1}")
 	@When("user logs in with valid test data from {string} using index {int}")
 	public void user_logs_in_with_valid_test_data_from_using_index(String jsonFile, Integer index) throws IOException {
-		List<SauceData> testDataList = JsonUtils.getSauceData(jsonFile);
+		List<SauceData> testDataList = JsonUtils.getTestData(jsonFile, new TypeReference<List<SauceData>>(){});
 		currentTestData = testDataList.get(index);
 		productListPage = loginPage.loginFunction(currentTestData.getUsername(), currentTestData.getPassword());
 		Assert.assertNotEquals("Login failed", productListPage);
@@ -125,7 +126,7 @@ public class StepDef extends BasePage {
 	@Step("Attempt login with test data from {0} at index {1}")
 	@When("user attempts login with test data from {string} using index {int}")
 	public void user_attempts_login_with_test_data_from_using_index(String jsonFile, Integer index) throws IOException {
-		List<SauceData> testDataList = JsonUtils.getSauceData(jsonFile);
+		List<SauceData> testDataList = JsonUtils.getTestData(jsonFile, new TypeReference<List<SauceData>>(){});
 		currentTestData = testDataList.get(index);
 		loginPage.loginFunction(currentTestData.getUsername(), currentTestData.getPassword());
 	}

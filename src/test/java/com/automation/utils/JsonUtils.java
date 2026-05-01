@@ -9,9 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class JsonUtils {
-	public static List<SauceData> getSauceData(String jsonFileName) throws IOException {
-		String filepPath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + jsonFileName;
-		ObjectMapper objMapper = new ObjectMapper();
-		return objMapper.readValue(new File(filepPath), new TypeReference<List<SauceData>>(){});
+	public static <T> List<T> getTestData(String jsonFileName, TypeReference<List<T>> type) throws IOException {
+		String filePath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + jsonFileName;
+		return new ObjectMapper().readValue(new File(filePath), type);
 	}
 }

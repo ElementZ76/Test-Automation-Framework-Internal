@@ -19,10 +19,21 @@ public class ConfigManager {
             log.info("Cannot read config.properties. Aborting.");
             throw new RuntimeException("Failed to load config properties", e);
         }
+
+        String appName = System.getProperty("appName");
+        if (appName != null && !appName.trim().isEmpty()) {
+            String appConfig = "src/test/resources/" + appName.trim() + ".properties";
+            try (FileInputStream fis = new FileInputStream(appConfig)) {
+                prop.load(fis);
+                log.info("{}.properties loaded and merged into ConfigManager", appName);
+            } catch (Exception e) {
+                log.warn("No {}.properties found for appName='{}'. Using config.properties only.", appName, appName);
+            }
+        }
     }
 
     /**
-     * Resolves key from System properties. If not found, it falls back to set defaukt
+     * Resolves key from System properties. If not found, it falls back to set default
      * @param key key to look for in config file
      * @param hardDefault to use when key is not found
      * @return set key if found in config, else return hard default
