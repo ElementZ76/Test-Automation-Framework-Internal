@@ -10,10 +10,6 @@
     <artifactId>saucedemo-automation</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- ================================================================
-         Project-wide properties — override any of these on the command
-         line with -D flags, e.g.  -Dbrowser=firefox -Dthreads=3
-         ================================================================ -->
     <properties>
         <!-- Compiler -->
         <maven.compiler.source>11</maven.compiler.source>
@@ -27,9 +23,6 @@
         <aspectj.version>1.9.20</aspectj.version>
     </properties>
 
-    <!-- ================================================================
-         Dependencies
-         ================================================================ -->
     <dependencies>
 
         <!-- Selenium WebDriver -->
@@ -66,13 +59,6 @@
             <version>${allure.version}</version>
         </dependency>
 
-<!--        &lt;!&ndash; Allure — TestNG integration &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.qameta.allure</groupId>-->
-<!--            <artifactId>allure-testng</artifactId>-->
-<!--            <version>${allure.version}</version>-->
-<!--        </dependency>-->
-
         <!-- Jackson — JSON deserialisation -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -102,15 +88,9 @@
 
     </dependencies>
 
-    <!-- ================================================================
-         Build
-         ================================================================ -->
     <build>
         <plugins>
 
-            <!--
-                 Maven Surefire — runs TestNG suite
-             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -123,17 +103,23 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
+                    <!--
+                        argLine: no outer quotes around the path — quotes break javaagent
+                        resolution on Linux. Maven property expansion handles spaces correctly
+                        without them.
+                    -->
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </argLine>
 
                     <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <!--
+                            allure.results.directory is intentionally omitted here.
+                            It is defined once in src/test/resources/allure.properties
+                            and read by SuiteThreadListener via System.getProperty().
+                        -->
                         <!--suppress UnresolvedMavenProperty -->
                         <cucumber.filter.tags>${tags}</cucumber.filter.tags>
-
-                        <!--suppress UnresolvedMavenProperty -->
-                        <threads>${cli.threads}</threads>
                     </systemPropertyVariables>
 
                 </configuration>
@@ -146,9 +132,6 @@
                 </dependencies>
             </plugin>
 
-            <!--
-                 Allure Maven Plugin — generates HTML report from results
-               -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>

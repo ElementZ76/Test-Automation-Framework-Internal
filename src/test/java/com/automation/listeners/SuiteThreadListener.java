@@ -41,7 +41,7 @@ public class SuiteThreadListener implements IAlterSuiteListener {
         writeAllureEnvironment();
     }
 
-    public void writeAllureEnvironment() {
+    private void writeAllureEnvironment() {
         Properties env = new Properties();
         env.setProperty("Browser", ConfigManager.get("browser", "crhome"));
         env.setProperty("Execution.Mode", ConfigManager.get("executionMode", "local"));
@@ -49,13 +49,15 @@ public class SuiteThreadListener implements IAlterSuiteListener {
         env.setProperty("OS", System.getProperty("os.name") + " " + System.getProperty("os.version"));
         env.setProperty("Java.Version", System.getProperty("java.version"));
         env.setProperty("URL", ConfigManager.get("url", " "));
-    try {
-        Path dir = Paths.get("target/allure-results");
+
+        String allureResultDir=System.getProperty("allure.results.directory", "target/allure-results");
+        try {
+        Path dir = Paths.get(allureResultDir);
         Files.createDirectories(dir);
         try (OutputStream out = Files.newOutputStream(dir.resolve("environment.properties"))) {
             env.store(out,null);
         }
-        log.info("Allure environment.properties written.");
+        log.info("Allure environment.properties written to {}.", allureResultDir);
     } catch (IOException e) {
             log.warn("Failed to write Allure environment.properties: {}", e.getMessage());
     }
