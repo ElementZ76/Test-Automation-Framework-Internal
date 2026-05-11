@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.automation.pages.*;
+import com.automation.pages.saucedemo.*;
 import com.automation.utils.ConfigManager;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.testng.Assert;
