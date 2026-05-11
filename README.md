@@ -33,6 +33,7 @@ BDD test automation framework for [SauceDemo](https://www.saucedemo.com/) built 
 
 ## Project Structure
 
+```
 TestAutomationFramework/
 ├── src/
 │   └── test/
@@ -88,6 +89,8 @@ TestAutomationFramework/
 ├── .github/workflows/ci.yml
 ├── pom.xml
 └── README.md
+```
+
 ---
 
 ## Tech Stack
