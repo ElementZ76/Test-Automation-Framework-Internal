@@ -75,9 +75,8 @@ public class DriverFactory {
                 "profile.password_manager_enabled", false,
                 "profile.password_manager_leak_detection", false,
                 "safebrowsing_for_trusted_sources_enabled", false,
-                "safebrowsing.enabled", false,
-                "excludeSwitches", List.of("enable-automation", "enable-logging")
-        ));
+                "safebrowsing.enabled", false)
+        );
 
         if (System.getenv("CI") != null) {
             options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");

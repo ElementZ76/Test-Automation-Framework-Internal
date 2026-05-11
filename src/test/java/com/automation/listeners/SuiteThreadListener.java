@@ -43,7 +43,7 @@ public class SuiteThreadListener implements IAlterSuiteListener {
 
     private void writeAllureEnvironment() {
         Properties env = new Properties();
-        env.setProperty("Browser", ConfigManager.get("browser", "crhome"));
+        env.setProperty("Browser", ConfigManager.get("browser", "chrome"));
         env.setProperty("Execution.Mode", ConfigManager.get("executionMode", "local"));
         env.setProperty("Threads", ConfigManager.get("threads", "1"));
         env.setProperty("OS", System.getProperty("os.name") + " " + System.getProperty("os.version"));

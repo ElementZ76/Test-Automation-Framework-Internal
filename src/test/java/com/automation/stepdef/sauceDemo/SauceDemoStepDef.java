@@ -1,4 +1,4 @@
-package com.automation.stepdef;
+package com.automation.stepdef.sauceDemo;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,8 +8,6 @@ import com.automation.utils.ConfigManager;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.testng.Assert;
 
-import com.automation.pages.BasePage.*;
-
 import com.automation.models.SauceData;
 import com.automation.utils.JsonUtils;
 
@@ -17,9 +15,8 @@ import io.cucumber.java.en.*;
 import io.qameta.allure.Step;
 
 import static com.automation.driver.DriverManager.*;
-import static com.automation.utils.ConfigManager.*;
 
-public class StepDef extends BasePage {
+public class SauceDemoStepDef extends BasePage {
 	private LoginPage loginPage;
 	private ProductListPage productListPage;
 	private CartPage cartPage;
@@ -34,7 +31,7 @@ public class StepDef extends BasePage {
 	@Given("user navigates to SauceDemo application")
 	public void user_navigates_to_sauce_demo_application() {
 		getDriver().get(ConfigManager.get("url"));
-		log.info("Navigated to: {}", prop.getProperty("url"));
+		log.info("Navigated to: {}", ConfigManager.get("url"));
 	}
 	
 	@Step("Verify user is on login page")

@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.automation.runners.TestRunner">
+      <class name="com.automation.runners.SauceDemoTestRunner">
         <methods>
           <include name="setUpClass"/>
           <include name="tearDownClass"/>
           <include name="runScenario" invocation-numbers="0"/>
         </methods>
-      </class> <!-- com.automation.runners.TestRunner -->
+      </class> <!-- com.automation.runners.SauceDemoTestRunner -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

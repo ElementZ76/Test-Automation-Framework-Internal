@@ -5,12 +5,12 @@
   <suite started-at="2026-03-04T13:15:36 IST" name="Default suite" finished-at="2026-03-04T13:15:45 IST" duration-ms="9746">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@e5c2463]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.SauceDemoTestRunner@e5c2463]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
     <test started-at="2026-03-04T13:15:36 IST" name="Default test" finished-at="2026-03-04T13:15:45 IST" duration-ms="9746">
-      <class name="com.automation.runners.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.automation.runners.TestRunner@e5c2463]" started-at="2026-03-04T13:15:36 IST" name="setUpClass" finished-at="2026-03-04T13:15:37 IST" duration-ms="899" status="PASS">
+      <class name="com.automation.runners.SauceDemoTestRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.automation.runners.SauceDemoTestRunner@e5c2463]" started-at="2026-03-04T13:15:36 IST" name="setUpClass" finished-at="2026-03-04T13:15:37 IST" duration-ms="899" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -21,7 +21,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@e5c2463]" started-at="2026-03-04T13:15:37 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-04T13:15:41 IST" duration-ms="4519" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.SauceDemoTestRunner@e5c2463]" started-at="2026-03-04T13:15:37 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-04T13:15:41 IST" duration-ms="4519" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -37,7 +37,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@e5c2463]" started-at="2026-03-04T13:15:41 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-04T13:15:43 IST" duration-ms="2071" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.SauceDemoTestRunner@e5c2463]" started-at="2026-03-04T13:15:41 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-04T13:15:43 IST" duration-ms="2071" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -53,7 +53,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.TestRunner@e5c2463]" started-at="2026-03-04T13:15:43 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-04T13:15:45 IST" duration-ms="2141" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.automation.runners.SauceDemoTestRunner@e5c2463]" started-at="2026-03-04T13:15:43 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-04T13:15:45 IST" duration-ms="2141" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -69,11 +69,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.automation.runners.TestRunner@e5c2463]" started-at="2026-03-04T13:15:45 IST" name="tearDownClass" finished-at="2026-03-04T13:15:45 IST" duration-ms="52" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.automation.runners.SauceDemoTestRunner@e5c2463]" started-at="2026-03-04T13:15:45 IST" name="tearDownClass" finished-at="2026-03-04T13:15:45 IST" duration-ms="52" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
-      </class> <!-- com.automation.runners.TestRunner -->
+      </class> <!-- com.automation.runners.SauceDemoTestRunner -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

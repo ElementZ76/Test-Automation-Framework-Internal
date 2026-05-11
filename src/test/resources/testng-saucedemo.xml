@@ -5,7 +5,7 @@
     </listeners>
     <test name="SauceDemo E2E Tests">
         <classes>
-            <class name="com.automation.runners.TestRunner"/>
+            <class name="com.automation.runners.SauceDemoTestRunner"/>
         </classes>
     </test>
 </suite>

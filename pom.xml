@@ -96,40 +96,23 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-
                     <testFailureIgnore>true</testFailureIgnore>
-
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <suiteXmlFile>src/test/resources/testng-${appName}.xml</suiteXmlFile>
                     </suiteXmlFiles>
-
-                    <!--
-                        argLine: no outer quotes around the path — quotes break javaagent
-                        resolution on Linux. Maven property expansion handles spaces correctly
-                        without them.
-                    -->
-                    <argLine>
-                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
-                    </argLine>
-
                     <systemPropertyVariables>
-                        <!--
-                            allure.results.directory is intentionally omitted here.
-                            It is defined once in src/test/resources/allure.properties
-                            and read by SuiteThreadListener via System.getProperty().
-                        -->
                         <!--suppress UnresolvedMavenProperty -->
                         <cucumber.filter.tags>${tags}</cucumber.filter.tags>
                     </systemPropertyVariables>
-
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.aspectj</groupId>-->
+<!--                        <artifactId>aspectjweaver</artifactId>-->
+<!--                        <version>${aspectj.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
             </plugin>
 
             <plugin>

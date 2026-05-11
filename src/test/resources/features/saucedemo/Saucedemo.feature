@@ -6,7 +6,7 @@ Feature: SauceDemo E2E Purchase Flow
 
   @smoke @regression
   Scenario: Complete E2E purchase flow with valid user
-    When user logs in with valid test data from "data.json" using index 0
+    When user logs in with valid test data from "sauceDemoData.json" using index 0
     Then user should be on the products page
     When user adds all products from test data to cart
     And user navigates to cart
@@ -21,12 +21,12 @@ Feature: SauceDemo E2E Purchase Flow
 
   @regression @negative
   Scenario: Login fails with locked out user
-    When user attempts login with test data from "data.json" using index 1
+    When user attempts login with test data from "sauceDemoData.json" using index 1
     Then user should see error message from test data
     And user should remain on login page
 
   @smoke
   Scenario: Quick smoke test - Add single product to cart
-    When user logs in with valid test data from "data.json" using index 0
+    When user logs in with valid test data from "sauceDemoData.json" using index 0
     And user adds product "Sauce Labs Backpack" to cart
     Then cart badge should show 1 item

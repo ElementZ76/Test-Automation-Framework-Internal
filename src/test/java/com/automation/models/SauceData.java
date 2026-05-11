@@ -20,7 +20,7 @@ public class SauceData {
     @JsonProperty("postalCode")
     private String postalCode;
 
-    // Changed from List<Product> to List<String> to match data.json ["Item 1", "Item 2"]
+    // Changed from List<Product> to List<String> to match sauceDemoData.json ["Item 1", "Item 2"]
     @JsonProperty("products")
     private List<String> products;
 
