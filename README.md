@@ -33,50 +33,61 @@ BDD test automation framework for [SauceDemo](https://www.saucedemo.com/) built 
 
 ## Project Structure
 
-```
 TestAutomationFramework/
 ├── src/
 │   └── test/
 │       ├── java/
 │       │   └── com/automation/
 │       │       ├── driver/
-│       │       │   ├── DriverFactory.java       # Browser instantiation (Chrome/Firefox/Edge, local/grid)
-│       │       │   └── DriverManager.java        # ThreadLocal WebDriver management
+│       │       │   ├── DriverFactory.java
+│       │       │   └── DriverManager.java
 │       │       ├── listeners/
-│       │       │   └── SuiteThreadListener.java  # IAlterSuiteListener for dynamic thread config
+│       │       │   └── SuiteThreadListener.java
 │       │       ├── models/
-│       │       │   └── SauceData.java            # POJO for test data deserialization
+│       │       │   ├── SauceData.java
+│       │       │   └── FlipkartData.java
 │       │       ├── pages/
-│       │       │   ├── BasePage.java             # Shared wait utilities and interaction methods
-│       │       │   ├── LoginPage.java
-│       │       │   ├── ProductListPage.java
-│       │       │   ├── CartPage.java
-│       │       │   ├── CheckoutInfoPage.java
-│       │       │   ├── CheckoutOverviewPage.java
-│       │       │   └── CheckoutCompletePage.java
+│       │       │   ├── BasePage.java
+│       │       │   ├── saucedemo/
+│       │       │   │   ├── LoginPage.java
+│       │       │   │   ├── ProductListPage.java
+│       │       │   │   ├── CartPage.java
+│       │       │   │   ├── CheckoutInfoPage.java
+│       │       │   │   ├── CheckoutOverviewPage.java
+│       │       │   │   └── CheckoutCompletePage.java
+│       │       │   └── flipkart/
+│       │       │       └── *.java
 │       │       ├── runners/
-│       │       │   └── TestRunner.java           # Cucumber-TestNG entry point with parallel DataProvider
+│       │       │   ├── SauceDemoTestRunner.java
+│       │       │   └── FlipkartTestRunner.java
 │       │       ├── stepdef/
-│       │       │   ├── ApplicationHooks.java     # @Before/@After: driver init, screenshot on failure
-│       │       │   └── StepDef.java              # Cucumber step definitions
+│       │       │   ├── saucedemo/
+│       │       │   │   ├── ApplicationHooks.java
+│       │       │   │   └── StepDef.java
+│       │       │   └── flipkart/
+│       │       │       ├── FlipkartHooks.java
+│       │       │       └── FlipkartStepDef.java
 │       │       └── utils/
-│       │           ├── ConfigManager.java        # Property resolution: -D flag → {appName}.properties → config.properties → default
-│       │           └── JsonUtils.java            # Generic Jackson-based JSON test data loader
+│       │           ├── ConfigManager.java
+│       │           └── JsonUtils.java
 │       └── resources/
 │           ├── features/
-│           │   └── Saucedemo.feature             # Cucumber feature file
+│           │   ├── saucedemo/
+│           │   │   └── Saucedemo.feature
+│           │   └── flipkart/
+│           │       └── Flipkart.feature
 │           ├── testdata/
-│           │   └── data.json                     # Test data (credentials, products, expected messages)
-│           ├── config.properties                 # Base configuration (browser, URL, threads, timeouts)
-│           ├── saucedemo.properties              # SauceDemo-specific overrides (loaded via -DappName=saucedemo)
-│           ├── log4j2.xml                        # Logging configuration
-│           └── testng.xml                        # TestNG suite definition with SuiteThreadListener
-├── logs/
-│   └── automation.log                            # Runtime log output
-├── pom.xml                                       # Maven build, dependencies, Surefire and Allure plugins
+│           │   ├── data.json
+│           │   └── flipkart-data.json
+│           ├── config.properties
+│           ├── sauceDemo.properties
+│           ├── flipkart.properties
+│           ├── allure.properties
+│           ├── log4j2.xml
+│           └── testng.xml
+├── .github/workflows/ci.yml
+├── pom.xml
 └── README.md
-```
-
 ---
 
 ## Tech Stack
