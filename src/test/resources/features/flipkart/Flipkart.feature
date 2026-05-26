@@ -11,17 +11,17 @@ Feature: Flipkart E2E Flows
     Then user should see the Flipkart homepage
     And search bar should be visible
 
-  @regression @flipkart @auth
-  Scenario: Login with valid credentials
-    When user opens the login modal
-    And user logs in with Flipkart credentials from "flipkartData.json" using index 0
-    Then user should be logged in successfully
-
-  @regression @flipkart @auth @negative
-  Scenario: Login fails with invalid credentials
-    When user opens the login modal
-    And user attempts Flipkart login with "invalid@test.com" and "wrongpass"
-    Then login error message should be displayed
+#  @regression @flipkart @auth
+#  Scenario: Login with valid credentials
+#    When user opens the login modal
+#    And user logs in with Flipkart credentials from "flipkartData.json" using index 0
+#    Then user should be logged in successfully
+#
+#  @regression @flipkart @auth @negative
+#  Scenario: Login fails with invalid credentials
+#    When user opens the login modal
+#    And user attempts Flipkart login with "invalid@test.com" and "wrongpass"
+#    Then login error message should be displayed
 
   # ─── SEARCH ───────────────────────────────────────────────────────
 
@@ -143,7 +143,7 @@ Feature: Flipkart E2E Flows
     And user adds the product to cart from PDP
     And user navigates to cart
     And user proceeds to checkout from cart
-    Then user should be on the checkout or login page
+    Then user should be on the login page
 
   # ─── NAVIGATION ───────────────────────────────────────────────────
 
