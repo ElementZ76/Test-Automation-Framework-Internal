@@ -38,7 +38,20 @@ public class HomePage extends BasePage {
             waitForVisibility(searchBarInput);
             return searchBarInput.isDisplayed();
         } catch (Exception e) {
+            log.info("Search bar is not visible: {}", e);
             return false;
+        }
+    }
+
+    public SearchResultsPage searchFor(String productName) {
+        try {
+            waitForClickability(searchBarInput);
+            sendText(searchBarInput, productName);
+            log.info("Entered product name as {}", productName);
+            return new SearchResultsPage();
+        } catch (Exception e) {
+            log.info("Could not enter product name:{}", e);
+            throw new RuntimeException("Failed to enter product name");
         }
     }
 

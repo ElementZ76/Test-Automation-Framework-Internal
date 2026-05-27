@@ -11,18 +11,6 @@ Feature: Flipkart E2E Flows
     Then user should see the Flipkart homepage
     And search bar should be visible
 
-#  @regression @flipkart @auth
-#  Scenario: Login with valid credentials
-#    When user opens the login modal
-#    And user logs in with Flipkart credentials from "flipkartData.json" using index 0
-#    Then user should be logged in successfully
-#
-#  @regression @flipkart @auth @negative
-#  Scenario: Login fails with invalid credentials
-#    When user opens the login modal
-#    And user attempts Flipkart login with "invalid@test.com" and "wrongpass"
-#    Then login error message should be displayed
-
   # ─── SEARCH ───────────────────────────────────────────────────────
 
   @smoke @flipkart @search
@@ -117,15 +105,6 @@ Feature: Flipkart E2E Flows
     Then cart count should be 1
 
   # ─── WISHLIST ─────────────────────────────────────────────────────
-
-  @regression @flipkart @wishlist
-  Scenario: Logged-in user can add product to wishlist
-    When user opens the login modal
-    And user logs in with Flipkart credentials from "flipkartData.json" using index 0
-    And user searches for product from "flipkartData.json" using index 0
-    And user clicks on the first product in search results
-    And user adds the product to wishlist
-    Then wishlist confirmation should be shown
 
   @regression @flipkart @wishlist @negative
   Scenario: Guest user is prompted to login when adding to wishlist

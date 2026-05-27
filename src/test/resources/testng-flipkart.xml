@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Flipkart ECommerce Test Suite" parallel="methods" thread-count="1">
+    <listeners>
+        <listener class-name="com.automation.listeners.SuiteThreadListener"/>
+    </listeners>
+    <test name="Flipkart E2E Tests">
+        <classes>
+            <class name="com.automation.runners.SauceDemoTestRunner"/>
+        </classes>
+    </test>
+</suite>

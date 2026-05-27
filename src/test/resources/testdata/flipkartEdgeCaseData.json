@@ -1,0 +1,102 @@
+[
+  {
+    "caseId": 1,
+    "description": "Standard valid product search",
+    "searchTerm": "Samsung Galaxy S23",
+    "brandFilter": "Samsung",
+    "priceMin": 5000,
+    "priceMax": 80000,
+    "sortOption": "Price -- Low to High",
+    "expectedBehavior": "Results load, filter and sort applied correctly"
+  },
+  {
+    "caseId": 2,
+    "description": "Special characters in search — SQL injection probe",
+    "searchTerm": "'; DROP TABLE products; --",
+    "brandFilter": null,
+    "priceMin": null,
+    "priceMax": null,
+    "sortOption": null,
+    "expectedBehavior": "No results or safe fallback; application does not crash"
+  },
+  {
+    "caseId": 3,
+    "description": "XSS probe in search input",
+    "searchTerm": "<script>alert('xss')</script>",
+    "brandFilter": null,
+    "priceMin": null,
+    "priceMax": null,
+    "sortOption": null,
+    "expectedBehavior": "Script tag rendered as plain text; no alert fires"
+  },
+  {
+    "caseId": 4,
+    "description": "Maximum length search term (255 chars)",
+    "searchTerm": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "brandFilter": null,
+    "priceMin": null,
+    "priceMax": null,
+    "sortOption": null,
+    "expectedBehavior": "Input truncated or no results shown gracefully; no UI break"
+  },
+  {
+    "caseId": 5,
+    "description": "Empty / whitespace-only search",
+    "searchTerm": "   ",
+    "brandFilter": null,
+    "priceMin": null,
+    "priceMax": null,
+    "sortOption": null,
+    "expectedBehavior": "Search is ignored or homepage reloads; no error thrown"
+  },
+  {
+    "caseId": 6,
+    "description": "Unicode / non-ASCII search term (Hindi)",
+    "searchTerm": "स्मार्टफोन",
+    "brandFilter": null,
+    "priceMin": null,
+    "priceMax": null,
+    "sortOption": null,
+    "expectedBehavior": "Results shown for Hindi query or transliterated fallback"
+  },
+  {
+    "caseId": 7,
+    "description": "Price boundary — min equals max (zero-range filter)",
+    "searchTerm": "laptop",
+    "brandFilter": null,
+    "priceMin": 10000,
+    "priceMax": 10000,
+    "sortOption": null,
+    "expectedBehavior": "Results at exactly ₹10,000 shown, or empty results gracefully"
+  },
+  {
+    "caseId": 8,
+    "description": "Inverted price range — min greater than max",
+    "searchTerm": "headphones",
+    "brandFilter": null,
+    "priceMin": 50000,
+    "priceMax": 500,
+    "sortOption": null,
+    "expectedBehavior": "Validation prevents filter apply, or results empty without crash"
+  },
+  {
+    "caseId": 9,
+    "description": "Extremely high price boundary (overflow probe)",
+    "searchTerm": "television",
+    "brandFilter": null,
+    "priceMin": 0,
+    "priceMax": 9999999999,
+    "sortOption": null,
+    "expectedBehavior": "All results displayed or max cap applied silently; no crash"
+  },
+  {
+    "caseId": 10,
+    "description": "Known invalid / gibberish product name",
+    "searchTerm": "xyzinvalidproduct12345",
+    "brandFilter": null,
+    "priceMin": null,
+    "priceMax": null,
+    "sortOption": null,
+    "expectedBehavior": "No-results message or alternate suggestions shown; page stable"
+  }
+]
