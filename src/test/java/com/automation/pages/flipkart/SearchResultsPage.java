@@ -14,6 +14,8 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Showing') and contains(text(),'results for')]")
     private WebElement searchResultsText;
 
+    @FindBy(xpath = "//div[text()='Sorry, no results found!']")
+    private WebElement noResultsMessage;
 
     public boolean isLoaded() {
         boolean loaded = Objects.requireNonNull(getDriver().getCurrentUrl()).contains("/search?q=");
@@ -28,6 +30,18 @@ public class SearchResultsPage extends BasePage {
         int count = Integer.parseInt(total.trim());
         log.info("Search results page is displaying relevant results");
         return count;
+    }
+
+    public boolean hasNoResults() {
+        waitForVisibility(noResultsMessage);
+        boolean isDisplayed = noResultsMessage.isDisplayed();
+        log.info("No results message is displayed");
+        return isDisplayed;
+    }
+
+    public String getResultsMessageText() {
+        waitForVisibility(noResultsMessage);
+        return noResultsMessage.getText();
     }
 
     public SearchResultsPage() {PageFactory.initElements(getDriver(), this);}

@@ -7,27 +7,27 @@ Feature: Flipkart E2E Flows
   # ─── AUTHENTICATION ───────────────────────────────────────────────
 
   @smoke @flipkart @auth
-  Scenario: Guest user can browse without login
+  Scenario: Guest user can browse without login - DONE
     Then user should see the Flipkart homepage
     And search bar should be visible
 
   # ─── SEARCH ───────────────────────────────────────────────────────
 
   @smoke @flipkart @search
-  Scenario: Search for a product returns results
+  Scenario: Search for a product returns results - DONE
     When user searches for product from "flipkartData.json" using index 0
     Then search results page should load
     And search results should contain relevant products
 
   @regression @flipkart @search
-  Scenario: Search suggestions appear on partial input
+  Scenario: Search suggestions appear on partial input - DONE
     When user types partial search term "iPhone"
     Then search suggestions dropdown should appear
 
   @regression @flipkart @search @negative
-  Scenario: Search with invalid term shows no results message
-    When user searches for "xyzinvalidproduct12345"
-    Then no results message or alternate suggestions should be shown
+  Scenario: Search with invalid term shows no results message - DONE
+    When user searches for product from "flipkartData.json" using index 9
+    Then no results message should be shown
 
   # ─── PRODUCT DISCOVERY ────────────────────────────────────────────
 
