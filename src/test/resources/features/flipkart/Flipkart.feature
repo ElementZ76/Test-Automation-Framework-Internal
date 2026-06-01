@@ -32,7 +32,7 @@ Feature: Flipkart E2E Flows
   # ─── PRODUCT DISCOVERY ────────────────────────────────────────────
 
   @smoke @flipkart @pdp
-  Scenario: User can open a product detail page
+  Scenario: User can open a product detail page - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     Then product detail page should load
@@ -40,7 +40,7 @@ Feature: Flipkart E2E Flows
     And product price should be displayed
 
   @regression @flipkart @pdp
-  Scenario: Product images are displayed on PDP
+  Scenario: Product images are displayed on PDP - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     Then product images should be visible on PDP

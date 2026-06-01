@@ -78,7 +78,7 @@ public class HomePage extends BasePage {
     public boolean isSearchDropdownVisible() {
         waitForVisibility(searchSuggestionsDropdown);
         boolean isAppear = searchSuggestionsDropdown.isDisplayed();
-        log.info("Search suggestion dropdown is displayed");
+        log.info("Verified search suggestions dropdown is visible");
         return isAppear;
     }
 
