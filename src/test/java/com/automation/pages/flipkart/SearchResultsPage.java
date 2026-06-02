@@ -1,11 +1,15 @@
 package com.automation.pages.flipkart;
 
 import com.automation.pages.BasePage;
+import io.cucumber.java.sl.In;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +26,17 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = "//a[contains(@href,'/p/itm')]")
     private List<WebElement> productNames;
 
+    @FindBy(xpath = "//div[starts-with(normalize-space(),'₹')]")
+    private List<WebElement> productPrices;
+
     private final String BRAND_FILTER_XPATH =
             "//section[.//div[normalize-space()='Brand']]//label[.//div[normalize-space()='%s']]";
+
+    private final String ACTIVE_BRAND_FILTER_XPATH =
+            "//div[./div[normalize-space()='✕'] and ./div[normalize-space()='%s']]";
+
+    private final String SORT_OPTION_XPATH =
+            "//div[normalize-space()='%s']";
 
     public boolean isSearchResultsPageLoaded() {
         String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
@@ -84,6 +97,55 @@ public class SearchResultsPage extends BasePage {
         log.info("Applying brand filter: {}", brandName);
         brandFilter.click();
         log.info("Successfully selected brand filter: {}", brandName);
+    }
+
+    public boolean isBrandFilterApplied(String brandName) {
+        String xpath = String.format(ACTIVE_BRAND_FILTER_XPATH, brandName);
+        try {
+            WebElement activeFilter = getDriver().findElement(By.xpath(xpath));
+            boolean isDisplayed = activeFilter.isDisplayed();
+            log.info("Verifying active brand filter chip: {}", brandName);
+            log.info("Brand filter '{}' applied status: {}", brandName, isDisplayed);
+            return isDisplayed;
+        } catch (NoSuchElementException e) {
+            log.error("Brand filter chip '{}' not found.", brandName);
+            return false;
+        }
+    }
+
+    private void selectSortOption(String sortOption) {
+        String xpath = String.format(SORT_OPTION_XPATH, sortOption);
+        WebElement option = getDriver().findElement(By.xpath(xpath));
+        waitForClickability(option);
+        log.info("Selecting sort option: {}", sortOption);
+        option.click();
+        log.info("Successfully selected sort option: {}", sortOption);
+    }
+
+    public boolean areProductPricesSortedByAscending() {
+        waitForVisibility(productPrices.get(0));
+        List<Integer> actualPrices = new ArrayList<>();
+        for (WebElement priceElement : productPrices) {
+            String priceText = priceElement.getText()
+                    .replace("₹", "")
+                    .replace(",", "")
+                    .trim();
+
+            actualPrices.add(Integer.parseInt(priceText));
+        }
+        log.info("Actual prices displayed: {}", actualPrices);
+        List<Integer> sortedPrices = new ArrayList<>(actualPrices);
+        Collections.sort(sortedPrices);
+
+        boolean isSorted = actualPrices.equals(sortedPrices);
+        if(isSorted) {
+            log.info("Products are displayed in ascending price order");
+        } else {
+            log.error("Products are NOT displayed in ascending price order");
+            log.error("Expected sorted prices: {}", sortedPrices);
+            log.error("Actual prices: {}", actualPrices);
+        }
+        return isSorted;
     }
 
     public SearchResultsPage() {PageFactory.initElements(getDriver(), this);}

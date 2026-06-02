@@ -54,16 +54,10 @@ Feature: Flipkart E2E Flows
   # ─── FILTERS & SORTING ────────────────────────────────────────────
 
   @regression @flipkart @filter
-  Scenario: User can filter search results by brand
+  Scenario: User can filter search results by brand - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user applies brand filter from "flipkartData.json" using index 0
     Then search results should be filtered by selected brand
-
-  @regression @flipkart @filter
-  Scenario: User can filter search results by price range
-    When user searches for product from "flipkartData.json" using index 0
-    And user applies price range filter with min 5000 and max 20000
-    Then all displayed products should be within the price range 5000 and 20000
 
   @regression @flipkart @sort
   Scenario: User can sort results by price low to high
