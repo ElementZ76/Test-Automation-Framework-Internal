@@ -30,6 +30,12 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//svg[contains(@viewBox,'12 12')]/parent::div")
     private WebElement productRatingSection;
 
+    @FindBy(xpath = "//div[.//clipPath[contains(@id,'AddToCart')]]")
+    private WebElement addToCartButton;
+
+    @FindBy(xpath = "//a[@title='Cart']//span[normalize-space() and not(text()='Cart')]")
+    private WebElement cartItemCountBadge;
+
     public boolean isProductDetailsPageLoaded() {
         String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
         boolean loaded = currentUrl.contains("a/p/itm");
@@ -82,6 +88,30 @@ public class ProductDetailsPage extends BasePage{
         return isVisible;
     }
 
+    public void addToCart() {
+        waitForClickability(addToCartButton);
+        addToCartButton.click();
+        log.info("Clicked on add to cart button");
+    }
+
+    public boolean verifyIfCartIconHasProduct() {
+        waitForVisibility(cartItemCountBadge);
+        String countText = cartItemCountBadge.getText().trim();
+        log.info("Cart badge count displayed: {}", cartItemCountBadge);
+        try {
+            int itemCount = Integer.parseInt(countText);
+            boolean isAdded = itemCount > 0;
+            if (isAdded) {
+                log.info("Product successfully added to cart. Item count: {}", itemCount);
+            } else {
+                log.error("Cart count is zero");
+            }
+            return isAdded;
+        } catch (NumberFormatException e) {
+            log.error("Unable to parse cart count: {}", countText);
+            return false;
+        }
+    }
 
     public ProductDetailsPage() {
         PageFactory.initElements(getDriver(), this);

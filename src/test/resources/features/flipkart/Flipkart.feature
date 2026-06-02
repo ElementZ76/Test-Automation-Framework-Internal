@@ -60,13 +60,13 @@ Feature: Flipkart E2E Flows
     Then search results should be filtered by selected brand
 
   @regression @flipkart @sort
-  Scenario: User can sort results by price low to high
+  Scenario: User can sort results by price low to high - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user sorts results by "Price -- Low to High"
     Then products should be displayed in ascending price order
 
   @regression @flipkart @sort
-  Scenario: User can sort results by popularity
+  Scenario: User can sort results by popularity - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user sorts results by "Popularity"
     Then search results page should load
@@ -74,7 +74,7 @@ Feature: Flipkart E2E Flows
   # ─── CART ─────────────────────────────────────────────────────────
 
   @smoke @flipkart @cart
-  Scenario: User can add a product to cart from PDP
+  Scenario: User can add a product to cart from PDP - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
