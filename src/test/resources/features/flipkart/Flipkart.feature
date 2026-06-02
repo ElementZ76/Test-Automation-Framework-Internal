@@ -82,7 +82,7 @@ Feature: Flipkart E2E Flows
     And cart should contain the added product
 
   @regression @flipkart @cart
-  Scenario: User can remove a product from cart
+  Scenario: User can remove a product from cart - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     And user adds the product to cart from PDP

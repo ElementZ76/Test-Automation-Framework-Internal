@@ -36,6 +36,9 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//a[@title='Cart']//span[normalize-space() and not(text()='Cart')]")
     private WebElement cartItemCountBadge;
 
+    @FindBy(xpath = "//a[@title='Cart']")
+    private WebElement cartIconLink;
+
     public boolean isProductDetailsPageLoaded() {
         String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
         boolean loaded = currentUrl.contains("a/p/itm");
@@ -111,6 +114,14 @@ public class ProductDetailsPage extends BasePage{
             log.error("Unable to parse cart count: {}", countText);
             return false;
         }
+    }
+
+    public CartPage goToCartPage() {
+        waitForClickability(cartIconLink);
+        log.info("Clicking cart icon");
+        cartIconLink.click();
+        log.info("Successfully navigated to cart page");
+        return new CartPage();
     }
 
     public ProductDetailsPage() {
