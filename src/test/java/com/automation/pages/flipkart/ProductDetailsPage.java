@@ -27,6 +27,9 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//picture//img[@alt='Image']")
     private WebElement productImage;
 
+    @FindBy(xpath = "//svg[contains(@viewBox,'12 12')]/parent::div")
+    private WebElement productRatingSection;
+
     public boolean isProductDetailsPageLoaded() {
         String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
         boolean loaded = currentUrl.contains("a/p/itm");
@@ -70,6 +73,15 @@ public class ProductDetailsPage extends BasePage{
         log.info("Image source present: {}", imageLoaded);
         return displayed && imageLoaded;
     }
+
+    public boolean isProductRatingsVisible() {
+        waitForVisibility(productRatingSection);
+        boolean isVisible = productRatingSection.isDisplayed();
+        log.info("Verifying product rating visibility on Product Detail Page");
+        log.info("Product rating section displayed: {}", isVisible);
+        return isVisible;
+    }
+
 
     public ProductDetailsPage() {
         PageFactory.initElements(getDriver(), this);

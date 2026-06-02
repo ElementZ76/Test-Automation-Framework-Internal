@@ -46,7 +46,7 @@ Feature: Flipkart E2E Flows
     Then product images should be visible on PDP
 
   @regression @flipkart @pdp
-  Scenario: Product ratings and reviews section is visible
+  Scenario: Product ratings and reviews section is visible - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     Then ratings and reviews section should be visible
