@@ -1,6 +1,7 @@
 package com.automation.pages.flipkart;
 
 import com.automation.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -21,6 +22,8 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = "//a[contains(@href,'/p/itm')]")
     private List<WebElement> productNames;
 
+    private final String BRAND_FILTER_XPATH =
+            "//section[.//div[normalize-space()='Brand']]//label[.//div[normalize-space()='%s']]";
 
     public boolean isSearchResultsPageLoaded() {
         String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
@@ -72,6 +75,15 @@ public class SearchResultsPage extends BasePage {
         firstProduct.click();
         log.info("Successfully navigated to product detail page");
         return new ProductDetailsPage();
+    }
+
+    public void applyBrandFilter(String brandName) {
+        String xpath = String.format(BRAND_FILTER_XPATH, brandName);
+        WebElement brandFilter = getDriver().findElement(By.xpath(xpath));
+        waitForClickability(brandFilter);
+        log.info("Applying brand filter: {}", brandName);
+        brandFilter.click();
+        log.info("Successfully selected brand filter: {}", brandName);
     }
 
     public SearchResultsPage() {PageFactory.initElements(getDriver(), this);}
