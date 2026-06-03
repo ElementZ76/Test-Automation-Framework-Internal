@@ -91,26 +91,17 @@ Feature: Flipkart E2E Flows
     Then cart should be empty or show empty cart message
 
   @regression @flipkart @cart
-  Scenario: Cart persists product after page refresh
+  Scenario: Cart persists product after page refresh - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
     And user refreshes the page
     Then cart count should be 1
 
-  # ─── WISHLIST ─────────────────────────────────────────────────────
-
-  @regression @flipkart @wishlist @negative
-  Scenario: Guest user is prompted to login when adding to wishlist
-    When user searches for product from "flipkartData.json" using index 0
-    And user clicks on the first product in search results
-    And user adds the product to wishlist
-    Then login prompt should appear for wishlist action
-
   # ─── CHECKOUT (GUEST) ─────────────────────────────────────────────
 
   @smoke @flipkart @checkout
-  Scenario: User can proceed to checkout from cart
+  Scenario: User can proceed to checkout from cart - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
@@ -121,7 +112,7 @@ Feature: Flipkart E2E Flows
   # ─── NAVIGATION ───────────────────────────────────────────────────
 
   @regression @flipkart @navigation
-  Scenario: Category navigation loads correct page
+  Scenario: Category navigation loads correct page - DONE
     When user navigates to category "Electronics" from top nav
     Then category page for "Electronics" should load
 

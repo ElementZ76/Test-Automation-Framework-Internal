@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.automation.driver.DriverManager.*;
+import java.util.Objects;
 
 import static com.automation.driver.DriverManager.getDriver;
 
@@ -25,6 +25,9 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//button[@type='submit' and contains(@aria-label,'Search')]")
     private WebElement searchButton;
+
+    @FindBy(xpath = "//a[.//img[contains(@src, 'electronics.svg')]]")
+    private WebElement electronicsCategoryButton;
 
     public void dismissLoginPopup() {
         closeLoginButton.click();
@@ -80,6 +83,29 @@ public class HomePage extends BasePage {
         boolean isAppear = searchSuggestionsDropdown.isDisplayed();
         log.info("Verified search suggestions dropdown is visible");
         return isAppear;
+    }
+
+    public void clickElectronicsCategory() {
+        log.info("Attempting to click the Electronics category button.");
+        try {
+            waitForClickability(electronicsCategoryButton);
+            electronicsCategoryButton.click();
+            log.info("Successfully clicked the Electronics category button.");
+        } catch (Exception e) {
+            log.error("Failed to click the Electronics category button: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    public boolean checkElectronicsURL() {
+        String currentURL = Objects.requireNonNull(getDriver().getCurrentUrl());
+        boolean isElectronicsURL = currentURL.contains("new-elec-clp");
+        if(isElectronicsURL){
+            log.info("Electronics Page is displayed");
+        } else {
+            log.info("Electronics Page is not displayed");
+        }
+        return isElectronicsURL;
     }
 
     public HomePage() {

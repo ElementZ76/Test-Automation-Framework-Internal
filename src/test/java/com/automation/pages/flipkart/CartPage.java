@@ -7,14 +7,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-
 import static com.automation.driver.DriverManager.getDriver;
 
 public class CartPage extends BasePage {
+
+    @FindBy(xpath = "//div[@dir='auto' and starts-with(normalize-space(text()), 'Price')]")
+    private WebElement priceItemCountLabel;
+
+    @FindBy(xpath = "//div[@dir='auto' and normalize-space(text())='Place order']")
+    private WebElement placeOrderButton;
+
+    @FindBy(xpath = "//div[contains(text(), 'Log in to complete your shopping')]")
+    private WebElement loginPromptHeader;
 
     private final String PRODUCT_TITLE_XPATH =
             "//div[contains(normalize-space(),'%s')]";
@@ -37,8 +41,46 @@ public class CartPage extends BasePage {
         getDriver().navigate().refresh();
     }
 
-    public void checkNumberOfItemsInCart() {
+    public int extractItemCount(String rawLabelText) {
+        log.debug("Extracting item count from text: '{}'", rawLabelText);
+        String numericPart = rawLabelText.replaceAll("[^0-9]", "");
+        int itemCount = Integer.parseInt(numericPart);
+        log.info("Extracted item count: {}", itemCount);
+        return itemCount;
+    }
 
+    public boolean compareItemCount(int countBefore, int countAfter) {
+        log.info("Comparing cart item counts - Before: {}, After: {}", countBefore, countAfter);
+        boolean isMatch = (countBefore == countAfter);
+        if (isMatch) {
+            log.info("Success: Cart item count persisted after refresh.");
+        } else {
+            log.error("Failure: Cart item count changed or was lost after refresh.");
+        }
+        return isMatch;
+    }
+
+    public void clickPlaceOrder() {
+        waitForClickability(placeOrderButton);
+        try {
+            placeOrderButton.click();
+            log.info("Successfully clicked the 'Place order' button.");
+        } catch (Exception e) {
+            log.error("Failed to click the 'Place order' button. Exception: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    public boolean isLoginPromptHeaderPresent() {
+        log.info("Checking if the login prompt is displayed.");
+        try {
+            boolean isDisplayed = loginPromptHeader.isDisplayed();
+            log.info("Login prompt display status: {}", isDisplayed);
+            return isDisplayed;
+        } catch (Exception e) {
+            log.error("Login prompt element not visible or found: {}", e.getMessage());
+            return false;
+        }
     }
 
     public CartPage() {

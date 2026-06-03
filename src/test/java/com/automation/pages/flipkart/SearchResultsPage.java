@@ -28,6 +28,9 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = "//div[starts-with(normalize-space(),'₹')]")
     private List<WebElement> productPrices;
 
+    @FindBy(xpath = "//a[@href='/']/img[@alt='Flipkart']")
+    private WebElement flipkartHomeLogoButton;
+
     private final String BRAND_FILTER_XPATH =
             "//section[.//div[normalize-space()='Brand']]//label[.//div[normalize-space()='%s']]";
 
@@ -135,7 +138,6 @@ public class SearchResultsPage extends BasePage {
         log.info("Actual prices displayed: {}", actualPrices);
         List<Integer> sortedPrices = new ArrayList<>(actualPrices);
         Collections.sort(sortedPrices);
-
         boolean isSorted = actualPrices.equals(sortedPrices);
         if(isSorted) {
             log.info("Products are displayed in ascending price order");
@@ -145,6 +147,19 @@ public class SearchResultsPage extends BasePage {
             log.error("Actual prices: {}", actualPrices);
         }
         return isSorted;
+    }
+
+    public HomePage clickOnFlipkartLogo() {
+        log.info("Attempting to click the Flipkart navbar logo button.");
+        try {
+            waitForClickability(flipkartHomeLogoButton);
+            flipkartHomeLogoButton.click();
+            log.info("Successfully clicked the Flipkart navbar logo button.");
+        } catch (Exception e) {
+            log.error("Failed to click the Flipkart navbar logo button: {}", e.getMessage());
+            throw e;
+        }
+        return new HomePage();
     }
 
     public SearchResultsPage() {PageFactory.initElements(getDriver(), this);}
