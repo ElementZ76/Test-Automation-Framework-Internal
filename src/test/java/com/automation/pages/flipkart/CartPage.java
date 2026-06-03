@@ -20,6 +20,12 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), 'Log in to complete your shopping')]")
     private WebElement loginPromptHeader;
 
+    @FindBy(xpath = "//div[@style[contains(.,'cursor: pointer') or contains(.,'cursor:pointer')]][.//div[text()='Remove']]")
+    private WebElement removeProductButton;
+
+    @FindBy(xpath = "//div[@dir='auto'][text()='Missing Cart items?']")
+    private WebElement missingCartItemsMessage;
+
     private final String PRODUCT_TITLE_XPATH =
             "//div[contains(normalize-space(),'%s')]";
 
@@ -79,6 +85,29 @@ public class CartPage extends BasePage {
             return isDisplayed;
         } catch (Exception e) {
             log.error("Login prompt element not visible or found: {}", e.getMessage());
+            return false;
+        }
+    }
+
+    public void removeProductFromCart() {
+        log.info("Attempting to click the product item 'Remove' button in the cart dashboard.");
+        try {
+            waitForClickability(removeProductButton);
+            removeProductButton.click();
+            log.info("Successfully clicked the 'Remove' button target block.");
+        } catch (Exception e) {
+            log.error("Failed to interact with the cart item 'Remove' button element: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    public boolean isCartEmptyMessageDisplayed() {
+        try {
+            boolean isDisplayed = missingCartItemsMessage.isDisplayed();
+            log.info("Empty cart state assertion check completed. Display status: {}", isDisplayed);
+            return isDisplayed;
+        } catch (Exception e) {
+            log.error("Failed to detect or assert visibility for the empty cart state header node: {}", e.getMessage());
             return false;
         }
     }

@@ -125,9 +125,9 @@ Feature: Flipkart E2E Flows
   # ─── OFFERS & BANNERS ─────────────────────────────────────────────
 
   @regression @flipkart @offers
-  Scenario: Homepage banners are displayed
+  Scenario: Homepage banners are displayed - DONE
     Then homepage promotional banners should be visible
 
   @regression @flipkart @offers
-  Scenario: Suggested for you section is visible
+  Scenario: Suggested for you section is visible - DONE
     Then Suggested for you section should be visible on homepage
