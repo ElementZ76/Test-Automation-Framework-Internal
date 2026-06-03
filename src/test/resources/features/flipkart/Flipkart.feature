@@ -117,7 +117,7 @@ Feature: Flipkart E2E Flows
     Then category page for "Electronics" should load
 
   @regression @flipkart @navigation
-  Scenario: User can navigate to Flipkart home via logo
+  Scenario: User can navigate to Flipkart home via logo - DONE
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the Flipkart logo
     Then user should be on the Flipkart homepage
@@ -129,5 +129,5 @@ Feature: Flipkart E2E Flows
     Then homepage promotional banners should be visible
 
   @regression @flipkart @offers
-  Scenario: Deals of the Day section is visible
-    Then deals of the day section should be visible on homepage
+  Scenario: Suggested for you section is visible
+    Then Suggested for you section should be visible on homepage

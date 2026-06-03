@@ -29,6 +29,12 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[.//img[contains(@src, 'electronics.svg')]]")
     private WebElement electronicsCategoryButton;
 
+    @FindBy(xpath = "//picture/img[contains(@src, '/fk-p-flap/') and @alt='Image']")
+    private WebElement promotionalOffersBanner;
+
+    @FindBy(xpath = "//a[contains(@href, 'suggested-product') and .//div[text()='Suggested For You']]")
+    private WebElement suggestedForYouButton;
+
     public void dismissLoginPopup() {
         closeLoginButton.click();
         log.info("Login pop up closed");
@@ -106,6 +112,31 @@ public class HomePage extends BasePage {
             log.info("Electronics Page is not displayed");
         }
         return isElectronicsURL;
+    }
+
+    public boolean isOffersBannerDisplayed() {
+        log.info("Verifying visibility of the homepage promotional offers banner.");
+        try {
+            boolean isVisible = promotionalOffersBanner.isDisplayed();
+            log.info("Homepage promotional offers banner display status: {}", isVisible);
+            return isVisible;
+        } catch (Exception e) {
+            log.error("Promotional offers banner could not be detected on the DOM: {}", e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean clickSuggestedForYouButton() {
+        log.info("Attempting to click the Suggested For You section navigation banner button.");
+        try {
+            waitForVisibility(suggestedForYouButton);
+            boolean isVisible = suggestedForYouButton.isDisplayed();
+            log.info("Suggested for you section display status: {}", isVisible);
+            return isVisible;
+        } catch (Exception e) {
+            log.error("Suggested for you section could not be detected on the DOM: {}", e.getMessage());
+            throw e;
+        }
     }
 
     public HomePage() {
