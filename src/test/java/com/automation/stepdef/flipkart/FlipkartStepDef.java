@@ -1,15 +1,20 @@
 package com.automation.stepdef.flipkart;
 
+import com.automation.models.FlipkartData;
 import com.automation.pages.flipkart.CartPage;
 import com.automation.pages.flipkart.HomePage;
 import com.automation.pages.flipkart.ProductDetailsPage;
 import com.automation.pages.flipkart.SearchResultsPage;
-import com.automation.utils.JsonDataReader;
+import com.automation.utils.JsonUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+
+import java.io.IOException;
+import java.util.List;
 
 import static com.automation.driver.DriverManager.getDriver;
 
@@ -20,11 +25,30 @@ public class FlipkartStepDef {
     private ProductDetailsPage productDetailsPage;
     private CartPage cartPage;
 
-    // Holds the product title captured from PDP for cart assertion
+    // Product title captured from PDP; used later for cart product assertion
     private String addedProductTitle;
 
-    // Holds the cart item count captured before a refresh
+    // Cart item count captured before refresh; compared against post-refresh count
     private int cartItemCountBeforeRefresh;
+
+    // Lazily loaded, file-scoped test data cache — avoids re-reading the JSON on every step
+    private static List<FlipkartData> flipkartTestData;
+
+    /**
+     * Loads flipkartData.json once per suite run and returns the entry at the given index.
+     * Uses JsonUtils.getTestData() with a TypeReference so Jackson can deserialize the
+     * flat JSON array into a typed List<FlipkartData>.
+     */
+    private FlipkartData getData(String fileName, int index) {
+        try {
+            if (flipkartTestData == null) {
+                flipkartTestData = JsonUtils.getTestData(fileName, new TypeReference<List<FlipkartData>>() {});
+            }
+            return flipkartTestData.get(index);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load test data from file: " + fileName, e);
+        }
+    }
 
     // ─── BACKGROUND ───────────────────────────────────────────────────────────
 
@@ -39,7 +63,7 @@ public class FlipkartStepDef {
         try {
             homePage.dismissLoginPopup();
         } catch (Exception e) {
-            // Login popup may not appear on every load; safe to continue
+            // Popup is not guaranteed on every page load; safe to swallow and continue
         }
     }
 
@@ -61,8 +85,8 @@ public class FlipkartStepDef {
 
     @When("user searches for product from {string} using index {int}")
     public void userSearchesForProductFromFileUsingIndex(String fileName, int index) {
-        String productName = JsonDataReader.getString(fileName, "products", index);
-        searchResultsPage = homePage.searchFor(productName);
+        String searchTerm = getData(fileName, index).getSearchTerm();
+        searchResultsPage = homePage.searchFor(searchTerm);
     }
 
     @Then("search results page should load")
@@ -74,7 +98,7 @@ public class FlipkartStepDef {
     @And("search results should contain relevant products")
     public void searchResultsShouldContainRelevantProducts() {
         Assert.assertTrue(searchResultsPage.getResultsCount() > 0,
-                "Expected search results to contain at least one product, but result count was 0.");
+                "Expected search results to return at least one product, but result count was 0.");
     }
 
     @When("user types partial search term {string}")
@@ -124,7 +148,7 @@ public class FlipkartStepDef {
     @Then("product images should be visible on PDP")
     public void productImagesShouldBeVisibleOnPDP() {
         Assert.assertTrue(productDetailsPage.isProductImageVisible(),
-                "Expected product image to be visible and loaded on the PDP.");
+                "Expected the product image to be visible and fully loaded on the PDP.");
     }
 
     @Then("ratings and reviews section should be visible")
@@ -137,21 +161,21 @@ public class FlipkartStepDef {
 
     @And("user applies brand filter from {string} using index {int}")
     public void userAppliesBrandFilterFromFileUsingIndex(String fileName, int index) {
-        String brandName = JsonDataReader.getString(fileName, "brands", index);
+        String brandName = getData(fileName, index).getBrandFilter();
         searchResultsPage.applyBrandFilter(brandName);
     }
 
     @Then("search results should be filtered by selected brand")
     public void searchResultsShouldBeFilteredBySelectedBrand() {
-        // Re-read the brand used in the When step for assertion; index 0 from default data file
-        String brandName = JsonDataReader.getString("flipkartData.json", "brands", 0);
+        // Re-reads index 0 (same row used by the When step) to retrieve the expected brand chip value
+        String brandName = getData("flipkartData.json", 0).getBrandFilter();
         Assert.assertTrue(searchResultsPage.isBrandFilterApplied(brandName),
                 "Expected brand filter chip '" + brandName + "' to be active, but it was not found.");
     }
 
     @And("user sorts results by {string}")
     public void userSortsResultsBy(String sortOption) {
-        searchResultsPage.sortResultsBy(sortOption);
+        searchResultsPage.selectSortOption(sortOption);
     }
 
     @Then("products should be displayed in ascending price order")
@@ -164,21 +188,21 @@ public class FlipkartStepDef {
 
     @And("user adds the product to cart from PDP")
     public void userAddsTheProductToCartFromPDP() {
+        // NOTE: Add getProductTitle() → productTitle.getText() to ProductDetailsPage
+        // to enable the cart product presence assertion downstream.
+        addedProductTitle = productDetailsPage.getProductTitle();
         productDetailsPage.addToCart();
     }
 
     @Then("cart count should be {int}")
     public void cartCountShouldBe(int expectedCount) {
         Assert.assertTrue(productDetailsPage.verifyIfCartIconHasProduct(),
-                "Expected cart icon to show a non-zero item count after adding to cart.");
+                "Expected the cart icon badge to show a non-zero item count after adding to cart.");
     }
 
     @And("cart should contain the added product")
     public void cartShouldContainTheAddedProduct() {
         cartPage = productDetailsPage.goToCartPage();
-        // Flipkart's cart verification uses a partial/full product title
-        // We navigate to the cart and confirm at least one matching item is present.
-        // The product title check relies on the text visible in the cart row.
         Assert.assertTrue(cartPage.isProductPresentInCart(addedProductTitle != null ? addedProductTitle : ""),
                 "Expected the added product to be present in the cart, but it was not found.");
     }
@@ -190,32 +214,31 @@ public class FlipkartStepDef {
 
     @And("user removes the product from cart")
     public void userRemovesTheProductFromCart() {
-        // NOTE: CartPage does not currently expose a removeProduct() method.
-        // This step requires a removeProduct(String productName) method to be added to CartPage.
-        // Placeholder — implement once the method is available in CartPage:
-        // cartPage.removeProduct(addedProductTitle);
-        throw new UnsupportedOperationException(
-                "CartPage.removeProduct() is not yet implemented. " +
-                        "Please add a removeProduct method to CartPage to support this step.");
+        cartPage.removeProductFromCart();
     }
 
     @Then("cart should be empty or show empty cart message")
     public void cartShouldBeEmptyOrShowEmptyCartMessage() {
-        // NOTE: CartPage does not currently expose an isEmpty() or isEmptyMessageDisplayed() method.
-        // This step requires such a method to be added to CartPage.
-        throw new UnsupportedOperationException(
-                "CartPage.isEmptyMessageDisplayed() is not yet implemented. " +
-                        "Please add the relevant method to CartPage to support this step.");
+        Assert.assertTrue(cartPage.isCartEmptyMessageDisplayed(),
+                "Expected the empty cart message ('Missing Cart items?') to be displayed after product removal.");
     }
 
     @And("user refreshes the page")
     public void userRefreshesThePage() {
-        // Capture cart count badge before navigating so we can compare post-refresh
-        cartItemCountBeforeRefresh = productDetailsPage.verifyIfCartIconHasProduct() ? 1 : 0;
+        // Navigate to cart, read the item count label, store it, then refresh
         cartPage = productDetailsPage.goToCartPage();
         String rawLabel = cartPage.getPriceItemCountLabelText();
         cartItemCountBeforeRefresh = cartPage.extractItemCount(rawLabel);
         cartPage.refreshCartPage();
+    }
+
+    @Then("cart count should be {int} after refresh")
+    public void cartCountShouldBeAfterRefresh(int expectedCount) {
+        String rawLabelAfter = cartPage.getPriceItemCountLabelText();
+        int cartItemCountAfterRefresh = cartPage.extractItemCount(rawLabelAfter);
+        Assert.assertTrue(cartPage.compareItemCount(cartItemCountBeforeRefresh, cartItemCountAfterRefresh),
+                "Expected cart item count to persist after refresh. Before: "
+                        + cartItemCountBeforeRefresh + ", After: " + cartItemCountAfterRefresh);
     }
 
     @And("user proceeds to checkout from cart")
@@ -226,7 +249,7 @@ public class FlipkartStepDef {
     @Then("user should be on the login page")
     public void userShouldBeOnTheLoginPage() {
         Assert.assertTrue(cartPage.isLoginPromptHeaderPresent(),
-                "Expected the login prompt to appear after clicking Place Order, but it was not found.");
+                "Expected the login prompt to appear after clicking 'Place Order', but it was not found.");
     }
 
     // ─── NAVIGATION ───────────────────────────────────────────────────────────
@@ -260,7 +283,7 @@ public class FlipkartStepDef {
     @Then("user should be on the Flipkart homepage")
     public void userShouldBeOnTheFlipkartHomepage() {
         Assert.assertTrue(homePage.isOnHomePage(),
-                "Expected to be on the Flipkart homepage after clicking the logo, but the homepage indicator was not found.");
+                "Expected to be on the Flipkart homepage after clicking the logo, but the indicator was not found.");
     }
 
     // ─── OFFERS & BANNERS ─────────────────────────────────────────────────────

@@ -115,7 +115,7 @@ public class SearchResultsPage extends BasePage {
         }
     }
 
-    private void selectSortOption(String sortOption) {
+    public void selectSortOption(String sortOption) {
         String xpath = String.format(SORT_OPTION_XPATH, sortOption);
         WebElement option = getDriver().findElement(By.xpath(xpath));
         waitForClickability(option);

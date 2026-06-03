@@ -50,6 +50,8 @@ public class ProductDetailsPage extends BasePage{
         return loaded;
     }
 
+    public String getProductTitle() { return productTitle.getText(); }
+
     public boolean isProductNameVisible() {
         waitForVisibility(productTitle);
         boolean isVisible = productTitle.isDisplayed();

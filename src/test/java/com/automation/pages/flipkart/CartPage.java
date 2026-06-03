@@ -112,6 +112,8 @@ public class CartPage extends BasePage {
         }
     }
 
+    public String getPriceItemCountLabelText() { waitForVisibility(priceItemCountLabel); return priceItemCountLabel.getText(); }
+
     public CartPage() {
         PageFactory.initElements(getDriver(), this);
     }

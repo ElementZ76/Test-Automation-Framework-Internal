@@ -11,8 +11,8 @@ import static com.automation.driver.DriverManager.getDriver;
 
 public class HomePage extends BasePage {
 
-    @FindBy(xpath = "//div[.//span[text()='Login']]//span[@role='button']")
-    private WebElement closeLoginButton;
+    @FindBy(xpath = "//span[@role='button'][text()='✕']")
+    private WebElement dismissLoginModalButton;
 
     @FindBy(xpath = "//a[contains(@href,'flights-travel-uhp-at-store')]")
     private WebElement travelButton;
@@ -36,8 +36,14 @@ public class HomePage extends BasePage {
     private WebElement suggestedForYouButton;
 
     public void dismissLoginPopup() {
-        closeLoginButton.click();
-        log.info("Login pop up closed");
+        log.info("Attempting to close login pop up");
+        try {
+            waitForClickability(dismissLoginModalButton);
+            dismissLoginModalButton.click();
+            log.info("Closed login pop up");
+        } catch (Exception e) {
+            log.info("Failed closing login pop up: {}", e.getMessage());
+        }
     }
 
     public boolean isOnHomePage() {
