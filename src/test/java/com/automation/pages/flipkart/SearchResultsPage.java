@@ -55,7 +55,7 @@ public class SearchResultsPage extends BasePage {
         waitForVisibility(searchResultsText);
         String text = searchResultsText.getText();
         String totalResults = text.split("of ")[1].split(" results")[0];
-        int resultsCount = Integer.parseInt(totalResults.trim());
+        int resultsCount = Integer.parseInt(totalResults.trim().replaceAll("[^0-9]", ""));
         log.info("Total search results displayed: {}", resultsCount);
         return resultsCount;
     }

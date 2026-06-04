@@ -3,13 +3,9 @@ package com.automation.pages.flipkart;
 import com.automation.pages.BasePage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import static com.automation.driver.DriverManager.*;
 
 import java.util.Objects;
 
@@ -18,8 +14,8 @@ import static com.automation.driver.DriverManager.getDriver;
 public class ProductDetailsPage extends BasePage{
     private static final Logger log = LogManager.getLogger(ProductDetailsPage.class);
 
-    @FindBy(tagName = "h1")
-    private WebElement productTitle;
+    @FindBy(xpath = "//h1[@style[contains(.,'user-select: text') or contains(.,'user-select:text')]]")
+    private WebElement productTitleHeader;
 
     @FindBy(xpath = "//h1/following::div[starts-with(normalize-space(),'₹')][1]")
     private WebElement productPriceLabel;
@@ -50,13 +46,13 @@ public class ProductDetailsPage extends BasePage{
         return loaded;
     }
 
-    public String getProductTitle() { return productTitle.getText(); }
+    public String getProductTitleHeader() { return productTitleHeader.getText(); }
 
     public boolean isProductNameVisible() {
-        waitForVisibility(productTitle);
-        boolean isVisible = productTitle.isDisplayed();
+        waitForVisibility(productTitleHeader);
+        boolean isVisible = productTitleHeader.isDisplayed();
         if(isVisible) {
-            log.info("Verified product name is visible. Product name: {}", productTitle.getText());
+            log.info("Verified product name is visible. Product name: {}", productTitleHeader.getText());
         } else {
             log.error("Product name is not visible");
         }

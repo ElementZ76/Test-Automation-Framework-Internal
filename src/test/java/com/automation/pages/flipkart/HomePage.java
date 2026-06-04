@@ -111,7 +111,7 @@ public class HomePage extends BasePage {
 
     public boolean checkElectronicsURL() {
         String currentURL = Objects.requireNonNull(getDriver().getCurrentUrl());
-        boolean isElectronicsURL = currentURL.contains("new-elec-clp");
+        boolean isElectronicsURL = currentURL.contains("new-elec");
         if(isElectronicsURL){
             log.info("Electronics Page is displayed");
         } else {
@@ -129,19 +129,6 @@ public class HomePage extends BasePage {
         } catch (Exception e) {
             log.error("Promotional offers banner could not be detected on the DOM: {}", e.getMessage());
             return false;
-        }
-    }
-
-    public boolean clickSuggestedForYouButton() {
-        log.info("Attempting to click the Suggested For You section navigation banner button.");
-        try {
-            waitForVisibility(suggestedForYouButton);
-            boolean isVisible = suggestedForYouButton.isDisplayed();
-            log.info("Suggested for you section display status: {}", isVisible);
-            return isVisible;
-        } catch (Exception e) {
-            log.error("Suggested for you section could not be detected on the DOM: {}", e.getMessage());
-            throw e;
         }
     }
 

@@ -20,7 +20,7 @@ public class FlipkartData {
     private Integer priceMin;
 
     @JsonProperty("priceMax")
-    private Integer priceMax;
+    private long priceMax;
 
     @JsonProperty("sortOption")
     private String sortOption;
@@ -33,7 +33,7 @@ public class FlipkartData {
     public String getSearchTerm()           { return searchTerm; }
     public String getBrandFilter()          { return brandFilter; }
     public Integer getPriceMin()            { return priceMin; }
-    public Integer getPriceMax()            { return priceMax; }
+    public long getPriceMax()            { return priceMax; }
     public String getSortOption()           { return sortOption; }
     public String getExpectedBehavior()     { return expectedBehavior; }
 
@@ -42,7 +42,7 @@ public class FlipkartData {
     public void setSearchTerm(String searchTerm)            { this.searchTerm = searchTerm; }
     public void setBrandFilter(String brandFilter)          { this.brandFilter = brandFilter; }
     public void setPriceMin(Integer priceMin)               { this.priceMin = priceMin; }
-    public void setPriceMax(Integer priceMax)               { this.priceMax = priceMax; }
+    public void setPriceMax(long priceMax)               { this.priceMax = priceMax; }
     public void setSortOption(String sortOption)            { this.sortOption = sortOption; }
     public void setExpectedBehavior(String expectedBehavior){ this.expectedBehavior = expectedBehavior; }
 

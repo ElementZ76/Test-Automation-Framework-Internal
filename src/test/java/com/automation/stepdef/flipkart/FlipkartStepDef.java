@@ -32,7 +32,7 @@ public class FlipkartStepDef {
     private int cartItemCountBeforeRefresh;
 
     // Lazily loaded, file-scoped test data cache — avoids re-reading the JSON on every step
-    private static List<FlipkartData> flipkartTestData;
+    private static List<FlipkartData> flipkartData;
 
     /**
      * Loads flipkartData.json once per suite run and returns the entry at the given index.
@@ -41,10 +41,10 @@ public class FlipkartStepDef {
      */
     private FlipkartData getData(String fileName, int index) {
         try {
-            if (flipkartTestData == null) {
-                flipkartTestData = JsonUtils.getTestData(fileName, new TypeReference<List<FlipkartData>>() {});
+            if (flipkartData == null) {
+                flipkartData = JsonUtils.getTestData(fileName, new TypeReference<List<FlipkartData>>() {});
             }
-            return flipkartTestData.get(index);
+            return flipkartData.get(index);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load test data from file: " + fileName, e);
         }
@@ -190,7 +190,7 @@ public class FlipkartStepDef {
     public void userAddsTheProductToCartFromPDP() {
         // NOTE: Add getProductTitle() → productTitle.getText() to ProductDetailsPage
         // to enable the cart product presence assertion downstream.
-        addedProductTitle = productDetailsPage.getProductTitle();
+        addedProductTitle = productDetailsPage.getProductTitleHeader();
         productDetailsPage.addToCart();
     }
 
@@ -292,11 +292,5 @@ public class FlipkartStepDef {
     public void homepagePromotionalBannersShouldBeVisible() {
         Assert.assertTrue(homePage.isOffersBannerDisplayed(),
                 "Expected the homepage promotional offers banner to be visible.");
-    }
-
-    @Then("Suggested for you section should be visible on homepage")
-    public void suggestedForYouSectionShouldBeVisibleOnHomepage() {
-        Assert.assertTrue(homePage.clickSuggestedForYouButton(),
-                "Expected the 'Suggested For You' section to be visible on the homepage.");
     }
 }

@@ -2,8 +2,6 @@ package com.automation.utils;
 
 import java.io.*;
 import java.util.List;
-
-import com.automation.models.SauceData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

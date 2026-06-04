@@ -5,7 +5,7 @@
     </listeners>
     <test name="Flipkart E2E Tests">
         <classes>
-            <class name="com.automation.runners.SauceDemoTestRunner"/>
+            <class name="com.automation.runners.FlipkartTestRunner"/>
         </classes>
     </test>
 </suite>
