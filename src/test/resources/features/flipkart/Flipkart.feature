@@ -13,18 +13,18 @@ Feature: Flipkart E2E Flows
 
   # ─── SEARCH ───────────────────────────────────────────────────────
 
-  @smoke @flipkart @search
+  @smoke @flipkart @search1
   Scenario: Search for a product returns results
     When user searches for product from "flipkartData.json" using index 0
     Then search results page should load
     And search results should contain relevant products
 
-  @regression @flipkart @search
+  @regression @flipkart @search2
   Scenario: Search suggestions appear on partial input
     When user types partial search term "iPhone"
     Then search suggestions dropdown should appear
 
-  @regression @flipkart @search @negative
+  @regression @flipkart @search3 @negative
   Scenario: Search with invalid term shows no results message
     When user searches for product from "flipkartData.json" using index 9
     Then no results message should be shown
