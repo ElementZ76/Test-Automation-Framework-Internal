@@ -54,8 +54,10 @@ public class SearchResultsPage extends BasePage {
     public int getResultsCount() {
         waitForVisibility(searchResultsText);
         String text = searchResultsText.getText();
-        String totalResults = text.split("of ")[1].split(" results")[0];
-        int resultsCount = Integer.parseInt(totalResults.trim().replaceAll("[^0-9]", ""));
+        String[] parts = text.split("of ");
+        String totalResults = parts.length > 1 ? parts[1].split(" results")[0] : "0";
+        String cleaned = totalResults.trim().replaceAll("[^0-9]", "");
+        int resultsCount = cleaned.isEmpty() ? 0 : Integer.parseInt(cleaned);
         log.info("Total search results displayed: {}", resultsCount);
         return resultsCount;
     }
@@ -133,7 +135,7 @@ public class SearchResultsPage extends BasePage {
                     .replace(",", "")
                     .trim();
 
-            actualPrices.add(Integer.parseInt(priceText));
+            actualPrices.add((int) Long.parseLong(priceText));
         }
         log.info("Actual prices displayed: {}", actualPrices);
         List<Integer> sortedPrices = new ArrayList<>(actualPrices);
