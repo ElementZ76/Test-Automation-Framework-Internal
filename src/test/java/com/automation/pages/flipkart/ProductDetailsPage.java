@@ -36,14 +36,19 @@ public class ProductDetailsPage extends BasePage{
     private WebElement cartIconLink;
 
     public boolean isProductDetailsPageLoaded() {
-        String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
-        boolean loaded = currentUrl.contains("a/p/itm");
-        if (loaded) {
-            log.info("Product details page loaded successfully. URL: {}", currentUrl);
-        } else {
-            log.error("Search Results did not load correctly. Current URL: {}", currentUrl);
+        try {
+            waitForVisibility(productTitleHeader);
+            boolean loaded = productTitleHeader.isDisplayed();
+            if (loaded) {
+                log.info("Product details page loaded successfully. Title visible: {}", productTitleHeader.getText());
+            } else {
+                log.error("Product title element found but not displayed.");
+            }
+            return loaded;
+        } catch (Exception e) {
+            log.error("PDP did not load — product title not found. Exception: {}", e.getMessage());
+            return false;
         }
-        return loaded;
     }
 
     public String getProductTitleHeader() { return productTitleHeader.getText(); }
