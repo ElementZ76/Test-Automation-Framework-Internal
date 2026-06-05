@@ -1,0 +1,1118 @@
+praveen@wall-e:~/TestAutomationFramework$ mvn clean test -DappName=flipkart
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ----------------< com.automation:saucedemo-automation >-----------------
+[INFO] Building saucedemo-automation 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ saucedemo-automation ---
+[INFO] Deleting /home/praveen/TestAutomationFramework/target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ saucedemo-automation ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ saucedemo-automation ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ saucedemo-automation ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 14 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ saucedemo-automation ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 24 source files to /home/praveen/TestAutomationFramework/target/test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:3.0.0:test (default-test) @ saucedemo-automation ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+09:33:24 [main] INFO  class com.automation.utils.ConfigManager - config.properties loaded successfully into ConfigManager
+09:33:24 [main] INFO  class com.automation.utils.ConfigManager - flipkart.properties loaded and merged into ConfigManager
+09:33:24 [main] INFO  com.automation.listeners.SuiteThreadListener - SuiteThreadListener: suite 'Flipkart ECommerce Test Suite' thread-count set to 10
+09:33:24 [main] INFO  com.automation.listeners.SuiteThreadListener - Allure environment.properties written to target/allure-results.
+
+@regression @flipkart @sort
+Scenario: User can sort results by popularity                           # src/test/resources/features/flipkart/Flipkart.feature:69
+
+@regression @flipkart @filter
+Scenario: User can filter search results by brand                       # src/test/resources/features/flipkart/Flipkart.feature:57
+
+@regression @flipkart @search @negative
+Scenario: Search with invalid term shows no results message             # src/test/resources/features/flipkart/Flipkart.feature:28
+
+@smoke @flipkart @pdp
+Scenario: User can open a product detail page                           # src/test/resources/features/flipkart/Flipkart.feature:35
+
+@smoke @flipkart @search
+Scenario: Search for a product returns results                          # src/test/resources/features/flipkart/Flipkart.feature:17
+
+@regression @flipkart @pdp
+Scenario: Product images are displayed on PDP                           # src/test/resources/features/flipkart/Flipkart.feature:43
+09:33:24 [TestNG-PoolService-1] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-4] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-1] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-4] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-5] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+
+@regression @flipkart @search
+Scenario: Search suggestions appear on partial input # src/test/resources/features/flipkart/Flipkart.feature:23
+09:33:24 [TestNG-PoolService-5] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-3] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-7] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-3] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-7] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-9] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-9] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+
+@regression @flipkart @sort
+Scenario: User can sort results by price low to high                    # src/test/resources/features/flipkart/Flipkart.feature:63
+
+@regression @flipkart @pdp
+Scenario: Product ratings and reviews section is visible                # src/test/resources/features/flipkart/Flipkart.feature:49
+
+@smoke @flipkart @auth
+Scenario: Guest user can browse without login  # src/test/resources/features/flipkart/Flipkart.feature:10
+09:33:24 [TestNG-PoolService-6] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-8] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-2] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-8] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-6] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-0] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:24 [TestNG-PoolService-2] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:24 [TestNG-PoolService-0] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:27 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+09:33:32 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+09:33:32 [TestNG-PoolService-5] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:32 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:32 [TestNG-PoolService-5] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:32 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:32 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:32 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:32 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:32 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:32 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:32 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application       # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:32 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:33 [TestNG-PoolService-3] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:33 [TestNG-PoolService-3] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:33 [TestNG-PoolService-6] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:33 [TestNG-PoolService-6] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:33 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:33 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:34 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:34 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:36 [TestNG-PoolService-6] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:36 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:36 [TestNG-PoolService-3] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:36 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:36 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present          # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:36 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present    # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:36 [TestNG-PoolService-5] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:37 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:37 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - On Homepage, unique element to homepage  is displayed
+  Then user should see the Flipkart homepage   # com.automation.stepdef.flipkart.FlipkartStepDef.userShouldSeeTheFlipkartHomepage()
+09:33:37 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Search bar is visible
+  And search bar should be visible             # com.automation.stepdef.flipkart.FlipkartStepDef.searchBarShouldBeVisible()
+09:33:37 [TestNG-PoolService-0] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: Guest user can browse without login
+09:33:37 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+09:33:37 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:38 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Entered partial search term: iPhone
+  When user types partial search term "iPhone"       # com.automation.stepdef.flipkart.FlipkartStepDef.userTypesPartialSearchTerm(java.lang.String)
+09:33:39 [TestNG-PoolService-0] INFO  com.automation.driver.DriverManager - [Thread 26] Browser closed and ThreadLocal cleared.
+09:33:39 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Verified search suggestions dropdown is visible
+  Then search suggestions dropdown should appear     # com.automation.stepdef.flipkart.FlipkartStepDef.searchSuggestionsDropdownShouldAppear()
+09:33:39 [TestNG-PoolService-2] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: Search suggestions appear on partial input
+
+@smoke @flipkart @cart
+Scenario: User can add a product to cart from PDP                       # src/test/resources/features/flipkart/Flipkart.feature:77
+09:33:40 [TestNG-PoolService-0] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:40 [TestNG-PoolService-0] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:41 [TestNG-PoolService-2] INFO  com.automation.driver.DriverManager - [Thread 28] Browser closed and ThreadLocal cleared.
+
+@regression @flipkart @cart
+Scenario: User can remove a product from cart                           # src/test/resources/features/flipkart/Flipkart.feature:85
+09:33:41 [TestNG-PoolService-2] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:41 [TestNG-PoolService-2] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:47 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+09:33:47 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+09:33:47 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:33:47 [TestNG-PoolService-5] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:33:47 [TestNG-PoolService-6] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:33:47 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.SearchResultsPage - Search Results page loaded successfully. URL: https://www.flipkart.com/search?q=Samsung%20Galaxy%20S23&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off
+  Then search results page should load                                  # com.automation.stepdef.flipkart.FlipkartStepDef.searchResultsPageShouldLoad()
+09:33:47 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.SearchResultsPage - Selecting sort option: Price -- Low to High
+09:33:47 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.SearchResultsPage - Applying brand filter: Samsung
+09:33:47 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+  And search results should contain relevant products                   # com.automation.stepdef.flipkart.FlipkartStepDef.searchResultsShouldContainRelevantProducts()
+      java.lang.NumberFormatException: For input string: "1,654"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+        at java.base/java.lang.Integer.parseInt(Integer.java:652)
+        at java.base/java.lang.Integer.parseInt(Integer.java:770)
+        at com.automation.pages.flipkart.SearchResultsPage.getResultsCount(SearchResultsPage.java:58)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.searchResultsShouldContainRelevantProducts(FlipkartStepDef.java:100)
+        at ✽.search results should contain relevant products(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:20)
+
+09:33:47 [TestNG-PoolService-5] INFO  com.automation.pages.flipkart.SearchResultsPage - Clicking first product. URL: https://www.flipkart.com/samsung-galaxy-s23-5g-cream-128-gb/p/itmc77ff94cdf044?pid=MOBGMFFX5XYE8MZN&lid=LSTMOBGMFFX5XYE8MZNRGKCA5&marketplace=FLIPKART&q=Samsung+Galaxy+S23&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=e9662900-79ee-4f0f-90fb-618750650419.MOBGMFFX5XYE8MZN.SEARCH&ppt=hp&ppn=homepage&ssid=bvmuzlay2o0000001780545825567&qH=1fe033b290fff2a3&ov_redirect=true
+09:33:47 [TestNG-PoolService-1] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 27] Scenario FAILED: Search for a product returns results
+09:33:47 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.SearchResultsPage - Selecting sort option: Popularity
+09:33:47 [TestNG-PoolService-6] INFO  com.automation.pages.flipkart.SearchResultsPage - Clicking first product. URL: https://www.flipkart.com/samsung-galaxy-s23-5g-cream-128-gb/p/itmc77ff94cdf044?pid=MOBGMFFX5XYE8MZN&lid=LSTMOBGMFFX5XYE8MZNRGKCA5&marketplace=FLIPKART&q=Samsung+Galaxy+S23&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=4544cb34-6f6d-4032-b3a9-f0bd5498bf92.MOBGMFFX5XYE8MZN.SEARCH&ppt=hp&ppn=homepage&ssid=doe2n1egsw0000001780545825819&qH=1fe033b290fff2a3&ov_redirect=true
+Jun 04, 2026 9:33:47 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+09:33:48 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully selected sort option: Price -- Low to High
+  And user sorts results by "Price -- Low to High"                      # com.automation.stepdef.flipkart.FlipkartStepDef.userSortsResultsBy(java.lang.String)
+Jun 04, 2026 9:33:48 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+09:33:48 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully selected brand filter: Samsung
+  And user applies brand filter from "flipkartData.json" using index 0  # com.automation.stepdef.flipkart.FlipkartStepDef.userAppliesBrandFilterFromFileUsingIndex(java.lang.String,int)
+09:33:48 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Could not enter product name:{}
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable, but the element was not visible.
+(tried for 10 seconds with 500 milliseconds interval)
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:43779}, goog:processID: 26059, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:43779/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 487e717a5e42f4dd8f463c5126d7a4c4
+        at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85) ~[selenium-support-4.43.0.jar:?]
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234) ~[selenium-support-4.43.0.jar:?]
+        at com.automation.pages.BasePage.waitForClickability(BasePage.java:33) ~[test-classes/:?]
+        at com.automation.pages.flipkart.HomePage.searchFor(HomePage.java:76) ~[test-classes/:?]
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(FlipkartStepDef.java:89) ~[test-classes/:?]
+        at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+        at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+        at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+        at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+        at io.cucumber.java.Invoker.doInvoke(Invoker.java:66) ~[cucumber-java-7.14.0.jar:7.14.0]
+        at io.cucumber.java.Invoker.invoke(Invoker.java:24) ~[cucumber-java-7.14.0.jar:7.14.0]
+        at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47) ~[cucumber-java-7.14.0.jar:7.14.0]
+        at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29) ~[cucumber-java-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:84) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.TestStep.run(TestStep.java:56) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.TestCase.run(TestCase.java:84) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runner.Runner.runPickle(Runner.java:75) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$1(TestNGCucumberRunner.java:132) ~[cucumber-testng-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:137) ~[cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23) [cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:137) [cucumber-core-7.14.0.jar:7.14.0]
+        at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:129) [cucumber-testng-7.14.0.jar:7.14.0]
+        at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:35) [cucumber-testng-7.14.0.jar:7.14.0]
+        at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+        at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+        at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+        at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+        at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139) [testng-7.8.0.jar:7.8.0]
+        at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664) [testng-7.8.0.jar:7.8.0]
+        at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227) [testng-7.8.0.jar:7.8.0]
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80) [testng-7.8.0.jar:7.8.0]
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17) [testng-7.8.0.jar:7.8.0]
+        at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515) [?:?]
+        at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+        at java.lang.Thread.run(Thread.java:829) [?:?]
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+      java.lang.RuntimeException: Failed to enter product name
+        at com.automation.pages.flipkart.HomePage.searchFor(HomePage.java:83)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(FlipkartStepDef.java:89)
+        at ✽.user searches for product from "flipkartData.json" using index 0(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:36)
+
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+  Then product detail page should load                                  # com.automation.stepdef.flipkart.FlipkartStepDef.productDetailPageShouldLoad()
+  And product name should be visible                                    # com.automation.stepdef.flipkart.FlipkartStepDef.productNameShouldBeVisible()
+  And product price should be displayed                                 # com.automation.stepdef.flipkart.FlipkartStepDef.productPriceShouldBeDisplayed()
+09:33:48 [TestNG-PoolService-4] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 30] Scenario FAILED: User can open a product detail page
+09:33:48 [TestNG-PoolService-5] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully navigated to product detail page
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+  Then products should be displayed in ascending price order            # com.automation.stepdef.flipkart.FlipkartStepDef.productsShouldBeDisplayedInAscendingPriceOrder()
+      java.lang.NumberFormatException: For input string: "10000
+15000
+20000
+30000
+30000+"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+        at java.base/java.lang.Integer.parseInt(Integer.java:652)
+        at java.base/java.lang.Integer.parseInt(Integer.java:770)
+        at com.automation.pages.flipkart.SearchResultsPage.areProductPricesSortedByAscending(SearchResultsPage.java:136)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.productsShouldBeDisplayedInAscendingPriceOrder(FlipkartStepDef.java:183)
+        at ✽.products should be displayed in ascending price order(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:66)
+
+09:33:48 [TestNG-PoolService-8] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 34] Scenario FAILED: User can sort results by price low to high
+09:33:48 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully selected sort option: Popularity
+  And user sorts results by "Popularity"                                # com.automation.stepdef.flipkart.FlipkartStepDef.userSortsResultsBy(java.lang.String)
+09:33:48 [TestNG-PoolService-6] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully navigated to product detail page
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+09:33:48 [TestNG-PoolService-1] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: Search for a product returns results
+09:33:48 [TestNG-PoolService-1] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:33:49 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.SearchResultsPage - Search Results page loaded successfully. URL: https://www.flipkart.com/search?q=Samsung+Galaxy+S23&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&sort=popularity
+  Then search results page should load                                  # com.automation.stepdef.flipkart.FlipkartStepDef.searchResultsPageShouldLoad()
+09:33:49 [TestNG-PoolService-9] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: User can sort results by popularity
+09:33:49 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.SearchResultsPage - Verifying active brand filter chip: Samsung
+09:33:49 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.SearchResultsPage - Brand filter 'Samsung' applied status: true
+  Then search results should be filtered by selected brand              # com.automation.stepdef.flipkart.FlipkartStepDef.searchResultsShouldBeFilteredBySelectedBrand()
+09:33:49 [TestNG-PoolService-7] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: User can filter search results by brand
+09:33:49 [TestNG-PoolService-1] INFO  com.automation.driver.DriverManager - [Thread 27] Browser closed and ThreadLocal cleared.
+09:33:49 [TestNG-PoolService-4] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: User can open a product detail page
+09:33:49 [TestNG-PoolService-4] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+
+@regression @flipkart @cart
+Scenario: Cart persists product after page refresh                      # src/test/resources/features/flipkart/Flipkart.feature:94
+09:33:49 [TestNG-PoolService-1] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:49 [TestNG-PoolService-1] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:49 [TestNG-PoolService-9] INFO  com.automation.driver.DriverManager - [Thread 35] Browser closed and ThreadLocal cleared.
+
+@smoke @flipkart @checkout
+Scenario: User can proceed to checkout from cart                        # src/test/resources/features/flipkart/Flipkart.feature:104
+09:33:49 [TestNG-PoolService-9] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:49 [TestNG-PoolService-9] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:49 [TestNG-PoolService-7] INFO  com.automation.driver.DriverManager - [Thread 33] Browser closed and ThreadLocal cleared.
+
+@regression @flipkart @navigation
+Scenario: Category navigation loads correct page             # src/test/resources/features/flipkart/Flipkart.feature:115
+09:33:49 [TestNG-PoolService-7] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:49 [TestNG-PoolService-7] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:49 [TestNG-PoolService-4] INFO  com.automation.driver.DriverManager - [Thread 30] Browser closed and ThreadLocal cleared.
+
+@regression @flipkart @navigation
+Scenario: User can navigate to Flipkart home via logo                   # src/test/resources/features/flipkart/Flipkart.feature:120
+09:33:49 [TestNG-PoolService-4] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:49 [TestNG-PoolService-4] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:50 [TestNG-PoolService-3] INFO  com.automation.pages.flipkart.HomePage - Entered product name as aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and clicked search
+  When user searches for product from "flipkartData.json" using index 9 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:33:50 [TestNG-PoolService-8] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: User can sort results by price low to high
+09:33:50 [TestNG-PoolService-8] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:33:50 [TestNG-PoolService-3] INFO  com.automation.pages.flipkart.SearchResultsPage - Verified 'No Results' message is displayed
+09:33:50 [TestNG-PoolService-8] INFO  com.automation.driver.DriverManager - [Thread 34] Browser closed and ThreadLocal cleared.
+
+@regression @flipkart @offers
+Scenario: Homepage banners are displayed              # src/test/resources/features/flipkart/Flipkart.feature:128
+09:33:50 [TestNG-PoolService-8] WARN  class com.automation.utils.ConfigManager - 'fallbackToLocal not found. Using built in default: 'false''
+09:33:50 [TestNG-PoolService-8] INFO  com.automation.driver.DriverFactory - --- Driver Initialization | browser='chrome' | mode='local' | fallback=false | threads=10 ---
+09:33:50 [TestNG-PoolService-3] INFO  com.automation.pages.flipkart.SearchResultsPage - Captured no-results message text: Sorry, no results found!
+  Then no results message should be shown                               # com.automation.stepdef.flipkart.FlipkartStepDef.noResultsMessageShouldBeShown()
+09:33:50 [TestNG-PoolService-3] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: Search with invalid term shows no results message
+09:33:51 [TestNG-PoolService-3] INFO  com.automation.driver.DriverManager - [Thread 29] Browser closed and ThreadLocal cleared.
+09:33:53 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:53 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:53 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:53 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+Jun 04, 2026 9:33:54 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:54 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:54 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:54 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+Jun 04, 2026 9:33:54 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 149, returning the closest version; found: 147; Please update to a Selenium version that supports CDP version 149
+09:33:55 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:55 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:33:57 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:57 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:58 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:58 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:58 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application               # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:58 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:58 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application                          # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:58 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:33:59 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  Given user navigates to Flipkart application        # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToFlipkartApplication()
+09:33:59 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Attempting to close login pop up
+09:34:00 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:34:01 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                  # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:34:01 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Attempting to click the Electronics category button.
+09:34:01 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:34:01 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Successfully clicked the Electronics category button.
+  When user navigates to category "Electronics" from top nav # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToCategoryFromTopNav(java.lang.String)
+09:34:01 [TestNG-PoolService-7] INFO  com.automation.pages.flipkart.HomePage - Electronics Page is not displayed
+  Then category page for "Electronics" should load           # com.automation.stepdef.flipkart.FlipkartStepDef.categoryPageForShouldLoad(java.lang.String)
+      java.lang.AssertionError: Expected the Electronics category page URL to load, but URL validation failed. expected [true] but found [false]
+        at org.testng.Assert.fail(Assert.java:111)
+        at org.testng.Assert.failNotEquals(Assert.java:1578)
+        at org.testng.Assert.assertTrue(Assert.java:57)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.categoryPageForShouldLoad(FlipkartStepDef.java:270)
+        at ✽.category page for "Electronics" should load(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:117)
+
+09:34:01 [TestNG-PoolService-7] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 33] Scenario FAILED: Category navigation loads correct page
+09:34:01 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present                             # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:34:01 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:34:02 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Closed login pop up
+  And user dismisses login popup if present           # com.automation.stepdef.flipkart.FlipkartStepDef.userDismissesLoginPopupIfPresent()
+09:34:02 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Verifying visibility of the homepage promotional offers banner.
+09:34:02 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:34:02 [TestNG-PoolService-8] INFO  com.automation.pages.flipkart.HomePage - Homepage promotional offers banner display status: true
+  Then homepage promotional banners should be visible # com.automation.stepdef.flipkart.FlipkartStepDef.homepagePromotionalBannersShouldBeVisible()
+09:34:02 [TestNG-PoolService-8] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: Homepage banners are displayed
+09:34:02 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.SearchResultsPage - Clicking first product. URL: https://www.flipkart.com/samsung-galaxy-s23-5g-cream-128-gb/p/itmc77ff94cdf044?pid=MOBGMFFX5XYE8MZN&lid=LSTMOBGMFFX5XYE8MZNRGKCA5&marketplace=FLIPKART&q=Samsung+Galaxy+S23&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=8ae167aa-50f8-425c-a17f-f06952492b60.MOBGMFFX5XYE8MZN.SEARCH&ppt=None&ppn=None&ssid=dpx43yicrk0000001780545840583&qH=1fe033b290fff2a3&ov_redirect=true
+09:34:02 [TestNG-PoolService-8] INFO  com.automation.driver.DriverManager - [Thread 34] Browser closed and ThreadLocal cleared.
+09:34:02 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.SearchResultsPage - Clicking first product. URL: https://www.flipkart.com/samsung-galaxy-s23-5g-cream-128-gb/p/itmc77ff94cdf044?pid=MOBGMFFX5XYE8MZN&lid=LSTMOBGMFFX5XYE8MZNRGKCA5&marketplace=FLIPKART&q=Samsung+Galaxy+S23&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&iid=f4a12399-ae0c-4f5d-ba88-7400223f3c02.MOBGMFFX5XYE8MZN.SEARCH&ssid=pjfxjendyo0000001780545840658&qH=1fe033b290fff2a3&ov_redirect=true
+09:34:03 [TestNG-PoolService-0] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully navigated to product detail page
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+09:34:03 [TestNG-PoolService-2] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully navigated to product detail page
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+09:34:03 [TestNG-PoolService-7] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: Category navigation loads correct page
+09:34:03 [TestNG-PoolService-7] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:04 [TestNG-PoolService-7] INFO  com.automation.driver.DriverManager - [Thread 33] Browser closed and ThreadLocal cleared.
+09:34:06 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:34:07 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.SearchResultsPage - Clicking first product. URL: https://www.flipkart.com/samsung-galaxy-s23-5g-cream-128-gb/p/itmc77ff94cdf044?pid=MOBGMFFX5XYE8MZN&lid=LSTMOBGMFFX5XYE8MZNRGKCA5&marketplace=FLIPKART&q=Samsung+Galaxy+S23&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=4f6307be-5dc6-4c2a-84db-b4522011b326.MOBGMFFX5XYE8MZN.SEARCH&ppt=None&ppn=None&ssid=a3jucxd82o0000001780545845535&qH=1fe033b290fff2a3&ov_redirect=true
+09:34:07 [TestNG-PoolService-1] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully navigated to product detail page
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+09:34:07 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:34:07 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.SearchResultsPage - Attempting to click the Flipkart navbar logo button.
+09:34:07 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.HomePage - Entered product name as Samsung Galaxy S23 and clicked search
+  When user searches for product from "flipkartData.json" using index 0 # com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(java.lang.String,int)
+09:34:07 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.SearchResultsPage - Clicking first product. URL: https://www.flipkart.com/samsung-galaxy-s23-5g-cream-128-gb/p/itmc77ff94cdf044?pid=MOBGMFFX5XYE8MZN&lid=LSTMOBGMFFX5XYE8MZNRGKCA5&marketplace=FLIPKART&q=Samsung+Galaxy+S23&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=7df2063a-c103-4094-8e78-9e007d3c0c4a.MOBGMFFX5XYE8MZN.SEARCH&ppt=None&ppn=None&ssid=w1nwl3al4g0000001780545846458&qH=1fe033b290fff2a3&ov_redirect=true
+09:34:08 [TestNG-PoolService-9] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully navigated to product detail page
+  And user clicks on the first product in search results                # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFirstProductInSearchResults()
+  Then product images should be visible on PDP                          # com.automation.stepdef.flipkart.FlipkartStepDef.productImagesShouldBeVisibleOnPDP()
+      org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //picture//img[@alt='Image']'
+(tried for 10 seconds with 500 milliseconds interval)
+        at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductImageVisible(ProductDetailsPage.java:78)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.productImagesShouldBeVisibleOnPDP(FlipkartStepDef.java:150)
+        at ✽.product images should be visible on PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:46)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//picture//img[@alt='Image']"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a2195dde7fec3c922ca4ca07770f60b4, findElement {value=//picture//img[@alt='Image'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:44241}, goog:processID: 26065, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:44241/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a2195dde7fec3c922ca4ca07770f60b4
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.isDisplayed(Unknown Source)
+        at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:365)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:351)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:348)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:210)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductImageVisible(ProductDetailsPage.java:78)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.productImagesShouldBeVisibleOnPDP(FlipkartStepDef.java:150)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+        at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+        at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+        at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+        at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+        at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+        at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+        at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:84)
+        at io.cucumber.core.runner.TestStep.run(TestStep.java:56)
+        at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+        at io.cucumber.core.runner.TestCase.run(TestCase.java:84)
+        at io.cucumber.core.runner.Runner.runPickle(Runner.java:75)
+        at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$1(TestNGCucumberRunner.java:132)
+        at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:137)
+        at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+        at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:137)
+        at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:129)
+        at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:35)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+        at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+        at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+09:34:08 [TestNG-PoolService-5] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 31] Scenario FAILED: Product images are displayed on PDP
+  Then ratings and reviews section should be visible                    # com.automation.stepdef.flipkart.FlipkartStepDef.ratingsAndReviewsSectionShouldBeVisible()
+      org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //svg[contains(@viewBox,'12 12')]/parent::div'
+(tried for 10 seconds with 500 milliseconds interval)
+        at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductRatingsVisible(ProductDetailsPage.java:89)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.ratingsAndReviewsSectionShouldBeVisible(FlipkartStepDef.java:156)
+        at ✽.ratings and reviews section should be visible(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:52)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//svg[contains(@viewBox,'12 12')]/parent::div"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [13b8b1bb58a3336099fa4cacf283de7c, findElement {value=//svg[contains(@viewBox,'12 12')]/parent::div, using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40127}, goog:processID: 26063, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40127/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 13b8b1bb58a3336099fa4cacf283de7c
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.isDisplayed(Unknown Source)
+        at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:365)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:351)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:348)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:210)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductRatingsVisible(ProductDetailsPage.java:89)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.ratingsAndReviewsSectionShouldBeVisible(FlipkartStepDef.java:156)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+        at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+        at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+        at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+        at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+        at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+        at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+        at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:84)
+        at io.cucumber.core.runner.TestStep.run(TestStep.java:56)
+        at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+        at io.cucumber.core.runner.TestCase.run(TestCase.java:84)
+        at io.cucumber.core.runner.Runner.runPickle(Runner.java:75)
+        at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$1(TestNGCucumberRunner.java:132)
+        at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:137)
+        at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+        at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:137)
+        at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:129)
+        at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:35)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+        at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+        at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+09:34:08 [TestNG-PoolService-6] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 32] Scenario FAILED: Product ratings and reviews section is visible
+09:34:09 [TestNG-PoolService-5] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: Product images are displayed on PDP
+09:34:09 [TestNG-PoolService-5] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:09 [TestNG-PoolService-6] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: Product ratings and reviews section is visible
+09:34:09 [TestNG-PoolService-6] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:10 [TestNG-PoolService-6] INFO  com.automation.driver.DriverManager - [Thread 32] Browser closed and ThreadLocal cleared.
+09:34:10 [TestNG-PoolService-5] INFO  com.automation.driver.DriverManager - [Thread 31] Browser closed and ThreadLocal cleared.
+09:34:11 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.SearchResultsPage - Successfully clicked the Flipkart navbar logo button.
+09:34:11 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - Homepage Initialized
+  And user clicks on the Flipkart logo                                  # com.automation.stepdef.flipkart.FlipkartStepDef.userClicksOnTheFlipkartLogo()
+09:34:12 [TestNG-PoolService-4] INFO  com.automation.pages.flipkart.HomePage - On Homepage, unique element to homepage  is displayed
+  Then user should be on the Flipkart homepage                          # com.automation.stepdef.flipkart.FlipkartStepDef.userShouldBeOnTheFlipkartHomepage()
+09:34:12 [TestNG-PoolService-4] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Scenario PASSED: User can navigate to Flipkart home via logo
+09:34:12 [TestNG-PoolService-4] INFO  com.automation.driver.DriverManager - [Thread 30] Browser closed and ThreadLocal cleared.
+  And user adds the product to cart from PDP                            # com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP()
+      org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [96a19d05c58eb2ae81577364e76db070, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36139}, goog:processID: 27643, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36139/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 96a19d05c58eb2ae81577364e76db070
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:80)
+
+  Then cart count should be 1                                           # com.automation.stepdef.flipkart.FlipkartStepDef.cartCountShouldBe(int)
+  And cart should contain the added product                             # com.automation.stepdef.flipkart.FlipkartStepDef.cartShouldContainTheAddedProduct()
+09:34:12 [TestNG-PoolService-0] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 26] Scenario FAILED: User can add a product to cart from PDP
+  And user adds the product to cart from PDP                            # com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP()
+      org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9054ed1237db7717655b3ab306665707, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38067}, goog:processID: 27660, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38067/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 9054ed1237db7717655b3ab306665707
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:88)
+
+  And user navigates to cart                                            # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToCart()
+  And user removes the product from cart                                # com.automation.stepdef.flipkart.FlipkartStepDef.userRemovesTheProductFromCart()
+  Then cart should be empty or show empty cart message                  # com.automation.stepdef.flipkart.FlipkartStepDef.cartShouldBeEmptyOrShowEmptyCartMessage()
+09:34:12 [TestNG-PoolService-2] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 28] Scenario FAILED: User can remove a product from cart
+09:34:13 [TestNG-PoolService-0] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: User can add a product to cart from PDP
+09:34:13 [TestNG-PoolService-0] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:13 [TestNG-PoolService-0] INFO  com.automation.driver.DriverManager - [Thread 26] Browser closed and ThreadLocal cleared.
+09:34:13 [TestNG-PoolService-2] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: User can remove a product from cart
+09:34:13 [TestNG-PoolService-2] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:13 [TestNG-PoolService-2] INFO  com.automation.driver.DriverManager - [Thread 28] Browser closed and ThreadLocal cleared.
+  And user adds the product to cart from PDP                            # com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP()
+      org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [51fd396a5c87498198390c1e05d3f1b6, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:34161}, goog:processID: 28061, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:34161/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 51fd396a5c87498198390c1e05d3f1b6
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:97)
+
+  And user refreshes the page                                           # com.automation.stepdef.flipkart.FlipkartStepDef.userRefreshesThePage()
+  Then cart count should be 1                                           # com.automation.stepdef.flipkart.FlipkartStepDef.cartCountShouldBe(int)
+09:34:17 [TestNG-PoolService-1] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 27] Scenario FAILED: Cart persists product after page refresh
+09:34:17 [TestNG-PoolService-1] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: Cart persists product after page refresh
+09:34:17 [TestNG-PoolService-1] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:17 [TestNG-PoolService-1] INFO  com.automation.driver.DriverManager - [Thread 27] Browser closed and ThreadLocal cleared.
+  And user adds the product to cart from PDP                            # com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP()
+      org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [584e00eb02fa5f150d0a3ee0b8379b52, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:44113}, goog:processID: 28066, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:44113/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 584e00eb02fa5f150d0a3ee0b8379b52
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:107)
+
+  And user navigates to cart                                            # com.automation.stepdef.flipkart.FlipkartStepDef.userNavigatesToCart()
+  And user proceeds to checkout from cart                               # com.automation.stepdef.flipkart.FlipkartStepDef.userProceedsToCheckoutFromCart()
+  Then user should be on the login page                                 # com.automation.stepdef.flipkart.FlipkartStepDef.userShouldBeOnTheLoginPage()
+09:34:18 [TestNG-PoolService-9] ERROR com.automation.stepdef.flipkart.ApplicationHooks - [Thread 35] Scenario FAILED: User can proceed to checkout from cart
+09:34:18 [TestNG-PoolService-9] INFO  com.automation.stepdef.flipkart.ApplicationHooks - Screenshot attached for: User can proceed to checkout from cart
+09:34:18 [TestNG-PoolService-9] ERROR com.automation.stepdef.flipkart.ApplicationHooks - Test completed with FAILURE status
+09:34:18 [TestNG-PoolService-9] INFO  com.automation.driver.DriverManager - [Thread 35] Browser closed and ThreadLocal cleared.
+[ERROR] Tests run: 17, Failures: 10, Errors: 0, Skipped: 0, Time elapsed: 55.698 s <<< FAILURE! - in TestSuite
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["Search for a product returns results", "Flipkart E2E Flows"](3)  Time elapsed: 8.346 s  <<< FAILURE!
+java.lang.NumberFormatException: For input string: "1,654"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+        at java.base/java.lang.Integer.parseInt(Integer.java:652)
+        at java.base/java.lang.Integer.parseInt(Integer.java:770)
+        at com.automation.pages.flipkart.SearchResultsPage.getResultsCount(SearchResultsPage.java:58)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.searchResultsShouldContainRelevantProducts(FlipkartStepDef.java:100)
+        at ✽.search results should contain relevant products(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:20)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["User can open a product detail page", "Flipkart E2E Flows"](6)  Time elapsed: 0.083 s  <<< FAILURE!
+java.lang.RuntimeException: Failed to enter product name
+        at com.automation.pages.flipkart.HomePage.searchFor(HomePage.java:83)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userSearchesForProductFromFileUsingIndex(FlipkartStepDef.java:89)
+        at ✽.user searches for product from "flipkartData.json" using index 0(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:36)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["User can sort results by price low to high", "Flipkart E2E Flows"](7)  Time elapsed: 0.7 s  <<< FAILURE!
+java.lang.NumberFormatException:
+For input string: "10000
+15000
+20000
+30000
+30000+"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+        at java.base/java.lang.Integer.parseInt(Integer.java:652)
+        at java.base/java.lang.Integer.parseInt(Integer.java:770)
+        at com.automation.pages.flipkart.SearchResultsPage.areProductPricesSortedByAscending(SearchResultsPage.java:136)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.productsShouldBeDisplayedInAscendingPriceOrder(FlipkartStepDef.java:183)
+        at ✽.products should be displayed in ascending price order(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:66)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["Category navigation loads correct page", "Flipkart E2E Flows"](10)  Time elapsed: 13.465 s  <<< FAILURE!
+java.lang.AssertionError: Expected the Electronics category page URL to load, but URL validation failed. expected [true] but found [false]
+        at org.testng.Assert.fail(Assert.java:111)
+        at org.testng.Assert.failNotEquals(Assert.java:1578)
+        at org.testng.Assert.assertTrue(Assert.java:57)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.categoryPageForShouldLoad(FlipkartStepDef.java:270)
+        at ✽.category page for "Electronics" should load(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:117)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["Product ratings and reviews section is visible", "Flipkart E2E Flows"](11)  Time elapsed: 19.622 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException:
+Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //svg[contains(@viewBox,'12 12')]/parent::div'
+(tried for 10 seconds with 500 milliseconds interval)
+        at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductRatingsVisible(ProductDetailsPage.java:89)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.ratingsAndReviewsSectionShouldBeVisible(FlipkartStepDef.java:156)
+        at ✽.ratings and reviews section should be visible(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:52)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//svg[contains(@viewBox,'12 12')]/parent::div"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [13b8b1bb58a3336099fa4cacf283de7c, findElement {value=//svg[contains(@viewBox,'12 12')]/parent::div, using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40127}, goog:processID: 26063, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40127/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 13b8b1bb58a3336099fa4cacf283de7c
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.isDisplayed(Unknown Source)
+        at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:365)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:351)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:348)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:210)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductRatingsVisible(ProductDetailsPage.java:89)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.ratingsAndReviewsSectionShouldBeVisible(FlipkartStepDef.java:156)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+        at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+        at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+        at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+        at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+        at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+        at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+        at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:84)
+        at io.cucumber.core.runner.TestStep.run(TestStep.java:56)
+        at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+        at io.cucumber.core.runner.TestCase.run(TestCase.java:84)
+        at io.cucumber.core.runner.Runner.runPickle(Runner.java:75)
+        at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$1(TestNGCucumberRunner.java:132)
+        at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:137)
+        at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+        at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:137)
+        at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:129)
+        at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:35)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+        at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+        at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["Product images are displayed on PDP", "Flipkart E2E Flows"](12)  Time elapsed: 19.653 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException:
+Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //picture//img[@alt='Image']'
+(tried for 10 seconds with 500 milliseconds interval)
+        at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductImageVisible(ProductDetailsPage.java:78)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.productImagesShouldBeVisibleOnPDP(FlipkartStepDef.java:150)
+        at ✽.product images should be visible on PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:46)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//picture//img[@alt='Image']"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a2195dde7fec3c922ca4ca07770f60b4, findElement {value=//picture//img[@alt='Image'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:44241}, goog:processID: 26065, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:44241/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a2195dde7fec3c922ca4ca07770f60b4
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.isDisplayed(Unknown Source)
+        at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:365)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:351)
+        at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:348)
+        at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:210)
+        at com.automation.pages.BasePage.waitForVisibility(BasePage.java:24)
+        at com.automation.pages.flipkart.ProductDetailsPage.isProductImageVisible(ProductDetailsPage.java:78)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.productImagesShouldBeVisibleOnPDP(FlipkartStepDef.java:150)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+        at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+        at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+        at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+        at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+        at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+        at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+        at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:84)
+        at io.cucumber.core.runner.TestStep.run(TestStep.java:56)
+        at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+        at io.cucumber.core.runner.TestCase.run(TestCase.java:84)
+        at io.cucumber.core.runner.Runner.runPickle(Runner.java:75)
+        at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$1(TestNGCucumberRunner.java:132)
+        at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:137)
+        at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+        at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:137)
+        at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:129)
+        at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:35)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+        at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+        at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+        at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["User can add a product to cart from PDP", "Flipkart E2E Flows"](14)  Time elapsed: 22.724 s  <<< FAILURE!
+org.openqa.selenium.NoSuchElementException:
+no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [96a19d05c58eb2ae81577364e76db070, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36139}, goog:processID: 27643, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36139/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 96a19d05c58eb2ae81577364e76db070
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:80)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["User can remove a product from cart", "Flipkart E2E Flows"](15)  Time elapsed: 22.974 s  <<< FAILURE!
+org.openqa.selenium.NoSuchElementException:
+no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9054ed1237db7717655b3ab306665707, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38067}, goog:processID: 27660, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38067/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 9054ed1237db7717655b3ab306665707
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:88)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["Cart persists product after page refresh", "Flipkart E2E Flows"](16)  Time elapsed: 27.356 s  <<< FAILURE!
+org.openqa.selenium.NoSuchElementException:
+no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [51fd396a5c87498198390c1e05d3f1b6, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:34161}, goog:processID: 28061, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:34161/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 51fd396a5c87498198390c1e05d3f1b6
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:97)
+
+[ERROR] com.automation.runners.FlipkartTestRunner.runScenario["User can proceed to checkout from cart", "Flipkart E2E Flows"](17)  Time elapsed: 28.187 s  <<< FAILURE!
+org.openqa.selenium.NoSuchElementException:
+no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [584e00eb02fa5f150d0a3ee0b8379b52, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:44113}, goog:processID: 28066, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:44113/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 584e00eb02fa5f150d0a3ee0b8379b52
+        at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+        at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+        at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+        at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+        at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:606)
+        at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+        at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:429)
+        at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:423)
+        at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+        at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+        at com.sun.proxy.$Proxy36.getText(Unknown Source)
+        at com.automation.pages.flipkart.ProductDetailsPage.getProductTitle(ProductDetailsPage.java:53)
+        at com.automation.stepdef.flipkart.FlipkartStepDef.userAddsTheProductToCartFromPDP(FlipkartStepDef.java:193)
+        at ✽.user adds the product to cart from PDP(file:///home/praveen/TestAutomationFramework/src/test/resources/features/flipkart/Flipkart.feature:107)
+
+[INFO]
+[INFO] Results:
+[INFO]
+[ERROR] Failures:
+[ERROR]   FlipkartTestRunner.runScenario » NoSuchElement no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [51fd396a5c87498198390c1e05d3f1b6, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:34161}, goog:processID: 28061, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:34161/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 51fd396a5c87498198390c1e05d3f1b6
+[ERROR]   FlipkartTestRunner.runScenario Expected the Electronics category page URL to load, but URL validation failed. expected [true] but found [false]
+[ERROR]   FlipkartTestRunner.runScenario » Timeout Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //picture//img[@alt='Image']'
+(tried for 10 seconds with 500 milliseconds interval)
+[ERROR]   FlipkartTestRunner.runScenario » Timeout Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //svg[contains(@viewBox,'12 12')]/parent::div'
+(tried for 10 seconds with 500 milliseconds interval)
+[ERROR]   FlipkartTestRunner.runScenario » NumberFormat For input string: "1,654"
+[ERROR]   FlipkartTestRunner.runScenario » NoSuchElement no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [96a19d05c58eb2ae81577364e76db070, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36139}, goog:processID: 27643, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36139/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 96a19d05c58eb2ae81577364e76db070
+[ERROR]   FlipkartTestRunner.runScenario » Runtime Failed to enter product name
+[ERROR]   FlipkartTestRunner.runScenario » NoSuchElement no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [584e00eb02fa5f150d0a3ee0b8379b52, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:44113}, goog:processID: 28066, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:44113/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 584e00eb02fa5f150d0a3ee0b8379b52
+[ERROR]   FlipkartTestRunner.runScenario » NoSuchElement no such element: Unable to locate element: {"method":"tag name","selector":"h1"}
+  (Session info: chrome=149.0.7827.54)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.43.0', revision: 'dd0f534'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '11.0.31'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9054ed1237db7717655b3ab306665707, findElement {value=h1, using=tag name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.54, chrome: {chromedriverVersion: 149.0.7827.54 (42ce21f112d0..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38067}, goog:processID: 27660, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38067/devtoo..., se:cdpVersion: 149.0.7827.54, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 9054ed1237db7717655b3ab306665707
+[ERROR]   FlipkartTestRunner.runScenario » NumberFormat For input string: "10000
+15000
+20000
+30000
+30000+"
+[INFO]
+[ERROR] Tests run: 17, Failures: 10, Errors: 0, Skipped: 0
+[INFO]
+[ERROR] There are test failures.
+
+Please refer to /home/praveen/TestAutomationFramework/target/surefire-reports for the individual test results.
+Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  59.369 s
+[INFO] Finished at: 2026-06-04T09:34:20+05:30
+[INFO] ------------------------------------------------------------------------
+praveen@wall-e:~/TestAutomationFramework$

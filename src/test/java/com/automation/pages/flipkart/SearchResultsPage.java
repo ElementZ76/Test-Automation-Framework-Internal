@@ -6,7 +6,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -83,13 +86,15 @@ public class SearchResultsPage extends BasePage {
     public ProductDetailsPage clickFirstProduct() {
         if(productNames.isEmpty()) {
             log.error("No product results available to click");
-            throw new RuntimeException("Prodcut results is empty");
+            throw new RuntimeException("Product results is empty");
         }
         WebElement firstProduct = productNames.get(0);
         waitForClickability(firstProduct);
         String productUrl = firstProduct.getAttribute("href");
         log.info("Clicking first product. URL: {}", productUrl);
         firstProduct.click();
+        new WebDriverWait(getDriver(), Duration.ofSeconds(15))
+                .until(ExpectedConditions.urlContains("/p/"));
         log.info("Successfully navigated to product detail page");
         return new ProductDetailsPage();
     }

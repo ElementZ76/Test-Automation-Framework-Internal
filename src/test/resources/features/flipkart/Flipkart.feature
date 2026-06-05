@@ -31,7 +31,7 @@ Feature: Flipkart E2E Flows
 
   # ─── PRODUCT DISCOVERY ────────────────────────────────────────────
 
-  @smoke @flipkart @pdp
+  @smoke @flipkart @pdp1
   Scenario: User can open a product detail page
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results

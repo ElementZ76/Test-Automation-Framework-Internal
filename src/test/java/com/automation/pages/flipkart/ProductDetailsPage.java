@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Objects;
 
@@ -14,7 +16,7 @@ import static com.automation.driver.DriverManager.getDriver;
 public class ProductDetailsPage extends BasePage{
     private static final Logger log = LogManager.getLogger(ProductDetailsPage.class);
 
-    @FindBy(xpath = "//h1[@style[contains(.,'user-select: text') or contains(.,'user-select:text')]]")
+    @FindBy(xpath = "//h1[normalize-space(.) != '']")
     private WebElement productTitleHeader;
 
     @FindBy(xpath = "//h1/following::div[starts-with(normalize-space(),'₹')][1]")
@@ -37,12 +39,18 @@ public class ProductDetailsPage extends BasePage{
 
     public boolean isProductDetailsPageLoaded() {
         try {
+            String currentUrl = getDriver().getCurrentUrl();
+            if (currentUrl == null || !currentUrl.contains("/p/")) {
+                log.error("Not on PDP. Current URL: {}", currentUrl);
+                return false;
+            }
             waitForVisibility(productTitleHeader);
-            boolean loaded = productTitleHeader.isDisplayed();
+            String productTitle = productTitleHeader.getText().trim();
+            boolean loaded = productTitleHeader.isDisplayed() && !productTitle.isEmpty();
             if (loaded) {
-                log.info("Product details page loaded successfully. Title visible: {}", productTitleHeader.getText());
+                log.info("PDP loaded successfully. Title: {}", productTitle);
             } else {
-                log.error("Product title element found but not displayed.");
+                log.error("h1 found but text was empty or element not displayed.");
             }
             return loaded;
         } catch (Exception e) {

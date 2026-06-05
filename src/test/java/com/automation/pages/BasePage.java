@@ -75,5 +75,23 @@ public class BasePage {
             }
         }
     }
+
+    /**
+     * Waits for a new tab to open and switches driver focus to it.
+     * Use after clicking any element that opens a link in a new tab (target="_blank").
+     */
+    protected void switchToNewTab(String originalTab) {
+        new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTimeout))
+                .until(ExpectedConditions.numberOfWindowsToBe(2));
+
+        for (String tab : DriverManager.getDriver().getWindowHandles()) {
+            if (!tab.equals(originalTab)) {
+                DriverManager.getDriver().switchTo().window(tab);
+                log.info("Switched to new tab. Current URL: {}", DriverManager.getDriver().getCurrentUrl());
+                return;
+            }
+        }
+        throw new RuntimeException("New tab did not open within " + waitTimeout + " seconds.");
+    }
 }
 
