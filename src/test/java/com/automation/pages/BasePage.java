@@ -4,12 +4,15 @@ import com.automation.driver.DriverManager;
 import com.automation.utils.ConfigManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+
+import static com.automation.driver.DriverManager.getDriver;
 
 public class BasePage {
     protected Logger log = LogManager.getLogger(this.getClass());
@@ -20,7 +23,7 @@ public class BasePage {
      * Method to wait for element to be visible
      */
     protected void waitForVisibility(WebElement element) {
-        new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTimeout))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(waitTimeout))
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -28,7 +31,7 @@ public class BasePage {
      * Method to wait for element to be clickable
      */
     protected void waitForClickability(WebElement element) {
-        new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTimeout))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(waitTimeout))
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
@@ -81,17 +84,46 @@ public class BasePage {
      * Use after clicking any element that opens a link in a new tab (target="_blank").
      */
     protected void switchToNewTab(String originalTab) {
-        new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTimeout))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(waitTimeout))
                 .until(ExpectedConditions.numberOfWindowsToBe(2));
 
-        for (String tab : DriverManager.getDriver().getWindowHandles()) {
+        for (String tab : getDriver().getWindowHandles()) {
             if (!tab.equals(originalTab)) {
-                DriverManager.getDriver().switchTo().window(tab);
-                log.info("Switched to new tab. Current URL: {}", DriverManager.getDriver().getCurrentUrl());
+                getDriver().switchTo().window(tab);
+                log.info("Switched to new tab. Current URL: {}", getDriver().getCurrentUrl());
                 return;
             }
         }
         throw new RuntimeException("New tab did not open within " + waitTimeout + " seconds.");
+    }
+
+    /**
+     * Blocks until the number of elements matching {@code xpath} is identical
+     * across two consecutive polls {@code intervalMs} milliseconds apart,
+     * or until {@code timeout} elapses.
+     *
+     * This is the correct way to detect that a JS-driven grid has finished
+     * re-rendering after a sort/filter action.
+     */
+    protected void waitForStableElementCount(String xpath, Duration timeout, long intervalMs) {
+        long deadline = System.currentTimeMillis() + timeout.toMillis();
+        int previousCount = -1;
+
+        while (System.currentTimeMillis() < deadline) {
+            int currentCount = getDriver().findElements(By.xpath(xpath)).size();
+            if (currentCount > 0 && currentCount == previousCount) {
+                log.info("Element count stabilised at {} for xpath: {}", currentCount, xpath);
+                return;
+            }
+            previousCount = currentCount;
+            try {
+                Thread.sleep(intervalMs);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+        log.warn("Element count did not stabilise within timeout for xpath: {}", xpath);
     }
 }
 
