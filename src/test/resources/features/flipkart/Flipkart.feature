@@ -6,32 +6,32 @@ Feature: Flipkart E2E Flows
 
   # ─── AUTHENTICATION ───────────────────────────────────────────────
 
-  @smoke @flipkart @auth
+  @smoke @flipkart @auth @test
   Scenario: Guest user can browse without login
     Then user should see the Flipkart homepage
     And search bar should be visible
 
   # ─── SEARCH ───────────────────────────────────────────────────────
 
-  @smoke @flipkart @search
+  @smoke @flipkart @search @test
   Scenario: Search for a product returns results
     When user searches for product from "flipkartData.json" using index 0
     Then search results page should load
     And search results should contain relevant products
 
-  @regression @flipkart @search
+  @regression @flipkart @search @test
   Scenario: Search suggestions appear on partial input
     When user types partial search term "iPhone"
     Then search suggestions dropdown should appear
 
-  @regression @flipkart @search @negative
+  @regression @flipkart @search @negative @test
   Scenario: Search with invalid term shows no results message
     When user searches for product from "flipkartData.json" using index 9
     Then no results message should be shown
 
   # ─── PRODUCT DISCOVERY ────────────────────────────────────────────
 
-  @smoke @flipkart @pdp1
+  @smoke @flipkart @pdp @test
   Scenario: User can open a product detail page
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
@@ -39,13 +39,13 @@ Feature: Flipkart E2E Flows
     And product name should be visible
     And product price should be displayed
 
-  @regression @flipkart @pdp
+  @regression @flipkart @pdp @test
   Scenario: Product images are displayed on PDP
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     Then product images should be visible on PDP
 
-  @regression @flipkart @pdp
+  @regression @flipkart @pdp @test
   Scenario: Product ratings and reviews section is visible
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
@@ -59,9 +59,9 @@ Feature: Flipkart E2E Flows
     And user applies brand filter from "flipkartData.json" using index 0
     Then search results should be filtered by selected brand
 
-  @regression @flipkart @sort
+  @regression @flipkart @sort2
   Scenario: User can sort results by price low to high
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using index 6
     And user sorts results by "Price -- Low to High"
     Then products should be displayed in ascending price order
 

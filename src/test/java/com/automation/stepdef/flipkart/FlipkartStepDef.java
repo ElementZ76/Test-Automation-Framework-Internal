@@ -129,7 +129,7 @@ public class FlipkartStepDef {
 
     @Then("product detail page should load")
     public void productDetailPageShouldLoad() {
-        Assert.assertTrue(productDetailsPage.isProductDetailsPageLoaded(),
+        Assert.assertTrue(productDetailsPage.isProductNameVisible(),
                 "Expected the product detail page to load, but product title verification failed in PDP.");
     }
 

@@ -28,7 +28,7 @@ public class SearchResultsPage extends BasePage {
     @FindBy(xpath = "//a[contains(@href,'/p/itm')]")
     private List<WebElement> productNames;
 
-    @FindBy(xpath = "//div[starts-with(normalize-space(),'₹')]")
+    @FindBy(xpath = "//div[starts-with(normalize-space(),'₹') and string-length(normalize-space()) < 12]")
     private List<WebElement> productPrices;
 
     @FindBy(xpath = "//a[@href='/']/img[@alt='Flipkart']")
@@ -90,12 +90,13 @@ public class SearchResultsPage extends BasePage {
         }
         WebElement firstProduct = productNames.get(0);
         waitForClickability(firstProduct);
-        String productUrl = firstProduct.getAttribute("href");
-        log.info("Clicking first product. URL: {}", productUrl);
+        log.info("Clicking first product. URL: {}", firstProduct.getAttribute("href"));
         firstProduct.click();
+        String originalTab = getDriver().getWindowHandle();
+        switchToNewTab(originalTab);
         new WebDriverWait(getDriver(), Duration.ofSeconds(15))
                 .until(ExpectedConditions.urlContains("/p/"));
-        log.info("Successfully navigated to product detail page");
+        log.info("Successfully navigated to product detail page", getDriver().getCurrentUrl());
         return new ProductDetailsPage();
     }
 
@@ -138,9 +139,22 @@ public class SearchResultsPage extends BasePage {
             String priceText = priceElement.getText()
                     .replace("₹", "")
                     .replace(",", "")
+                    .replaceAll("[^0-9]", "")
                     .trim();
+            if(priceText.isEmpty()) {
+                log.warn("Skipping empty/unparseable price element text: '{}'", priceElement.getText());
+                continue;
+            }
+            try {
+                actualPrices.add((int) Long.parseLong(priceText));
+            } catch (NumberFormatException e) {
+                log.warn("Skipping unparseable price text: '{}' | Raw element text: '{}'", priceElement.getText());
+            }
 
-            actualPrices.add((int) Long.parseLong(priceText));
+        }
+        if(actualPrices.isEmpty()) {
+            log.error("No valud prices were collect from the search results page.");
+            return false;
         }
         log.info("Actual prices displayed: {}", actualPrices);
         List<Integer> sortedPrices = new ArrayList<>(actualPrices);

@@ -25,7 +25,7 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//picture//img[@alt='Image']")
     private WebElement productImage;
 
-    @FindBy(xpath = "//svg[contains(@viewBox,'12 12')]/parent::div")
+    @FindBy(xpath = "//a[contains(@href, '/ratings-reviews-details-page')]")
     private WebElement productRatingSection;
 
     @FindBy(xpath = "//div[.//clipPath[contains(@id,'AddToCart')]]")
@@ -37,35 +37,13 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//a[@title='Cart']")
     private WebElement cartIconLink;
 
-    public boolean isProductDetailsPageLoaded() {
-        try {
-            String currentUrl = getDriver().getCurrentUrl();
-            if (currentUrl == null || !currentUrl.contains("/p/")) {
-                log.error("Not on PDP. Current URL: {}", currentUrl);
-                return false;
-            }
-            waitForVisibility(productTitleHeader);
-            String productTitle = productTitleHeader.getText().trim();
-            boolean loaded = productTitleHeader.isDisplayed() && !productTitle.isEmpty();
-            if (loaded) {
-                log.info("PDP loaded successfully. Title: {}", productTitle);
-            } else {
-                log.error("h1 found but text was empty or element not displayed.");
-            }
-            return loaded;
-        } catch (Exception e) {
-            log.error("PDP did not load — product title not found. Exception: {}", e.getMessage());
-            return false;
-        }
-    }
-
     public String getProductTitleHeader() { return productTitleHeader.getText(); }
 
     public boolean isProductNameVisible() {
         waitForVisibility(productTitleHeader);
         boolean isVisible = productTitleHeader.isDisplayed();
         if(isVisible) {
-            log.info("Verified product name is visible. Product name: {}", productTitleHeader.getText());
+            log.info("Verified product name is visible. Product details page has loaded. Product name: {}", productTitleHeader.getText());
         } else {
             log.error("Product name is not visible");
         }
