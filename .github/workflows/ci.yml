@@ -30,11 +30,11 @@ jobs:
         run: google-chrome --version
 
       - name: Run SauceDemo Tests
-        run: mvn clean test -DappName=saucedemo -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress
+        run: mvn clean test -DappName=saucedemo -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress -Dthreads=1
         continue-on-error: true
 
       - name: Run Flipkart Tests
-        run: mvn clean test -DappName=flipkart -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress
+        run: mvn clean test -DappName=flipkart -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress -Dthreads=1
         continue-on-error: true
         
       - name: Debug - Show test output
