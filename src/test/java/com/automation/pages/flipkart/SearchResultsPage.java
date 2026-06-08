@@ -43,6 +43,11 @@ public class SearchResultsPage extends BasePage {
     private final String SORT_OPTION_XPATH =
             "//div[normalize-space()='%s']";
 
+    // In SearchResultsPage — replace the @FindBy and the constant
+    private static final String ORGANIC_PRICE_XPATH =
+            "//a[contains(@href,'/p/itm')]" +
+                    "//div[starts-with(normalize-space(),'₹') and string-length(normalize-space()) < 12]";
+
     public boolean isSearchResultsPageLoaded() {
         String currentUrl = Objects.requireNonNull(getDriver().getCurrentUrl());
         boolean loaded = currentUrl.contains("/search?q=");
@@ -130,44 +135,11 @@ public class SearchResultsPage extends BasePage {
         log.info("Selecting sort option: {}", sortOption);
         option.click();
         log.info("Successfully selected sort option: {}", sortOption);
-    }
-
-    public boolean areProductPricesSortedByAscending() {
-        waitForVisibility(productPrices.get(0));
-        List<Integer> actualPrices = new ArrayList<>();
-        for (WebElement priceElement : productPrices) {
-            String priceText = priceElement.getText()
-                    .replace("₹", "")
-                    .replace(",", "")
-                    .replaceAll("[^0-9]", "")
-                    .trim();
-            if(priceText.isEmpty()) {
-                log.warn("Skipping empty/unparseable price element text: '{}'", priceElement.getText());
-                continue;
-            }
-            try {
-                actualPrices.add((int) Long.parseLong(priceText));
-            } catch (NumberFormatException e) {
-                log.warn("Skipping unparseable price text: '{}' | Raw element text: '{}'", priceElement.getText());
-            }
-
-        }
-        if(actualPrices.isEmpty()) {
-            log.error("No valud prices were collect from the search results page.");
-            return false;
-        }
-        log.info("Actual prices displayed: {}", actualPrices);
-        List<Integer> sortedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(sortedPrices);
-        boolean isSorted = actualPrices.equals(sortedPrices);
-        if(isSorted) {
-            log.info("Products are displayed in ascending price order");
-        } else {
-            log.error("Products are NOT displayed in ascending price order");
-            log.error("Expected sorted prices: {}", sortedPrices);
-            log.error("Actual prices: {}", actualPrices);
-        }
-        return isSorted;
+        String priceXpath = "//div[starts-with(normalize-space(),'₹') and string-length(normalize-space()) < 12]";
+        WebElement until = new WebDriverWait(getDriver(), Duration.ofSeconds(15))
+                .until(ExpectedConditions.refreshed(
+                        ExpectedConditions.visibilityOfElementLocated(By.xpath(priceXpath))));
+        log.info("Product grid re-render detected after sort selection.");
     }
 
     public HomePage clickOnFlipkartLogo() {

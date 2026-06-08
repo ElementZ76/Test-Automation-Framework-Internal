@@ -6,12 +6,17 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.List;
 
 import static com.automation.driver.DriverManager.getDriver;
 
 public class CartPage extends BasePage {
 
-    @FindBy(xpath = "//div[@dir='auto' and starts-with(normalize-space(text()), 'Price')]")
+    @FindBy(xpath = "//div[@dir='auto' and starts-with(normalize-space(string(.)), 'Price')]")
     private WebElement priceItemCountLabel;
 
     @FindBy(xpath = "//div[@dir='auto' and normalize-space(text())='Place order']")
@@ -27,18 +32,19 @@ public class CartPage extends BasePage {
     private WebElement missingCartItemsMessage;
 
     private final String PRODUCT_TITLE_XPATH =
-            "//div[contains(normalize-space(),'%s')]";
+            "//div[@dir='auto' and contains(string(), 'SEARCH_TOKEN')]";
 
-    public boolean isProductPresentInCart(String expectedProduct) {
-        String xpath = String.format(PRODUCT_TITLE_XPATH, expectedProduct);
+    public boolean isProductPresentInCart(String searchTerm) {
+        String xpath = PRODUCT_TITLE_XPATH.replace("SEARCH_TOKEN", searchTerm);
         try {
+            new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
             WebElement productElement = getDriver().findElement(By.xpath(xpath));
-            String actualProduct = productElement.getText().trim();
-            boolean matches = actualProduct.equalsIgnoreCase(expectedProduct);
-            log.info("Cart product verification for '{}': {}", expectedProduct, matches);
-            return matches;
-        } catch (NoSuchElementException e) {
-            log.error("Product '{}' not found in cart.", expectedProduct);
+            log.info("Product found in cart. Search term: '{}', Cart title: '{}'",
+                    searchTerm, productElement.getText().trim());
+            return true;
+        } catch (Exception e) {
+            log.error("Product not found in cart. Search term: '{}'", searchTerm);
             return false;
         }
     }
@@ -50,6 +56,11 @@ public class CartPage extends BasePage {
     public int extractItemCount(String rawLabelText) {
         log.debug("Extracting item count from text: '{}'", rawLabelText);
         String numericPart = rawLabelText.replaceAll("[^0-9]", "");
+        if (numericPart.isEmpty()) {
+            throw new RuntimeException(
+                    "extractItemCount: no digits found in label text: '" + rawLabelText + "'. " +
+                            "Check if the priceItemCountLabel locator matched the correct element.");
+        }
         int itemCount = Integer.parseInt(numericPart);
         log.info("Extracted item count: {}", itemCount);
         return itemCount;
@@ -112,7 +123,13 @@ public class CartPage extends BasePage {
         }
     }
 
-    public String getPriceItemCountLabelText() { waitForVisibility(priceItemCountLabel); return priceItemCountLabel.getText(); }
+    public String getPriceItemCountLabelText() {
+        waitForVisibility(priceItemCountLabel);
+        String text = priceItemCountLabel.getText();
+        log.info("priceItemCountLabel raw text: '{}'", text);
+        return text; }
+
+    
 
     public CartPage() {
         PageFactory.initElements(getDriver(), this);

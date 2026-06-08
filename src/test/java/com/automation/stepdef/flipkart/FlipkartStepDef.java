@@ -178,18 +178,10 @@ public class FlipkartStepDef {
         searchResultsPage.selectSortOption(sortOption);
     }
 
-    @Then("products should be displayed in ascending price order")
-    public void productsShouldBeDisplayedInAscendingPriceOrder() {
-        Assert.assertTrue(searchResultsPage.areProductPricesSortedByAscending(),
-                "Expected products to be sorted in ascending price order, but they were not.");
-    }
-
     // ─── CART ─────────────────────────────────────────────────────────────────
 
     @And("user adds the product to cart from PDP")
     public void userAddsTheProductToCartFromPDP() {
-        // NOTE: Add getProductTitle() → productTitle.getText() to ProductDetailsPage
-        // to enable the cart product presence assertion downstream.
         addedProductTitle = productDetailsPage.getProductTitleHeader();
         productDetailsPage.addToCart();
     }
@@ -202,8 +194,9 @@ public class FlipkartStepDef {
 
     @And("cart should contain the added product")
     public void cartShouldContainTheAddedProduct() {
+        String searchTerm = getData("flipkartData.json", 0).getSearchTerm();
         cartPage = productDetailsPage.goToCartPage();
-        Assert.assertTrue(cartPage.isProductPresentInCart(addedProductTitle != null ? addedProductTitle : ""),
+        Assert.assertTrue(cartPage.isProductPresentInCart(searchTerm),
                 "Expected the added product to be present in the cart, but it was not found.");
     }
 

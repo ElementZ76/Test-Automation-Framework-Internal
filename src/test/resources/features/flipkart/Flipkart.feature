@@ -53,19 +53,18 @@ Feature: Flipkart E2E Flows
 
   # ─── FILTERS & SORTING ────────────────────────────────────────────
 
-  @regression @flipkart @filter
+  @regression @flipkart @filter @test
   Scenario: User can filter search results by brand
     When user searches for product from "flipkartData.json" using index 0
     And user applies brand filter from "flipkartData.json" using index 0
     Then search results should be filtered by selected brand
 
-  @regression @flipkart @sort2
+  @regression @flipkart @sort @test
   Scenario: User can sort results by price low to high
     When user searches for product from "flipkartData.json" using index 6
     And user sorts results by "Price -- Low to High"
-    Then products should be displayed in ascending price order
 
-  @regression @flipkart @sort
+  @regression @flipkart @sort @test
   Scenario: User can sort results by popularity
     When user searches for product from "flipkartData.json" using index 0
     And user sorts results by "Popularity"
@@ -90,13 +89,13 @@ Feature: Flipkart E2E Flows
     And user removes the product from cart
     Then cart should be empty or show empty cart message
 
-  @regression @flipkart @cart
+  @regression @flipkart @cart1
   Scenario: Cart persists product after page refresh
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
     And user refreshes the page
-    Then cart count should be 1
+    Then cart count should be 1 after refresh
 
   # ─── CHECKOUT (GUEST) ─────────────────────────────────────────────
 

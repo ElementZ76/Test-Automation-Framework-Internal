@@ -3,12 +3,14 @@ package com.automation.pages.flipkart;
 import com.automation.pages.BasePage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import static com.automation.driver.DriverManager.getDriver;
@@ -28,14 +30,15 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//a[contains(@href, '/ratings-reviews-details-page')]")
     private WebElement productRatingSection;
 
-    @FindBy(xpath = "//div[.//clipPath[contains(@id,'AddToCart')]]")
-    private WebElement addToCartButton;
-
     @FindBy(xpath = "//a[@title='Cart']//span[normalize-space() and not(text()='Cart')]")
     private WebElement cartItemCountBadge;
 
     @FindBy(xpath = "//a[@title='Cart']")
     private WebElement cartIconLink;
+
+    @FindBy (xpath = "//div[contains(@style,'height: 44px') and contains(@style,'width: 44px') and contains(@style,'z-index: 2') and contains(@style,'rgb(214, 214, 214)')]")
+    private WebElement cartButton;
+
 
     public String getProductTitleHeader() { return productTitleHeader.getText(); }
 
@@ -81,9 +84,9 @@ public class ProductDetailsPage extends BasePage{
     }
 
     public void addToCart() {
-        waitForClickability(addToCartButton);
-        addToCartButton.click();
-        log.info("Clicked on add to cart button");
+        waitForClickability(cartButton);
+        clickOn(cartButton);
+        log.info("Clicked Add to Cart button");
     }
 
     public boolean verifyIfCartIconHasProduct() {
