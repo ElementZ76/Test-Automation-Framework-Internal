@@ -96,7 +96,7 @@ public class SearchResultsPage extends BasePage {
         WebElement firstProduct = productNames.get(0);
         waitForClickability(firstProduct);
         log.info("Clicking first product. URL: {}", firstProduct.getAttribute("href"));
-        firstProduct.click();
+        clickOn(firstProduct);
         String originalTab = getDriver().getWindowHandle();
         switchToNewTab(originalTab);
         new WebDriverWait(getDriver(), Duration.ofSeconds(15))
@@ -110,7 +110,7 @@ public class SearchResultsPage extends BasePage {
         WebElement brandFilter = getDriver().findElement(By.xpath(xpath));
         waitForClickability(brandFilter);
         log.info("Applying brand filter: {}", brandName);
-        brandFilter.click();
+        clickOn(brandFilter);
         log.info("Successfully selected brand filter: {}", brandName);
     }
 
@@ -133,7 +133,7 @@ public class SearchResultsPage extends BasePage {
         WebElement option = getDriver().findElement(By.xpath(xpath));
         waitForClickability(option);
         log.info("Selecting sort option: {}", sortOption);
-        option.click();
+        clickOn(option);
         log.info("Successfully selected sort option: {}", sortOption);
         String priceXpath = "//div[starts-with(normalize-space(),'₹') and string-length(normalize-space()) < 12]";
         WebElement until = new WebDriverWait(getDriver(), Duration.ofSeconds(15))

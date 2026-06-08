@@ -75,7 +75,7 @@ public class HomePage extends BasePage {
         try {
             waitForClickability(searchBarInput);
             sendText(searchBarInput, productName);
-            searchButton.click();
+            clickOn(searchButton);
             log.info("Entered product name as {} and clicked search", productName);
             return new SearchResultsPage();
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class HomePage extends BasePage {
         log.info("Attempting to click the Electronics category button.");
         try {
             waitForClickability(electronicsCategoryButton);
-            electronicsCategoryButton.click();
+            clickOn(electronicsCategoryButton);
             log.info("Successfully clicked the Electronics category button.");
         } catch (Exception e) {
             log.error("Failed to click the Electronics category button: {}", e.getMessage());

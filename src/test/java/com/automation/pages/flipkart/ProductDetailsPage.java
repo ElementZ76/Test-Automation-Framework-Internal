@@ -111,7 +111,7 @@ public class ProductDetailsPage extends BasePage{
     public CartPage goToCartPage() {
         waitForClickability(cartIconLink);
         log.info("Clicking cart icon");
-        cartIconLink.click();
+        clickOn(cartIconLink);
         log.info("Successfully navigated to cart page");
         return new CartPage();
     }

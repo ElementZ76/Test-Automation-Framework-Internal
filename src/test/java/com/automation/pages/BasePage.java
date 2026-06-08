@@ -31,9 +31,15 @@ public class BasePage {
      * Method to wait for element to be clickable
      */
     protected void waitForClickability(WebElement element) {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(waitTimeout))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(15))
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.elementToBeClickable(element));
+                .until(driver -> {
+                    try {
+                        return element.isDisplayed() && element.isEnabled();
+                    } catch (StaleElementReferenceException e) {
+                        return false;
+                    }
+                });
     }
 
     /**

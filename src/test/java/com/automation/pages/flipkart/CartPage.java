@@ -80,7 +80,7 @@ public class CartPage extends BasePage {
     public void clickPlaceOrder() {
         waitForClickability(placeOrderButton);
         try {
-            placeOrderButton.click();
+            clickOn(placeOrderButton);
             log.info("Successfully clicked the 'Place order' button.");
         } catch (Exception e) {
             log.error("Failed to click the 'Place order' button. Exception: {}", e.getMessage());
@@ -104,7 +104,7 @@ public class CartPage extends BasePage {
         log.info("Attempting to click the product item 'Remove' button in the cart dashboard.");
         try {
             waitForClickability(removeProductButton);
-            removeProductButton.click();
+            clickOn(removeProductButton);
             log.info("Successfully clicked the 'Remove' button target block.");
         } catch (Exception e) {
             log.error("Failed to interact with the cart item 'Remove' button element: {}", e.getMessage());
@@ -129,8 +129,6 @@ public class CartPage extends BasePage {
         log.info("priceItemCountLabel raw text: '{}'", text);
         return text;
     }
-
-    
 
     public CartPage() {
         PageFactory.initElements(getDriver(), this);
