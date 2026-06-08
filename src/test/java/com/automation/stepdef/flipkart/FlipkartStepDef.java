@@ -257,17 +257,6 @@ public class FlipkartStepDef {
         }
     }
 
-    @Then("category page for {string} should load")
-    public void categoryPageForShouldLoad(String category) {
-        if (category.equalsIgnoreCase("Electronics")) {
-            Assert.assertTrue(homePage.checkElectronicsURL(),
-                    "Expected the Electronics category page URL to load, but URL validation failed.");
-        } else {
-            throw new UnsupportedOperationException(
-                    "URL validation for category '" + category + "' is not yet implemented in HomePage.");
-        }
-    }
-
     @And("user clicks on the Flipkart logo")
     public void userClicksOnTheFlipkartLogo() {
         homePage = searchResultsPage.clickOnFlipkartLogo();

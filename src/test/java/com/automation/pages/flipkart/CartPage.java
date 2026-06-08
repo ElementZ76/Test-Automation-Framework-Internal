@@ -16,7 +16,7 @@ import static com.automation.driver.DriverManager.getDriver;
 
 public class CartPage extends BasePage {
 
-    @FindBy(xpath = "//div[@dir='auto' and starts-with(normalize-space(string(.)), 'Price')]")
+    @FindBy(xpath = "//div[@dir='auto' and starts-with(normalize-space(.), 'Price (')]")
     private WebElement priceItemCountLabel;
 
     @FindBy(xpath = "//div[@dir='auto' and normalize-space(text())='Place order']")
@@ -127,7 +127,8 @@ public class CartPage extends BasePage {
         waitForVisibility(priceItemCountLabel);
         String text = priceItemCountLabel.getText();
         log.info("priceItemCountLabel raw text: '{}'", text);
-        return text; }
+        return text;
+    }
 
     
 

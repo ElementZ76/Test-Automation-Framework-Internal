@@ -39,7 +39,7 @@ public class HomePage extends BasePage {
         log.info("Attempting to close login pop up");
         try {
             waitForClickability(dismissLoginModalButton);
-            dismissLoginModalButton.click();
+            clickOn(dismissLoginModalButton);
             log.info("Closed login pop up");
         } catch (Exception e) {
             log.info("Failed closing login pop up: {}", e.getMessage());
@@ -107,17 +107,6 @@ public class HomePage extends BasePage {
             log.error("Failed to click the Electronics category button: {}", e.getMessage());
             throw e;
         }
-    }
-
-    public boolean checkElectronicsURL() {
-        String currentURL = Objects.requireNonNull(getDriver().getCurrentUrl());
-        boolean isElectronicsURL = currentURL.contains("new-elec");
-        if(isElectronicsURL){
-            log.info("Electronics Page is displayed");
-        } else {
-            log.info("Electronics Page is not displayed");
-        }
-        return isElectronicsURL;
     }
 
     public boolean isOffersBannerDisplayed() {

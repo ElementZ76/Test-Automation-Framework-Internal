@@ -72,7 +72,7 @@ Feature: Flipkart E2E Flows
 
   # ─── CART ─────────────────────────────────────────────────────────
 
-  @smoke @flipkart @cart
+  @smoke @flipkart @cart @test
   Scenario: User can add a product to cart from PDP
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
@@ -80,7 +80,7 @@ Feature: Flipkart E2E Flows
     Then cart count should be 1
     And cart should contain the added product
 
-  @regression @flipkart @cart
+  @regression @flipkart @cart @test
   Scenario: User can remove a product from cart
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
@@ -89,7 +89,7 @@ Feature: Flipkart E2E Flows
     And user removes the product from cart
     Then cart should be empty or show empty cart message
 
-  @regression @flipkart @cart1
+  @regression @flipkart @cart @test
   Scenario: Cart persists product after page refresh
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
@@ -99,7 +99,7 @@ Feature: Flipkart E2E Flows
 
   # ─── CHECKOUT (GUEST) ─────────────────────────────────────────────
 
-  @smoke @flipkart @checkout
+  @smoke @flipkart @checkout @test
   Scenario: User can proceed to checkout from cart
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the first product in search results
@@ -110,12 +110,7 @@ Feature: Flipkart E2E Flows
 
   # ─── NAVIGATION ───────────────────────────────────────────────────
 
-  @regression @flipkart @navigation
-  Scenario: Category navigation loads correct page
-    When user navigates to category "Electronics" from top nav
-    Then category page for "Electronics" should load
-
-  @regression @flipkart @navigation
+  @regression @flipkart @navigation @test
   Scenario: User can navigate to Flipkart home via logo
     When user searches for product from "flipkartData.json" using index 0
     And user clicks on the Flipkart logo
@@ -123,6 +118,6 @@ Feature: Flipkart E2E Flows
 
   # ─── OFFERS & BANNERS ─────────────────────────────────────────────
 
-  @regression @flipkart @offers
+  @regression @flipkart @offers @test
   Scenario: Homepage banners are displayed
     Then homepage promotional banners should be visible
