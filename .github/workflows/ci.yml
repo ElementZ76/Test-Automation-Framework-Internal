@@ -1,4 +1,4 @@
-name: SauceDemo Test Pipeline
+name: Multi-App E-Commerce Test Pipeline
 
 on:
   push:
@@ -29,9 +29,14 @@ jobs:
       - name: Verify Chrome
         run: google-chrome --version
 
-      - name: Run Tests
+      - name: Run SauceDemo Tests
         run: mvn clean test -DappName=saucedemo -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress
         continue-on-error: true
+
+      - name: Run Flipkart Tests
+        run: mvn clean test -DappName=flipkart -Dbrowser=chrome -DexecutionMode=local --no-transfer-progress
+        continue-on-error: true
+        
       - name: Debug - Show test output
         if: always()
         run: |
