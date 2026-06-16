@@ -36,9 +36,8 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//a[@title='Cart']")
     private WebElement cartIconLink;
 
-    @FindBy (xpath = "//div[contains(@style,'height: 44px') and contains(@style,'width: 44px') and contains(@style,'z-index: 2') and contains(@style,'rgb(214, 214, 214)')]")
+    @FindBy (xpath = "//div[contains(@style, 'border-top-right-radius:12px') and contains(@style, 'z-index:2')]")
     private WebElement cartButton;
-
 
     public String getProductTitleHeader() { return productTitleHeader.getText(); }
 
