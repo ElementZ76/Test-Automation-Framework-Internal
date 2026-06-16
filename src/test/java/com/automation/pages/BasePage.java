@@ -4,10 +4,7 @@ import com.automation.driver.DriverManager;
 import com.automation.utils.ConfigManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -23,8 +20,13 @@ public class BasePage {
      * Method to wait for element to be visible
      */
     protected void waitForVisibility(WebElement element) {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(waitTimeout))
-                .until(ExpectedConditions.visibilityOf(element));
+        try {
+            new WebDriverWait(getDriver(), Duration.ofSeconds(waitTimeout))
+                    .until(ExpectedConditions.visibilityOf(element));
+        } catch (TimeoutException e) {
+            throw new TimeoutException(
+                    "Timed out waiting for element to be visible. Locator: " + element.toString(), e);
+        }
     }
 
     /**
