@@ -14,8 +14,8 @@ Feature: Flipkart E2E Flows
   # ─── SEARCH ───────────────────────────────────────────────────────
 
   @smoke @flipkart @search @test
-  Scenario: Search for a product returns results
-    When user searches for product from "flipkartData.json" using index 0
+  Scenario: Search for a valid product returns results
+    When user searches for product from "flipkartData.json" using caseId 1
     Then search results page should load
     And search results should contain relevant products
 
@@ -26,14 +26,32 @@ Feature: Flipkart E2E Flows
 
   @regression @flipkart @search @negative @test
   Scenario: Search with invalid term shows no results message
-    When user searches for product from "flipkartData.json" using index 9
+    When user searches for product from "flipkartData.json" using caseId 10
     Then no results message should be shown
+
+  @regression @flipkart @search @data-driven @test
+  Scenario Outline: Search handles all boundary and security input cases
+    When user searches for product from "flipkartData.json" using caseId <caseId>
+    Then search completes without application crash
+
+    Examples:
+      | caseId |
+      | 1      |
+      | 2      |
+      | 3      |
+      | 4      |
+      | 5      |
+      | 6      |
+      | 7      |
+      | 8      |
+      | 9      |
+      | 10     |
 
   # ─── PRODUCT DISCOVERY ────────────────────────────────────────────
 
   @smoke @flipkart @pdp @test
   Scenario: User can open a product detail page
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     Then product detail page should load
     And product name should be visible
@@ -41,13 +59,13 @@ Feature: Flipkart E2E Flows
 
   @regression @flipkart @pdp @test
   Scenario: Product images are displayed on PDP
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     Then product images should be visible on PDP
 
   @regression @flipkart @pdp @test
   Scenario: Product ratings and reviews section is visible
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     Then ratings and reviews section should be visible
 
@@ -55,18 +73,18 @@ Feature: Flipkart E2E Flows
 
   @regression @flipkart @filter @test
   Scenario: User can filter search results by brand
-    When user searches for product from "flipkartData.json" using index 0
-    And user applies brand filter from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
+    And user applies brand filter from "flipkartData.json" using caseId 1
     Then search results should be filtered by selected brand
 
   @regression @flipkart @sort @test
   Scenario: User can sort results by price low to high
-    When user searches for product from "flipkartData.json" using index 6
+    When user searches for product from "flipkartData.json" using caseId 7
     And user sorts results by "Price -- Low to High"
 
   @regression @flipkart @sort @test
   Scenario: User can sort results by popularity
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user sorts results by "Popularity"
     Then search results page should load
 
@@ -74,7 +92,7 @@ Feature: Flipkart E2E Flows
 
   @smoke @flipkart @cart @test
   Scenario: User can add a product to cart from PDP
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
     Then cart count should be 1
@@ -82,7 +100,7 @@ Feature: Flipkart E2E Flows
 
   @regression @flipkart @cart @test
   Scenario: User can remove a product from cart
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
     And user navigates to cart
@@ -91,7 +109,7 @@ Feature: Flipkart E2E Flows
 
   @regression @flipkart @cart @test
   Scenario: Cart persists product after page refresh
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
     And user refreshes the page
@@ -101,7 +119,7 @@ Feature: Flipkart E2E Flows
 
   @smoke @flipkart @checkout @test
   Scenario: User can proceed to checkout from cart
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the first product in search results
     And user adds the product to cart from PDP
     And user navigates to cart
@@ -112,7 +130,7 @@ Feature: Flipkart E2E Flows
 
   @regression @flipkart @navigation @test
   Scenario: User can navigate to Flipkart home via logo
-    When user searches for product from "flipkartData.json" using index 0
+    When user searches for product from "flipkartData.json" using caseId 1
     And user clicks on the Flipkart logo
     Then user should be on the Flipkart homepage
 

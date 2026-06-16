@@ -15,6 +15,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import static com.automation.driver.DriverManager.getDriver;
 
@@ -39,12 +40,15 @@ public class FlipkartStepDef {
      * Uses JsonUtils.getTestData() with a TypeReference so Jackson can deserialize the
      * flat JSON array into a typed List<FlipkartData>.
      */
-    private FlipkartData getData(String fileName, int index) {
+    private FlipkartData getData(String fileName, int caseId) {
         try {
             if (flipkartData == null) {
                 flipkartData = JsonUtils.getTestData(fileName, new TypeReference<List<FlipkartData>>() {});
             }
-            return flipkartData.get(index);
+            return flipkartData.stream()
+                    .filter(d -> d.getCaseId() == caseId)
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("No test data found for caseId: " + caseId));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load test data from file: " + fileName, e);
         }
@@ -83,9 +87,9 @@ public class FlipkartStepDef {
 
     // ─── SEARCH ───────────────────────────────────────────────────────────────
 
-    @When("user searches for product from {string} using index {int}")
-    public void userSearchesForProductFromFileUsingIndex(String fileName, int index) {
-        String searchTerm = getData(fileName, index).getSearchTerm();
+    @When("user searches for product from {string} using caseId {int}")
+    public void userSearchesForProductFromFileUsingCaseId(String fileName, int caseId) {
+        String searchTerm = getData(fileName, caseId).getSearchTerm();
         searchResultsPage = homePage.searchFor(searchTerm);
     }
 
@@ -118,6 +122,12 @@ public class FlipkartStepDef {
                 "Expected a 'no results' message to be displayed for the invalid search term.");
         Assert.assertEquals(searchResultsPage.getNoResultsMessageText(), "Sorry, no results found!",
                 "The no-results message text did not match the expected value.");
+    }
+
+    @Then("search completes without application crash")
+    public void searchCompletesWithoutApplicationCrash() {
+        Assert.assertFalse(Objects.requireNonNull(getDriver().getTitle()).isEmpty(),
+                "Page title is empty after search — possible crash or blank page.");
     }
 
     // ─── PRODUCT DISCOVERY (PDP) ──────────────────────────────────────────────
@@ -159,16 +169,16 @@ public class FlipkartStepDef {
 
     // ─── FILTERS & SORTING ────────────────────────────────────────────────────
 
-    @And("user applies brand filter from {string} using index {int}")
-    public void userAppliesBrandFilterFromFileUsingIndex(String fileName, int index) {
-        String brandName = getData(fileName, index).getBrandFilter();
+    @And("user applies brand filter from {string} using caseId {int}")
+    public void userAppliesBrandFilterFromFileUsingIndex(String fileName, int caseId) {
+        String brandName = getData(fileName, caseId).getBrandFilter();
         searchResultsPage.applyBrandFilter(brandName);
     }
 
     @Then("search results should be filtered by selected brand")
     public void searchResultsShouldBeFilteredBySelectedBrand() {
         // Re-reads index 0 (same row used by the When step) to retrieve the expected brand chip value
-        String brandName = getData("flipkartData.json", 0).getBrandFilter();
+        String brandName = getData("flipkartData.json", 1).getBrandFilter();
         Assert.assertTrue(searchResultsPage.isBrandFilterApplied(brandName),
                 "Expected brand filter chip '" + brandName + "' to be active, but it was not found.");
     }
@@ -194,7 +204,7 @@ public class FlipkartStepDef {
 
     @And("cart should contain the added product")
     public void cartShouldContainTheAddedProduct() {
-        String searchTerm = getData("flipkartData.json", 0).getSearchTerm();
+        String searchTerm = getData("flipkartData.json", 1).getSearchTerm();
         cartPage = productDetailsPage.goToCartPage();
         Assert.assertTrue(cartPage.isProductPresentInCart(searchTerm),
                 "Expected the added product to be present in the cart, but it was not found.");
